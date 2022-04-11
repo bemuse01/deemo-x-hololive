@@ -5,7 +5,7 @@
     width: 100%;
     height: 100%;
     --logo-ratio: 178 / 476;
-    --logo-width: 40rem;
+    --logo-width: 44rem;
 }
 .open-object-container{
     position: absolute;

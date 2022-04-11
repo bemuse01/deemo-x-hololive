@@ -11,9 +11,9 @@ export default class{
         this.param = {
             blur: 0.25,
             count: Param.count,
-            time: 5000,
+            time: 6000,
             delayDefault: 500,
-            delayStep: 100
+            delayStep: 0
         }
 
         // max width range and ratio
