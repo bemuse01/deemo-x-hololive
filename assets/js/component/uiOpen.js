@@ -32,7 +32,6 @@ export default {
             deemoContainer: {right: '50%', transform: 'translate(50%, -50%)'},
             hololiveContainer: {opacity: 0, transform: 'translate(0, 100%)'}
         })
-        const objAnim = Vue.computed(() => store.getters['open/getObjAnim'])
 
         const show = () => {
 
