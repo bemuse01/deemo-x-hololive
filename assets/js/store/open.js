@@ -14,10 +14,10 @@ export default {
     },
     mutations: {
         setObjAnim(state, value){
-            state.openObjAnimDone = value
+            state.objAnimDone = value
         },
         setElAnim(state, value){
-            state.openElAnimDone = value
+            state.elAnimDone = value
         }
     },
     actions: {

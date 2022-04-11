@@ -42,7 +42,7 @@ export default {
             
         }
 
-        Vue.watch(objAnim, (cur, pre) => {
+        Vue.watch(() => store.getters['open/getObjAnim'], (cur, pre) => {
             console.log(cur)
         })
 
