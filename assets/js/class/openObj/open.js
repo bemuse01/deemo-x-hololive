@@ -6,8 +6,9 @@ import PublicMethod from '../../method/method.js'
 import Child from './build/open.child.build.js'
 
 export default class{
-    constructor(app){
-        this.renderer = app.renderer
+    constructor(store){
+        this.store = store
+        this.renderer = store.getters.getApp.renderer
         this.element = document.querySelector('.open-deemo-container')
 
         this.modules = {
@@ -63,7 +64,7 @@ export default class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size})
+            this.comp[module] = new instance({group, size: this.size, store: this.store})
         }
 
         for(const group in this.group) this.build.add(this.group[group])

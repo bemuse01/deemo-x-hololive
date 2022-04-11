@@ -1,3 +1,5 @@
+import OpenStore from './open.js'
+
 export default Vuex.createStore({
     state: {
         app: null
@@ -18,5 +20,6 @@ export default Vuex.createStore({
         }
     },
     modules: {
+        open: OpenStore
     }
 })

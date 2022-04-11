@@ -24,10 +24,11 @@
 .open-deemo-container{
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    right: 50%;
+    transform: translate(50%, -50%);
     width: var(--deemo-width);
     height: calc(var(--deemo-width) * var(--deemo-ratio));
+    transition: 0.3s;
 }
 .open-deemo-container div{
     width: 100%;
@@ -39,7 +40,7 @@
     left: 0;
     transform: translate(0, -50%);
     width: var(--hololive-width);
-    opacity: 0;
+    transition: 0.3s;
 }
 .open-hololive-container img{
     max-width: 100%;

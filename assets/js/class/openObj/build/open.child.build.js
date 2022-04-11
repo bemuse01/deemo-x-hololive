@@ -4,7 +4,8 @@ import Shader from '../shader/open.child.shader.js'
 import Param from '../param/open.child.param.js'
 
 export default class{
-    constructor({group, size}){
+    constructor({group, size, store}){
+        this.store = store
         this.group = group
         this.size = size
 
@@ -100,11 +101,18 @@ export default class{
         .to(end, time)
         .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => this.onUpdateTween(idx, start))
+        .onComplete(() => this.onCompleteTween(idx))
         .delay(delayDefault + idx * delayStep)
         .start()
     }
     onUpdateTween(idx, {radius}){
         this.object.setUniform('uRadius', radius, idx)
+    }
+    onCompleteTween(idx){
+        if(idx === this.param.count - 1){
+            // animation is completed
+            this.store.dispatch('open/setObjAnim', true)
+        }
     }
 
 
