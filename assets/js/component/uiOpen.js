@@ -3,9 +3,17 @@ import Open from '../class/openObj/open.js'
 export default {
     template: `
         <div class="ui ui-open">
+
+            <div class="open-logo-box">
         
-            <div class="ui-object-container open-object-container">
-                <div class="open-object"></div>
+                <div class="ui-object-container open-deemo-container">
+                    <div></div>
+                </div>
+
+                <div class="ui-el-container open-hololive-container">
+                    <img src="./assets/src/hololive.png">
+                </div>
+
             </div>
         
         </div>

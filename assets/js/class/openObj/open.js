@@ -8,7 +8,7 @@ import Child from './build/open.child.build.js'
 export default class{
     constructor(app){
         this.renderer = app.renderer
-        this.element = document.querySelector('.open-object')
+        this.element = document.querySelector('.open-deemo-container')
 
         this.modules = {
             child: Child

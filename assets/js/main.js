@@ -22,6 +22,7 @@ const vueApp = Vue.createApp({
 
             requestAnimationFrame(animate)
         }
+        
         animate()
     }
 })
