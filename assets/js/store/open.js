@@ -3,7 +3,8 @@ export default {
     state: {
         showing: true,
         deemoAnim: false,
-        hololiveAnim: false
+        hololiveAnim: false,
+        overlayAnim: false,
     },
     getters: {
         getShowing(state){
@@ -14,6 +15,9 @@ export default {
         },
         getHololiveAnim(state){
             return state.hololiveAnim
+        },
+        getOverlayAnim(state){
+            return state.overlayAnim
         }
     },
     mutations: {
@@ -25,6 +29,9 @@ export default {
         },
         setHololiveAnim(state, value){
             state.hololiveAnim = value
+        },
+        setOverlayAnim(state, value){
+            state.overlayAnim = value
         }
     },
     actions: {
@@ -36,6 +43,9 @@ export default {
         },
         setHololiveAnim({commit}, value){
             commit('setHololiveAnim', value)
+        },
+        setOverlayAnim({commit}, value){
+            commit('setOverlayAnim', value)
         }
     }
 }

@@ -24,7 +24,9 @@ export default {
         }
 
         const onTransitionend = () => {
-            store.dispatch('open/setHololiveAnim', true)
+            setTimeout(() => {
+                store.dispatch('open/setHololiveAnim', true)
+            }, 500)
         }
 
         watchEffect(() => {

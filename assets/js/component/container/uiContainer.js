@@ -7,7 +7,11 @@ export default {
     template: `
         <div id="ui-container">
 
-            <ui-open v-if="openShowing"></ui-open>
+            <transition name="fade">
+
+                <ui-open v-if="openShowing"></ui-open>
+
+            </transition>
 
         </div>
     `,

@@ -79,6 +79,8 @@ export default class{
         for(const comp in this.comp){
             this.comp[comp].dispose()
         }
+
+        cancelAnimationFrame(this.animation)
     }
 
 
@@ -87,7 +89,7 @@ export default class{
         this.render()
         this.animateObject()
 
-        requestAnimationFrame(() => this.animate())
+        this.animation = requestAnimationFrame(() => this.animate())
     }
     render(){
         const rect = this.element.getBoundingClientRect()

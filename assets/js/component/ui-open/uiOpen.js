@@ -1,10 +1,12 @@
 import LogoDeemo from './logoDeemo.js'
 import LogoHololive from './LogoHololive.js'
+import Overlay from './overlay.js'
 
 export default {
     components: {
         'logo-deemo': LogoDeemo,
-        'logo-hololive': LogoHololive
+        'logo-hololive': LogoHololive,
+        'overlay': Overlay
     },
     template: `
         <div class="ui ui-open">
@@ -13,6 +15,7 @@ export default {
 
                 <logo-deemo />
                 <logo-hololive />
+                <overlay />
 
             </div>
         
@@ -25,7 +28,7 @@ export default {
         const store = useStore()
 
         watchEffect(() => {
-            if(store.getters['open/getDeemoAnim'] && store.getters['open/getHololiveAnim']){
+            if(store.getters['open/getOverlayAnim']){
                 store.dispatch('open/setShowing', false)
             }
         })

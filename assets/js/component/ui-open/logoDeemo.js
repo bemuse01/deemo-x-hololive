@@ -40,7 +40,6 @@ export default {
 
         onUnmounted(() => {
             logo.value.dispose()
-            console.log('unmounted')
         })
 
         nextTick(() => {
