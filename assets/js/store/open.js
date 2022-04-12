@@ -1,31 +1,31 @@
 export default {
     namespaced: true,
     state: {
-        objAnimDone: false,
-        elAnimDone: false
+        deemoAnim: false,
+        hololiveAnim: false
     },
     getters: {
-        getObjAnim(state){
-            return state.objAnimDone
+        getDeemoAnim(state){
+            return state.deemoAnim
         },
-        getElAnim(state){
-            return state.elAnimDone
+        getHololiveAnim(state){
+            return state.hololiveAnim
         }
     },
     mutations: {
-        setObjAnim(state, value){
-            state.openObjAnimDone = value
+        setDeemoAnim(state, value){
+            state.deemoAnim = value
         },
-        setElAnim(state, value){
-            state.openElAnimDone = value
+        setHololiveAnim(state, value){
+            state.hololiveAnim = value
         }
     },
     actions: {
-        setObjAnim({commit}, value){
-            commit('setObjAnim', value)
+        setDeemoAnim({commit}, value){
+            commit('setDeemoAnim', value)
         },
-        setElAnim({commit}, value){
-            commit('setElAnim', value)
+        setHololiveAnim({commit}, value){
+            commit('setHololiveAnim', value)
         }
     }
 }

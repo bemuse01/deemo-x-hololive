@@ -1,13 +1,13 @@
 import * as THREE from '../../lib/three.module.js'
 
-import Param from './param/open.param.js'
+import Param from './param/deemo.param.js'
 import PublicMethod from '../../method/method.js'
 
-import Child from './build/open.child.build.js'
+import Child from './build/deemo.child.build.js'
 
 export default class{
-    constructor(store){
-        this.store = store
+    constructor(store, anim){
+        this.anim = anim
         this.renderer = store.getters.getApp.renderer
         this.element = document.querySelector('.open-deemo-container')
 
@@ -64,12 +64,20 @@ export default class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size, store: this.store})
+            this.comp[module] = new instance({group, size: this.size, name: module, anim: this.anim})
         }
 
         for(const group in this.group) this.build.add(this.group[group])
         
         this.scene.add(this.build)
+    }
+
+
+    // remove
+    dispose(){
+        for(const comp in this.comp){
+            this.comp[comp].dispose()
+        }
     }
 
 

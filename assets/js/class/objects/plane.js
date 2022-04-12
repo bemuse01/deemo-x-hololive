@@ -33,6 +33,21 @@ export default class{
     }
 
 
+    // dispose
+    dispose(){
+        this.getGeometry().dispose()
+        this.getMaterial().dispose()
+
+        const uniforms = this.getUniforms()
+
+        if(uniforms){
+            for(const name in uniforms){
+                if(uniforms[name].value.dispose) uniforms[name].value.dispose()
+            }
+        }
+    }
+
+
     // set
     setAttribute(name, array, itemSize){
         this.mesh.geometry.setAttribute(name, new THREE.BufferAttribute(array, itemSize))
@@ -58,6 +73,9 @@ export default class{
     }
     getAttribute(name){
         return this.mesh.geometry.attributes[name]
+    }
+    getUniforms(){
+        return this.mesh.material.uniforms
     }
     getUniform(name){
         return this.mesh.material.uniforms[name].value

@@ -2,8 +2,8 @@ import Store from './store/index.js'
 
 import App from './class/app/app.js'
 
-import CanvasContainer from './component/canvasContainer.js'
-import UiContainer from './component/uiContainer.js'
+import CanvasContainer from './component/container/canvasContainer.js'
+import UiContainer from './component/container/uiContainer.js'
 
 const vueApp = Vue.createApp({
     components: {
