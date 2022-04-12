@@ -5,7 +5,7 @@
     width: 100%;
     height: 100%;
     
-    --logo-width: 60rem;
+    --logo-width: 58rem;
 
     --deemo-width: 44rem;
     --deemo-ratio: 178 / 476;
@@ -28,7 +28,7 @@
     transform: translate(50%, -50%);
     width: var(--deemo-width);
     height: calc(var(--deemo-width) * var(--deemo-ratio));
-    transition: 0.3s;
+    transition: 0.4s;
 }
 .open-deemo-container div{
     width: 100%;
@@ -40,7 +40,7 @@
     left: 0;
     transform: translate(0, -50%);
     width: var(--hololive-width);
-    transition: 0.3s;
+    transition: 0.4s;
 }
 .open-hololive-container img{
     max-width: 100%;

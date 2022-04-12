@@ -8,9 +8,23 @@ export default {
         </div>
     `,
     setup(){
-        const store = Vuex.useStore()
-        const style = Vue.reactive({
-            container: {opacity: 0, transform: 'translate(0, 100%)'}
+        const {reactive, ref, watchEffect, onUnmounted, nextTick} = Vue
+        const {useStore} = Vuex
+
+        const store = useStore()
+        const style = reactive({
+            container: {opacity: 0, transform: 'translate(0, 0)'}
+        })
+
+        const slide = () => {
+            style.container.opacity = 1
+            style.container.transform = 'translate(0, -50%)'
+        }
+
+        watchEffect(() => {
+            if(!store.getters['open/getDeemoAnim']) return
+
+            slide()
         })
 
         return{

@@ -10,7 +10,7 @@ export default {
         </div>
     `,
     setup(){
-        const {computed, reactive, ref, watch, watchEffect, onUnmounted, nextTick, toRefs} = Vue
+        const {reactive, ref, watchEffect, onUnmounted, nextTick} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -27,7 +27,12 @@ export default {
         }
 
         const hide = () => {
+            
+        }
 
+        const slide = () => {
+            style.container.right = '0'
+            style.container.transform = 'translate(0, -50%)'
         }
 
         watchEffect(() => {
@@ -35,11 +40,12 @@ export default {
                 if(!anim[name]) return
             }
 
-            console.log(anim)
+            slide()
+            store.dispatch('open/setDeemoAnim', true)
         })
 
         onUnmounted(() => {
-
+            deemoLogo.value.dispose()
         })
 
         nextTick(() => {
@@ -48,7 +54,6 @@ export default {
 
         return{
             style,
-            hide
         }
     }
 }

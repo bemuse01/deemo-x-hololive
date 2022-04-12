@@ -19,14 +19,17 @@ export default {
         </div>
     `,
     setup(){
-        const store = Vuex.useStore()
-        const style = Vue.reactive({
+        const {reactive, ref, watchEffect, watch, computed, onUnmounted, nextTick} = Vue
+        const {useStore} = Vuex
+
+        const store = useStore()
+        const style = reactive({
             logoBox: {},
         })
-        const objAnim = Vue.computed(() => store.getters['open/getObjAnim'])
+        const objAnim = computed(() => store.getters['open/getDeemoAnim'])
 
-        Vue.watch(objAnim, (cur, pre) => {
-            
+        watch(objAnim, (cur, pre) => {
+            console.log(cur)
         })
 
         return{

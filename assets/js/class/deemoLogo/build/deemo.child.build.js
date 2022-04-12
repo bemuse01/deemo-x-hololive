@@ -13,7 +13,7 @@ export default class{
         this.param = {
             blur: 0.25,
             count: Param.count,
-            time: 6000,
+            time: 3000,
             delayDefault: 500,
             delayStep: 0
         }
@@ -100,7 +100,7 @@ export default class{
 
         const tw = new TWEEN.Tween(start)
         .to(end, time)
-        .easing(TWEEN.Easing.Quadratic.Out)
+        // .easing(TWEEN.Easing.Quadratic.Out)
         .onUpdate(() => this.onUpdateTween(idx, start))
         .onComplete(() => this.onCompleteTween(idx))
         .delay(delayDefault + idx * delayStep)
@@ -112,9 +112,7 @@ export default class{
     onCompleteTween(idx){
         if(idx === this.param.count - 1){
             // animation is completed
-            // console.log(this.anim[this.name])
             this.anim[this.name] = true
-            // this.store.dispatch('open/setObjAnim', true)
         }
     }
 
