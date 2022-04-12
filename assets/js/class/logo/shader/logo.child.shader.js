@@ -1,5 +1,5 @@
 import ShaderMethod from '../../../method/method.shader.js'
-import Param from '../param/deemo.child.param.js'
+import Param from '../param/logo.child.param.js'
 
 export default {
     vertex: `

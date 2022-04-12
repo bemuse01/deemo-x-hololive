@@ -25,6 +25,7 @@ div#wrap{
 
 /* canvas */
 div#canvas-container{
+    position: absolute;
     width: 100%;
     height: 100%;
 }
@@ -37,6 +38,11 @@ canvas#canvas{
 
 
 /* ui */
+div#ui-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 .ui{
     position: absolute;
 }

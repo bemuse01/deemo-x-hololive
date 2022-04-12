@@ -5,10 +5,21 @@ export default {
         'ui-open': UiOpen
     },
     template: `
-        <div class="ui-container">
+        <div id="ui-container">
 
-            <ui-open></ui-open>
+            <ui-open v-if="showing.open"></ui-open>
 
         </div>
-    `
+    `,
+    setup(){
+        const {reactive} = Vue
+
+        const showing = reactive({
+            open: true,
+        })
+
+        return{
+            showing
+        }
+    }
 }

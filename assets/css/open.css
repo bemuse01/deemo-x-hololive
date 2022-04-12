@@ -19,7 +19,6 @@
     transform: translate(-50%, -50%);
     width: var(--logo-width);
     height: 100%;
-    /* height: calc(var(--deemo-width) * var(--deemo-ratio)); */
 }
 .open-deemo-container{
     position: absolute;

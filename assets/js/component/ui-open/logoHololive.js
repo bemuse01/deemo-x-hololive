@@ -8,7 +8,7 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, ref, watchEffect, onUnmounted, nextTick} = Vue
+        const {reactive, watchEffect} = Vue
         const {useStore} = Vuex
 
         const store = useStore()

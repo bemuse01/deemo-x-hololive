@@ -1,10 +1,10 @@
 import * as THREE from '../../../lib/three.module.js'
 import Plane from '../../objects/plane.js'
-import Shader from '../shader/deemo.child.shader.js'
-import Param from '../param/deemo.child.param.js'
+import Shader from '../shader/logo.child.shader.js'
+import Param from '../param/logo.child.param.js'
 
 export default class{
-    constructor({group, size, name, anim}){
+    constructor({group, size, name, anim, src}){
         this.name = name
         this.anim = anim
         this.group = group
@@ -20,7 +20,7 @@ export default class{
 
         // max width range and ratio
         this.ratio = this.size.obj.w / this.size.obj.h
-        this.src = './assets/src/logo.png'
+        this.src = src
 
         this.init()
     }

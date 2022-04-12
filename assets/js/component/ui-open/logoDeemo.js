@@ -1,4 +1,4 @@
-import DeemoLogo from '../../class/deemoLogo/deemo.js'
+import Logo from '../../class/logo/logo.js'
 
 export default {
     template: `
@@ -14,21 +14,15 @@ export default {
         const {useStore} = Vuex
 
         const store = useStore()
-        const deemoLogo = ref()
+        const logo = ref()
         const anim = reactive({
             child: false
         })
         const style = reactive({
             container: {right: '50%', transform: 'translate(50%, -50%)'}
         })
-
-        const show = () => {
-
-        }
-
-        const hide = () => {
-            
-        }
+        const src = './assets/src/logo.png'
+        const element = '.open-deemo-container'
 
         const slide = () => {
             style.container.right = '0'
@@ -45,11 +39,12 @@ export default {
         })
 
         onUnmounted(() => {
-            deemoLogo.value.dispose()
+            logo.value.dispose()
+            console.log('unmounted')
         })
 
         nextTick(() => {
-            deemoLogo.value = new DeemoLogo(store, anim)
+            logo.value = new Logo(store, anim, src, element)
         })
 
         return{
