@@ -19,14 +19,15 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, ref, watchEffect, watch, computed} = Vue
+        const {watchEffect} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
-        const objAnim = computed(() => store.getters['open/getDeemoAnim'])
 
-        watch(objAnim, (cur, pre) => {
-            console.log(cur)
+        watchEffect(() => {
+            if(store.getters['open/getDeemoAnim'] && store.getters['open/getHololiveAnim']){
+                store.dispatch('open/setShowing', false)
+            }
         })
     }
 }

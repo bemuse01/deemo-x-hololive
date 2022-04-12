@@ -1,10 +1,14 @@
 export default {
     namespaced: true,
     state: {
+        showing: true,
         deemoAnim: false,
         hololiveAnim: false
     },
     getters: {
+        getShowing(state){
+            return state.showing
+        },
         getDeemoAnim(state){
             return state.deemoAnim
         },
@@ -13,6 +17,9 @@ export default {
         }
     },
     mutations: {
+        setShowing(state, value){
+            state.showing = value
+        },
         setDeemoAnim(state, value){
             state.deemoAnim = value
         },
@@ -21,6 +28,9 @@ export default {
         }
     },
     actions: {
+        setShowing({commit}, value){
+            commit('setShowing', value)
+        },
         setDeemoAnim({commit}, value){
             commit('setDeemoAnim', value)
         },

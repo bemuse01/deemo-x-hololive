@@ -3,13 +3,15 @@ export default {
         <div 
             class="ui-container open-hololive-container"
             :style="style.container"
+            :ref="el => element = el"
         >
             <img src="./assets/src/hololive.png">
         </div>
     `,
     setup(){
-        const {reactive, watchEffect} = Vue
+        const {reactive, watchEffect, ref, onMounted} = Vue
         const {useStore} = Vuex
+        const element = ref()
 
         const store = useStore()
         const style = reactive({
@@ -21,14 +23,23 @@ export default {
             style.container.transform = 'translate(0, -50%)'
         }
 
+        const onTransitionend = () => {
+            store.dispatch('open/setHololiveAnim', true)
+        }
+
         watchEffect(() => {
             if(!store.getters['open/getDeemoAnim']) return
 
             slide()
         })
 
+        onMounted(() => {
+            element.value.addEventListener('transitionend', onTransitionend)
+        })
+
         return{
-            style
+            style,
+            element
         }
     }
 }

@@ -7,19 +7,19 @@ export default {
     template: `
         <div id="ui-container">
 
-            <ui-open v-if="showing.open"></ui-open>
+            <ui-open v-if="openShowing"></ui-open>
 
         </div>
     `,
     setup(){
-        const {reactive} = Vue
+        const {reactive, computed} = Vue
+        const {useStore} = Vuex
 
-        const showing = reactive({
-            open: true,
-        })
+        const store = useStore()
+        const openShowing = computed(() => store.getters['open/getShowing'])
 
         return{
-            showing
+            openShowing
         }
     }
 }
