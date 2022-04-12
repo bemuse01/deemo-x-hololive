@@ -25,12 +25,12 @@ export default {
 
         const onTransitionend = () => {
             setTimeout(() => {
-                store.dispatch('open/setHololiveAnim', true)
+                store.dispatch('open/setAnim', {name: 'hololive', value: true})
             }, 500)
         }
 
         watchEffect(() => {
-            if(!store.getters['open/getDeemoAnim']) return
+            if(!store.getters['open/getAnim'].deemo) return
 
             slide()
         })

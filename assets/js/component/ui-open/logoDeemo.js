@@ -35,7 +35,7 @@ export default {
             }
 
             slide()
-            store.dispatch('open/setDeemoAnim', true)
+            store.dispatch('open/setAnim', {name: 'deemo', value: true})
         })
 
         onUnmounted(() => {

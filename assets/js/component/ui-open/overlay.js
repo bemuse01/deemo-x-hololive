@@ -21,11 +21,11 @@ export default {
         }
 
         const onTransitionend = () => {
-            store.dispatch('open/setOverlayAnim', true)
+            store.dispatch('open/setAnim', {name: 'overlay', value: true})
         }
 
         watchEffect(() => {
-            if(!store.getters['open/getHololiveAnim']) return
+            if(!store.getters['open/getAnim'].hololive) return
 
             show()
         })

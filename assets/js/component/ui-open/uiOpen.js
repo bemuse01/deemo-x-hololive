@@ -28,7 +28,7 @@ export default {
         const store = useStore()
 
         watchEffect(() => {
-            if(store.getters['open/getOverlayAnim']){
+            if(store.getters['open/getAnim'].overlay){
                 store.dispatch('open/setShowing', false)
             }
         })
