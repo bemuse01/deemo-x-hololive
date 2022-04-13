@@ -1,12 +1,14 @@
 import LogoDeemo from './logoDeemo.js'
 import LogoHololive from './LogoHololive.js'
+import BgContainer from '../public/bgContainer.js'
 import Overlay from './overlay.js'
 
 export default {
     components: {
         'logo-deemo': LogoDeemo,
         'logo-hololive': LogoHololive,
-        'overlay': Overlay
+        'overlay': Overlay,
+        'bg-container': BgContainer
     },
     template: `
         <div class="ui ui-open">
