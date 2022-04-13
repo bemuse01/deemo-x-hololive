@@ -17,7 +17,7 @@ export default {
 
                 <logo-deemo />
                 <logo-hololive />
-                <overlay />
+                <!--<overlay />-->
 
             </div>
         
@@ -30,8 +30,8 @@ export default {
         const store = useStore()
 
         watchEffect(() => {
-            if(store.getters['open/getAnim'].overlay){
-                store.dispatch('open/setShowing', false)
+            if(store.getters['open/getAnim'].hololive){
+                // store.dispatch('open/setShowing', false)
             }
         })
     }

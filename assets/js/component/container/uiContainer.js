@@ -9,13 +9,8 @@ export default {
     template: `
         <div id="ui-container">
 
+            <ui-open v-if="openShowing"></ui-open>
             <ui-playlist></ui-playlist>
-
-            <transition name="fade">
-
-                <ui-open v-if="openShowing"></ui-open>
-
-            </transition>
 
         </div>
     `,
@@ -25,9 +20,11 @@ export default {
 
         const store = useStore()
         const openShowing = computed(() => store.getters['open/getShowing'])
+        const playlistShowing = computed(() => store.getters['playlist/getShowing'])
 
         return{
-            openShowing
+            openShowing,
+            playlistShowing
         }
     }
 }

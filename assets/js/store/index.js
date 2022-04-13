@@ -1,4 +1,5 @@
 import OpenStore from './open.js'
+import PlaylistStore from './playlist.js'
 
 export default Vuex.createStore({
     state: {
@@ -20,6 +21,7 @@ export default Vuex.createStore({
         }
     },
     modules: {
-        open: OpenStore
+        open: OpenStore,
+        playlist: PlaylistStore
     }
 })
