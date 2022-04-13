@@ -1,8 +1,10 @@
 import BgContainer from '../public/bgContainer.js'
+import NavContainer from './navContainer.js'
 
 export default {
     components: {
-        'bg-container': BgContainer
+        'bg-container': BgContainer,
+        'nav-container': NavContainer
     },
     template: `
         <div 
@@ -12,6 +14,7 @@ export default {
         >
 
             <bg-container class="playlist-bg-container"></bg-container>
+            <nav-container></nav-container>
 
         </div>
     `,

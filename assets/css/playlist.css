@@ -9,3 +9,19 @@
 .playlist-bg-container div{
     background: url('../src/bg.png') no-repeat center center / cover;
 }
+.nav-background{
+    position: absolute;
+    top: 50%;
+    left: -40px;
+    transform: translate(0, -64%);
+    width: 356px;
+    height: 720px;
+} 
+.flare{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.flare img{
+    max-width: 100%;
+}
