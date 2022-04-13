@@ -6,17 +6,26 @@
     height: 100%;
     transition: opacity 0.6s;
 }
+
+/* bg */
 .playlist-bg-container div{
     background: url('../src/bg.png') no-repeat center center / cover;
 }
-.nav-background{
+
+/* nav */
+.playlist-nav-container{
     position: absolute;
+    width: 356px;
+    height: 720px;
     top: 50%;
     left: -40px;
     transform: translate(0, -64%);
-    width: 356px;
-    height: 720px;
-} 
+}
+.nav-background{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 .flare{
     position: absolute;
     width: 100%;
@@ -24,4 +33,23 @@
 }
 .flare img{
     max-width: 100%;
+}
+.nav-item-box{
+    position: absolute;
+    bottom: calc(720px - 634px);
+    width: 356px;
+    height: 356px;
+}
+.nav-item{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.nav-item div{
+    position: absolute;
+}
+.nav-item span{
+    position: absolute;
+    transform: translate(-50%, -50%)
 }

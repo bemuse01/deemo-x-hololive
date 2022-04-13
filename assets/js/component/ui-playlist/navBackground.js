@@ -4,6 +4,8 @@ export default {
             <div class="flare">
                 <img src="./assets/src/songselect_flare.png">
             </div>
+            <div class="flare-beam">
+            </div>
         </div>
     `,
     setup(){
