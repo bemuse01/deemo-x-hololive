@@ -15,13 +15,15 @@ const createDegree = (count) => {
     }
     downDegree.unshift(0)
 
-    return {upDegree, downDegree}
+    return {upDegree: downDegree.map(e => -e), downDegree}
 }
 
-const getDeg = ({current, key, upDegree, downDegree}) => {
+const getDeg = ({current, key, upDegree, downDegree, count}) => {
+    const sign = Math.sign(current - key)
     const degree = key < current ? upDegree : downDegree
+    const edge = degree.length * (360 / count)
     const idx = Math.abs(current - key)
-    const deg = idx < degree.length ? degree[idx] : 180
+    const deg = idx < degree.length ? degree[idx] : edge * -sign
 
     return deg
 }
@@ -68,7 +70,7 @@ export default {
         const items = ref(Array.from({length: count}, (_, key) => {
             const name = 'xxxxx'.replace(/x/g, () => text[~~(Math.random() * text.length)])
             
-            const deg = getDeg({current, key, upDegree, downDegree})
+            const deg = getDeg({current, key, upDegree, downDegree, count})
             const {x, y} = updatePosition({deg, radius1, radius2})
         
             const style = {
@@ -85,7 +87,7 @@ export default {
         }
 
         const createTween = (cur, idx) => {
-            const newDeg = getDeg({current: cur, key: idx, upDegree, downDegree})
+            const newDeg = getDeg({current: cur, key: idx, upDegree, downDegree, count})
             
             const item = items.value[idx]
 
