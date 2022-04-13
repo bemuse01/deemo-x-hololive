@@ -1,21 +1,36 @@
 const createDegree = (count) => {
     const len = ~~(count / 4)
-    const tDegree = []
-    const bDegree = []
+    const upDegree = []
+    const downDegree = []
     const deg = 360 / count
 
     for(let i = count - len; i < count; i++){
-        tDegree.push(deg * i)
+        upDegree.push(deg * i)
     }
-    tDegree.reverse()
-    tDegree.unshift(0)
+    upDegree.reverse()
+    upDegree.unshift(0)
 
     for(let i = 1; i < len + 1; i++){
-        bDegree.push(deg * i)
+        downDegree.push(deg * i)
     }
-    bDegree.unshift(0)
+    downDegree.unshift(0)
 
-    return {tDegree, bDegree}
+    return {upDegree, downDegree}
+}
+
+const getDeg = ({current, key, upDegree, downDegree}) => {
+    const degree = key < current ? upDegree : downDegree
+    const idx = Math.abs(current - key)
+    const deg = idx < degree.length ? degree[idx] : 180
+
+    return deg
+}
+
+const updatePosition = ({deg, radius1, radius2}) => {
+    const x = Math.cos(deg * RADIAN) * radius1
+    const y = Math.sin(deg * RADIAN) * radius2
+    
+    return {x, y}
 }
 
 export default {
@@ -31,7 +46,9 @@ export default {
                     class="nav-item-translate" 
                     :style="item.style"
                 >
-                    <span>{{item.name}}</span>
+                    <span
+                        @click="initTween(item.key)"
+                    >{{item.name}}</span>
                 </div>
             </div>
         
@@ -45,30 +62,55 @@ export default {
         const radius2 = 200
         // count must be even num
         const count = 18
-        const {tDegree, bDegree} = createDegree(count)
+        const {upDegree, downDegree} = createDegree(count)
         const current = 16
-
-        console.log(tDegree, bDegree)
 
         const items = ref(Array.from({length: count}, (_, key) => {
             const name = 'xxxxx'.replace(/x/g, () => text[~~(Math.random() * text.length)])
             
-            const degree = key < current ? tDegree : bDegree
-            const idx = Math.abs(current - key)
-            const deg = idx < degree.length ? degree[idx] : 180
-
-            const x = Math.cos(deg * RADIAN) * radius1
-            const y = Math.sin(deg * RADIAN) * radius2
-            
+            const deg = getDeg({current, key, upDegree, downDegree})
+            const {x, y} = updatePosition({deg, radius1, radius2})
+        
             const style = {
                 transform: `translate(${x}px, ${y}px)`
             }
             
-            return {key, name, style}
+            return {key, name, style, deg}
         }))
 
+        const initTween = (cur) => {
+            for(let i = 0; i < items.value.length; i++){
+                createTween(cur, i)
+            }
+        }
+
+        const createTween = (cur, idx) => {
+            const newDeg = getDeg({current: cur, key: idx, upDegree, downDegree})
+            
+            const item = items.value[idx]
+
+            const start = {deg: item.deg}
+            const end = {deg: newDeg}
+
+            const tw = new TWEEN.Tween(start)
+            .to(end, 600)
+            .onUpdate(() => onUpdateTween(item, start))
+            .onComplete(() => onCompleteTween(item, newDeg))
+            .start()
+        }
+
+        const onUpdateTween = (item, {deg}) => {
+            const {x, y} = updatePosition({deg, radius1, radius2})
+            item.style.transform = `translate(${x}px, ${y}px)`
+        }
+
+        const onCompleteTween = (item, newDeg) => {
+            item.deg = newDeg
+        }
+
         return{
-            items
+            items,
+            initTween
         }
     }
 }
