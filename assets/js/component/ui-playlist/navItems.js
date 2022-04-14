@@ -1,21 +1,13 @@
 const createDegree = (count) => {
     const len = ~~(count / 4)
-    const upDegree = []
-    const downDegree = []
+    const degree = [0]
     const deg = 360 / count
 
-    for(let i = count - len; i < count; i++){
-        upDegree.push(deg * i)
-    }
-    upDegree.reverse()
-    upDegree.unshift(0)
-
     for(let i = 1; i < len + 1; i++){
-        downDegree.push(deg * i)
+        degree.push(deg * i)
     }
-    downDegree.unshift(0)
 
-    return {upDegree: downDegree.map(e => -e), downDegree}
+    return {upDegree: degree.map(e => -e), downDegree: degree}
 }
 
 const getDeg = ({current, key, upDegree, downDegree, count}) => {
@@ -33,6 +25,13 @@ const updatePosition = ({deg, radius1, radius2}) => {
     const y = Math.sin(deg * RADIAN) * radius2
     
     return {x, y}
+}
+
+const getOpacity = ({len, current, key}) => {
+    const o = 1 / len
+    const sub = Math.abs(current - key)
+    const opacity = 1 - o * sub
+    return opacity
 }
 
 export default {
@@ -65,19 +64,22 @@ export default {
         // count must be even num
         const count = 18
         const {upDegree, downDegree} = createDegree(count)
-        const current = 16
+        const current = 6
 
         const items = ref(Array.from({length: count}, (_, key) => {
             const name = 'xxxxx'.replace(/x/g, () => text[~~(Math.random() * text.length)])
             
             const deg = getDeg({current, key, upDegree, downDegree, count})
             const {x, y} = updatePosition({deg, radius1, radius2})
-        
+
+            const opacity = getOpacity({len: upDegree.length, current, key})
+
             const style = {
-                transform: `translate(${x}px, ${y}px)`
+                transform: `translate(${x}px, ${y}px)`,
+                opacity: `${opacity}`
             }
             
-            return {key, name, style, deg}
+            return {key, name, style, deg, opacity}
         }))
 
         const initTween = (cur) => {
@@ -87,27 +89,34 @@ export default {
         }
 
         const createTween = (cur, idx) => {
-            const newDeg = getDeg({current: cur, key: idx, upDegree, downDegree, count})
-            
             const item = items.value[idx]
 
-            const start = {deg: item.deg}
-            const end = {deg: newDeg}
+            const oldDeg = item.deg
+            const newDeg = getDeg({current: cur, key: idx, upDegree, downDegree, count})
+
+            const oldOpacity = item.opacity
+            const newOpacity = getOpacity({len: upDegree.length, current: cur, key: idx})
+
+            const start = {deg: oldDeg, opacity: oldOpacity}
+            const end = {deg: newDeg, opacity: newOpacity}
 
             const tw = new TWEEN.Tween(start)
             .to(end, 600)
+            .easing(TWEEN.Easing.Quadratic.InOut)
             .onUpdate(() => onUpdateTween(item, start))
-            .onComplete(() => onCompleteTween(item, newDeg))
+            .onComplete(() => onCompleteTween(item, newDeg, newOpacity))
             .start()
         }
 
-        const onUpdateTween = (item, {deg}) => {
+        const onUpdateTween = (item, {deg, opacity}) => {
             const {x, y} = updatePosition({deg, radius1, radius2})
             item.style.transform = `translate(${x}px, ${y}px)`
+            item.style.opacity = `${opacity}`
         }
 
-        const onCompleteTween = (item, newDeg) => {
+        const onCompleteTween = (item, newDeg, newOpacity) => {
             item.deg = newDeg
+            item.opacity = newOpacity
         }
 
         return{
