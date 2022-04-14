@@ -10,12 +10,14 @@ export default {
                         <img src="./assets/src/songselect_namebar.png">
                     </div>
                     
-                    <div class="song-text">
+                    <div class="song-text song-text-title">
                         
                         <div class="song-name">
+                            <span>Demonic Pray</span>
                         </div>
 
                         <div class="song-vocal">
+                            <span>Easy LV4</span>
                         </div>
 
                     </div>

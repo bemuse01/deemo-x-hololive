@@ -122,17 +122,49 @@
     width: 100%;
     height: 100%;
 }
+.song-bg img{
+    transform-origin: left;
+    transform: scaleX(1.125);
+}
 .song-length-box .song-bg{
     width: 535px;
 }
 .song-text{
     position: absolute;
     right: 0;
-    width: 80%;
+    width: 82%;
     height: 100%;
 }
+.song-text-title{
+    top: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    height: 88%;
+    flex-direction: column;
+}
+.song-text-title > div{
+    /* position: absolute; */
+    flex: 1;
+}
+.song-name{
+    font-family: FANTIQUE;
+    font-size: 24px;
+    text-shadow: 0 0 3px black;
+    filter: drop-shadow(0 0 1px black);
+    max-height: 100%;
+    color: white;
+    transform-origin: left 65%;
+    transform: scale(2.25);
+}
+.song-vocal{
+    color: white;
+    font-size: 21px;
+    font-family: SairaRegular;
+}
+.song-vocal span{
+    padding-left: 10px;
+}
 .song-length{
-    position: absolute;
     font-family: Eringobragh;
     font-size: 46px;
     max-height: 27px;

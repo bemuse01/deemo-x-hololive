@@ -13,6 +13,10 @@
     font-family: Eringobragh;
     src: url('../font/eringobragh.ttf');
 }
+@font-face {
+    font-family: NeonNanoborg;
+    src: url('../font/NeonNanoborg.otf');
+}
 
 
 /* init */
