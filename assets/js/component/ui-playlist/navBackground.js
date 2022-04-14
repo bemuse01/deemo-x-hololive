@@ -19,17 +19,16 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, watch, computed} = Vue
+        const {reactive, watchEffect} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
-        const currentMusicKey = computed(() => store.getters['playlist/getCrtMusicKey'])
         const degree = 120
         const offset = (180 -  degree) / 2
         const musicCount = 14
         const deg = degree / (musicCount - 1)
         const style = reactive({
-            flareBeam: {transform: `rotate(${getDeg({degree, deg, offset, key: 0})}deg)`}
+            flareBeam: {transform: `rotate(${getDeg({degree, deg, offset, key: store.getters['playlist/getCrtMusicKey']})}deg)`}
         })
 
         const updateTransform = (key) => {
@@ -37,8 +36,8 @@ export default {
             style.flareBeam.transform = `rotate(${newDeg}deg)`
         }
         
-        watch(currentMusicKey, cur => {
-            updateTransform(cur)
+        watchEffect(() => {
+            updateTransform(store.getters['playlist/getCrtMusicKey'])
         })
 
         return{
