@@ -7,17 +7,15 @@ export default {
                 <div class="song-title-box">
                     
                     <div class="song-bg">
-                        <img>
+                        <img src="./assets/src/songselect_namebar.png">
                     </div>
                     
                     <div class="song-text">
                         
                         <div class="song-name">
-                            <span></span>
                         </div>
 
-                        <div class="song-">
-                            <span></span>
+                        <div class="song-vocal">
                         </div>
 
                     </div>
@@ -27,13 +25,12 @@ export default {
                 <div class="song-length-box">
                 
                     <div class="song-bg">
-                        <img>
+                        <img src="./assets/src/songselect_scorebar_easy.png">
                     </div>
                     
-                    <div class="song-text>
+                    <div class="song-text">
 
-                        <div class="song-length>
-                            <span></span>
+                        <div class="song-length">
                         </div>
                     
                     </div>
@@ -42,11 +39,11 @@ export default {
 
             </div>
 
-            <div class="difficulty-bg">
+            <div class="nav-difficulty difficulty-bg">
                 <img src="./assets/src/songselect_difficulty_bg_easy.png">
             </div>
 
-            <div class="difficulty">
+            <div class="nav-difficulty difficulty">
                 <img src="./assets/src/songselect_difficulty_easy.png">
             </div>
 
