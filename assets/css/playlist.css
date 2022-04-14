@@ -139,7 +139,7 @@
     top: 50%;
     transform: translate(0, -50%);
     display: flex;
-    height: 88%;
+    height: 90%;
     flex-direction: column;
 }
 .song-text-title > div{
@@ -153,12 +153,16 @@
     filter: drop-shadow(0 0 1px black);
     max-height: 100%;
     color: white;
+}
+.song-name span{
+    display: inline-block;
     transform-origin: left 65%;
     transform: scale(2.25);
 }
 .song-vocal{
     color: white;
     font-size: 21px;
+    line-height: 21px;
     font-family: SairaRegular;
     letter-spacing: 1px;
 }
