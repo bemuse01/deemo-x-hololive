@@ -160,6 +160,7 @@
     color: white;
     font-size: 21px;
     font-family: SairaRegular;
+    letter-spacing: 1px;
 }
 .song-vocal span{
     padding-left: 10px;
