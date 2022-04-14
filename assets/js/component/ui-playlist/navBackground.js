@@ -1,3 +1,7 @@
+const getDeg = ({degree, deg, offset, key}) => {
+    return (offset + degree) - deg * key
+}
+
 export default {
     template: `
         <div class="nav-background">
@@ -20,7 +24,7 @@ export default {
 
         const store = useStore()
         const currentMusicKey = computed(() => store.getters['playlist/getCrtMusicKey'])
-        const degree = 140
+        const degree = 120
         const offset = (180 -  degree) / 2
         const musicCount = 14
         const deg = degree / (musicCount - 1)
@@ -29,7 +33,7 @@ export default {
         })
 
         const updateTransform = (key) => {
-            const newDeg = (offset + degree) - deg * key
+            const newDeg = getDeg({degree, deg, offset, key})
             style.flareBeam.transform = `rotate(${newDeg}deg)`
         }
         
