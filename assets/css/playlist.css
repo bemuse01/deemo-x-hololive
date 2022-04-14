@@ -6,9 +6,16 @@
     height: 100%;
     transition: opacity 0.6s;
     font-family: FANTIQUE;
+
+    --nav-width: 356px;
+    --nav-height: 720px;
+    --place-to-center: calc(634px - var(--nav-height));
 }
 .ui-playlist span{
     cursor: pointer;
+}
+.ui-playlist img{
+    max-width: 100%;
 }
 
 /* bg */
@@ -19,11 +26,11 @@
 /* nav */
 .playlist-nav-container{
     position: absolute;
-    width: 356px;
-    height: 720px;
     top: 50%;
     left: -40px;
-    transform: translate(0, -64%);
+    transform: translate(0, -50%);
+    width: var(--nav-width);
+    height: var(--nav-width);
 }
 /* nav background */
 .nav-background{
@@ -31,21 +38,19 @@
     width: 100%;
     height: 100%;
 }
-.nav-background img{
-    max-width: 100%;
+.nav-background-child{
+    position: absolute;
+    height: var(--nav-height);
+    bottom: var(--place-to-center);
 }
 .flare{
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    width: var(--nav-width);
 }
 .flare-beam{
     position: absolute;
-    top: 0;
     left: 50%;
     transform: translate(-50%, 0);
     width: 8px;
-    height: 100%;
 }
 .flare-beam div{
     position: absolute;
@@ -57,10 +62,9 @@
 /* nav item box */
 .nav-item-box{
     position: absolute;
-    bottom: calc(720px - 634px);
-    width: 356px;
-    height: 356px;
-    font-size: 27px;
+    width: 100%;
+    height: 100%;
+    font-size: 26px;
     white-space: nowrap;
 }
 .nav-item{
@@ -75,4 +79,19 @@
 .nav-item span{
     position: absolute;
     transform: translate(-50%, -50%)
+}
+/* nav current */
+.nav-current{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 192px;
+    height: 192px;
+    white-space: nowrap;
+}
+.difficulty-bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }

@@ -6,11 +6,11 @@ export default {
     template: `
         <div class="nav-background">
         
-            <div class="flare">
+            <div class="nav-background-child flare">
                 <img src="./assets/src/songselect_flare.png">
             </div>
 
-            <div class="flare-beam">
+            <div class="nav-background-child flare-beam">
                 <div :style="style.flareBeam">
                     <img src="./assets/src/songselect_flare_beam.png">
                 </div>
@@ -29,7 +29,7 @@ export default {
         const musicCount = 14
         const deg = degree / (musicCount - 1)
         const style = reactive({
-            flareBeam: {transform: `rotate(${degree + offset}deg)`}
+            flareBeam: {transform: `rotate(${getDeg({degree, deg, offset, key: 0})}deg)`}
         })
 
         const updateTransform = (key) => {
