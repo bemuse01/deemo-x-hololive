@@ -4,6 +4,13 @@
 @import './animation.css';
 
 
+/* font */
+@font-face {
+    font-family: FANTIQUE;
+    src: url('../font/FANTIQUE.TTF');
+}
+
+
 /* init */
 html{
     font-size: 10px;

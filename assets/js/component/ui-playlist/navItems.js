@@ -31,7 +31,7 @@ const getOpacity = ({len, current, key}) => {
     const o = 1 / len
     const sub = Math.abs(current - key)
     const opacity = 1 - o * sub
-    return opacity
+    return opacity - 0.1
 }
 
 export default {
@@ -59,10 +59,10 @@ export default {
         const {reactive, ref} = Vue
 
         const text = 'abcdef'
-        const radius1 = 150
+        const radius1 = 170
         const radius2 = 200
         // count must be even num
-        const count = 18
+        const count = 14
         const {upDegree, downDegree} = createDegree(count)
         const current = 6
 
