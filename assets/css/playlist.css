@@ -25,19 +25,36 @@
     left: -40px;
     transform: translate(0, -64%);
 }
+/* nav background */
 .nav-background{
     position: absolute;
     width: 100%;
     height: 100%;
+}
+.nav-background img{
+    max-width: 100%;
 }
 .flare{
     position: absolute;
     width: 100%;
     height: 100%;
 }
-.flare img{
-    max-width: 100%;
+.flare-beam{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 8px;
+    height: 100%;
 }
+.flare-beam div{
+    position: absolute;
+    transform-origin: center 456px;
+    transition: transform 0.5s;
+    width: 100%;
+    height: 100%;
+}
+/* nav item box */
 .nav-item-box{
     position: absolute;
     bottom: calc(720px - 634px);

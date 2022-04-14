@@ -28,10 +28,10 @@ const updatePosition = ({deg, radius1, radius2}) => {
 }
 
 const getOpacity = ({len, current, key}) => {
-    const o = 1 / (len - 1)
+    const o = 0.6 / len
     const sub = Math.abs(current - key)
-    const opacity = 1 - o * sub
-    return opacity - 0.15
+    const opacity = 0.6 - o * sub
+    return opacity
 }
 
 export default {
@@ -57,14 +57,17 @@ export default {
     `,
     setup(){
         const {reactive, ref} = Vue
+        const {useStore} = Vuex
 
+
+        // vars
+        const store = useStore()
         const text = 'abcdef'
         const radius1 = 170
-        const radius2 = 200
-        // count must be even num
-        const count = 14
+        const radius2 = 210
+        const count = 14 // count must be even num
         const {upDegree, downDegree} = createDegree(count)
-        const current = 6
+        const current = store.getters['playlist/getCrtMusicKey']
 
         const items = ref(Array.from({length: count}, (_, key) => {
             const name = 'xxx xxx xxx'.replace(/x/g, () => text[~~(Math.random() * text.length)])
@@ -82,7 +85,11 @@ export default {
             return {key, name, style, deg, opacity}
         }))
 
+
+        // methods
         const initTween = (cur) => {
+            store.dispatch('playlist/setCrtMusicKey', cur)
+
             for(let i = 0; i < items.value.length; i++){
                 createTween(cur, i)
             }
