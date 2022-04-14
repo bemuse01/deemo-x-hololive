@@ -28,10 +28,10 @@ const updatePosition = ({deg, radius1, radius2}) => {
 }
 
 const getOpacity = ({len, current, key}) => {
-    const o = 1 / len
+    const o = 1 / (len - 1)
     const sub = Math.abs(current - key)
     const opacity = 1 - o * sub
-    return opacity - 0.1
+    return opacity - 0.15
 }
 
 export default {
@@ -67,7 +67,7 @@ export default {
         const current = 6
 
         const items = ref(Array.from({length: count}, (_, key) => {
-            const name = 'xxxxx'.replace(/x/g, () => text[~~(Math.random() * text.length)])
+            const name = 'xxx xxx xxx'.replace(/x/g, () => text[~~(Math.random() * text.length)])
             
             const deg = getDeg({current, key, upDegree, downDegree, count})
             const {x, y} = updatePosition({deg, radius1, radius2})

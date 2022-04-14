@@ -43,7 +43,8 @@
     bottom: calc(720px - 634px);
     width: 356px;
     height: 356px;
-    font-size: 28px;
+    font-size: 27px;
+    white-space: nowrap;
 }
 .nav-item{
     position: absolute;
