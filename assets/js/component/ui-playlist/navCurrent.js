@@ -31,6 +31,7 @@ export default {
                     <div class="song-text">
 
                         <div class="song-length">
+                            <span>00:00</span>
                         </div>
                     
                     </div>

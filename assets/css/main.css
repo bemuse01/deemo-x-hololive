@@ -9,6 +9,10 @@
     font-family: FANTIQUE;
     src: url('../font/FANTIQUE.TTF');
 }
+@font-face {
+    font-family: Eringobragh;
+    src: url('../font/eringobragh.ttf');
+}
 
 
 /* init */
