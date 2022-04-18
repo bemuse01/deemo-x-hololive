@@ -75,15 +75,6 @@ export default [
     {
         songSrc: './assets/songs/',
         bgSrc: './assets/src/',
-        name: 'Reflect',
-        vocal: 'Gawr Gura',
-        composer: 'Farhan Sarasin',
-        length: '00:00',
-        type: ''
-    },
-    {
-        songSrc: './assets/songs/',
-        bgSrc: './assets/src/',
         name: 'Error',
         vocal: 'Tokoyami Towa',
         composer: 'niki',
