@@ -72,7 +72,7 @@ export default {
         let canClick = true
 
         const items = ref(Array.from(Songs, (song, key) => {
-            const {name, src} = song
+            const {name, songSrc} = song
             
             const deg = getDeg({current, key, upDegree, downDegree, count})
             const {x, y} = updatePosition({deg, radius1, radius2})
@@ -84,7 +84,7 @@ export default {
                 opacity: `${opacity}`
             }
             
-            return {key, name, style, deg, opacity, src}
+            return {key, name, style, deg, opacity, songSrc}
         }))
 
 

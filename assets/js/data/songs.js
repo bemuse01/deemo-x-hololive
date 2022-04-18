@@ -1,6 +1,7 @@
 export default [
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'Kamippoi na',
         vocal: 'Laplus Darknesss',
         composer: 'PINOCCHIOP',
@@ -8,7 +9,8 @@ export default [
         type: ''
     },
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'Ranbu No Melody',
         vocal: 'Hoshimati Suisei',
         composer: 'SID',
@@ -16,7 +18,8 @@ export default [
         type: ''
     },
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'Kakusei',
         vocal: 'Hoshimati Suisei',
         composer: 'Superfly',
@@ -24,7 +27,8 @@ export default [
         type: ''
     },
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'Phony',
         vocal: 'Machita Chima',
         composer: 'Tsumiki',
@@ -32,7 +36,8 @@ export default [
         type: ''
     },
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'Phony',
         vocal: 'Hoshimati Suisei',
         composer: 'Tsumiki',
@@ -40,7 +45,8 @@ export default [
         type: ''
     },
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'KING',
         vocal: 'Machita Chima',
         composer: 'Kanaria',
@@ -48,7 +54,8 @@ export default [
         type: ''
     },
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'KING',
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
@@ -56,7 +63,8 @@ export default [
         type: ''
     },
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'Reflect',
         vocal: 'Gawr Gura',
         composer: 'Farhan Sarasin',
@@ -64,7 +72,8 @@ export default [
         type: ''
     },
     {
-        src: './assets/songs/',
+        songSrc: './assets/songs/',
+        bgSrc: './assets/src/',
         name: 'Error',
         vocal: 'Tokoyami Towa',
         composer: 'niki',
