@@ -1,5 +1,15 @@
 export default [
     {
+        songSrc: '',
+        bgSrc: '',
+        name: 'Deemo x Hololive',
+        vocal: '',
+        composer: '',
+        length: '',
+        type: '',
+        default: true
+    },
+    {
         songSrc: './assets/songs/',
         bgSrc: './assets/src/',
         name: 'Kamippoi na',
