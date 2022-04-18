@@ -1,3 +1,5 @@
+import Songs from '../../data/songs.js'
+
 const getDeg = ({degree, deg, offset, key}) => {
     return (offset + degree) - deg * key
 }
@@ -25,8 +27,8 @@ export default {
         const store = useStore()
         const degree = 120
         const offset = (180 -  degree) / 2
-        const musicCount = 14
-        const deg = degree / (musicCount - 1)
+        const songCount = Songs.length
+        const deg = degree / (songCount - 1)
         const style = reactive({
             flareBeam: {transform: `rotate(${getDeg({degree, deg, offset, key: store.getters['playlist/getCrtMusicKey']})}deg)`}
         })

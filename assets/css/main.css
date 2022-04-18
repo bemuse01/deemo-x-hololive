@@ -17,6 +17,10 @@
     font-family: CanelaRoman;
     src: url('../font/canela_roman.otf');
 }
+@font-face {
+    font-family: CanelaBold;
+    src: url('../font/canela_bold.otf');
+}
 
 
 /* init */

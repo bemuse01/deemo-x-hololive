@@ -163,12 +163,16 @@
     color: white;
     font-size: 20px;
     line-height: 20px;
-    font-family: CanelaRoman;
+    font-family: CanelaBold;
     letter-spacing: 1px;
     display: flex;
     flex-direction: column-reverse;
 }
 .song-vocal span{
+    background-image: url('../src/song_select_easy_mask.png');
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     padding-left: 10px;
     padding-bottom: 4px;
 }

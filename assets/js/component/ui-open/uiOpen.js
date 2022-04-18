@@ -21,15 +21,15 @@ export default {
         </div>
     `,
     setup(){
-        const {watchEffect} = Vue
-        const {useStore} = Vuex
+        // const {watchEffect} = Vue
+        // const {useStore} = Vuex
 
-        const store = useStore()
+        // const store = useStore()
 
-        watchEffect(() => {
-            if(store.getters['open/getAnim'].hololive){
-                // store.dispatch('open/setShowing', false)
-            }
-        })
+        // watchEffect(() => {
+        //     if(store.getters['open/getAnim'].hololive){
+        //         store.dispatch('open/setShowing', false)
+        //     }
+        // })
     }
 }

@@ -1,3 +1,5 @@
+import Songs from '../../data/songs.js'
+
 export default {
     template: `
         <div class="nav-current">
@@ -53,6 +55,6 @@ export default {
         </div>
     `,
     setup(){
-
+        
     }
 }

@@ -1,3 +1,5 @@
+import Songs from '../../data/songs.js'
+
 const createDegree = (count) => {
     const len = ~~(count / 4)
     const degree = [0]
@@ -62,15 +64,15 @@ export default {
 
         // vars
         const store = useStore()
-        const text = 'abcdef'
         const radius1 = 170
         const radius2 = 210
         const count = 14 // count must be even num
         const {upDegree, downDegree} = createDegree(count)
         const current = store.getters['playlist/getCrtMusicKey']
+        let canClick = true
 
-        const items = ref(Array.from({length: count}, (_, key) => {
-            const name = 'xxx xxx xxx'.replace(/x/g, () => text[~~(Math.random() * text.length)])
+        const items = ref(Array.from(Songs, (song, key) => {
+            const {name, src} = song
             
             const deg = getDeg({current, key, upDegree, downDegree, count})
             const {x, y} = updatePosition({deg, radius1, radius2})
@@ -82,12 +84,15 @@ export default {
                 opacity: `${opacity}`
             }
             
-            return {key, name, style, deg, opacity}
+            return {key, name, style, deg, opacity, src}
         }))
 
 
         // methods
         const initTween = (cur) => {
+            if(!canClick) return
+            canClick = false
+
             store.dispatch('playlist/setCrtMusicKey', cur)
 
             for(let i = 0; i < items.value.length; i++){
@@ -124,6 +129,7 @@ export default {
         const onCompleteTween = (item, newDeg, newOpacity) => {
             item.deg = newDeg
             item.opacity = newOpacity
+            canClick = true
         }
 
         return{
