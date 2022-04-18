@@ -15,11 +15,11 @@ export default {
                     <div class="song-text song-text-title">
                         
                         <div class="song-name">
-                            <span>Demonic Pray</span>
+                            <span>{{currentItem.name}}</span>
                         </div>
 
                         <div class="song-vocal">
-                            <span>Easy LV4</span>
+                            <span>{{currentItem.vocal}}</span>
                         </div>
 
                     </div>
@@ -35,7 +35,7 @@ export default {
                     <div class="song-text">
 
                         <div class="song-length">
-                            <span>00:00</span>
+                            <span>{{currentItem.length}}</span>
                         </div>
                     
                     </div>
@@ -55,6 +55,27 @@ export default {
         </div>
     `,
     setup(){
+        const {ref, onMounted, watchEffect} = Vue
+        const {useStore} = Vuex
+
+        const store = useStore()
+        const currentItem = ref()
         
+        const setCurrentItem = () => {
+            const currentKey = store.getters['playlist/getCrtMusicKey']
+            currentItem.value = Songs[currentKey]
+        }
+
+        watchEffect(() => {
+            setCurrentItem()
+        })
+
+        onMounted(() => {
+            setCurrentItem()
+        })
+
+        return{
+            currentItem
+        }
     }
 }
