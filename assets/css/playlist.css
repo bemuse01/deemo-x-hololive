@@ -161,13 +161,16 @@
 }
 .song-vocal{
     color: white;
-    font-size: 21px;
-    line-height: 21px;
-    font-family: SairaRegular;
+    font-size: 20px;
+    line-height: 20px;
+    font-family: CanelaRoman;
     letter-spacing: 1px;
+    display: flex;
+    flex-direction: column-reverse;
 }
 .song-vocal span{
     padding-left: 10px;
+    padding-bottom: 4px;
 }
 .song-length{
     font-family: Eringobragh;
