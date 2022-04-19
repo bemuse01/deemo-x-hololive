@@ -5,7 +5,7 @@ import NavContainer from './navContainer.js'
 export default {
     components: {
         'bg-container': BgContainer,
-        'nav-container': NavContainer
+        'nav-container': NavContainer,
     },
     template: `
         <div 
@@ -14,7 +14,7 @@ export default {
             :ref="el => root = el"
         >
 
-            <bg-container class="playlist-bg-container"></bg-container>
+            <bg-container></bg-container>
             <nav-container></nav-container>
 
         </div>

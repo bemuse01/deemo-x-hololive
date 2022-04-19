@@ -36,16 +36,23 @@
 .playlist-nav-container{
     position: absolute;
     top: 50%;
-    left: -40px;
+    /* left: -40px; */
     transform: translate(0, -50%);
     width: var(--nav-width);
-    height: var(--nav-width);
+    height: 100%;
+}
+.nav-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -40px;
+    transform: translate(-50%, -50%);
 }
 /* nav background */
 .nav-background{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: var(--nav-width);
+    height: var(--nav-width);
 }
 .nav-background-child{
     position: absolute;
@@ -71,8 +78,8 @@
 /* nav item box */
 .nav-item-box{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: var(--nav-width);
+    height: var(--nav-width);
     font-size: 26px;
     white-space: nowrap;
 }
@@ -197,4 +204,17 @@
     display: flex;
     flex-flow: column-reverse;
     justify-content: center;
+}
+/* nav composer */
+.nav-composer{
+    position: absolute;
+    font-family: FANTIQUE;
+    font-size: 40px;
+    letter-spacing: -0.4px;
+    padding-top: 4px;
+    padding-left: 28px;
+    transition: color 0.3s;
+}
+.composer-current{
+    padding-top: 5px;
 }

@@ -8,7 +8,6 @@ export default [
         length: '\xa0',
         type: '',
         overlay: 'transparent',
-        color: 'black',
         isDefault: true,
     },
     {

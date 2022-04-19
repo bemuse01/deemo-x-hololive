@@ -30,7 +30,7 @@ const updatePosition = ({deg, radius1, radius2}) => {
 }
 
 const getOpacity = ({len, current, key}) => {
-    let max = Songs[current].isDefault ? 0.6 : 0.7
+    let max = Songs[current].isDefault ? 0.6 : 0.8
     const o = max / len
     const sub = Math.abs(current - key)
     const opacity = max - o * sub
