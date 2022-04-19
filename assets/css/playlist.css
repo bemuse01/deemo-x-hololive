@@ -90,12 +90,7 @@
     height: 192px;
     white-space: nowrap;
 }
-.song-difficulty{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-.song-difficulty > div{
+.nav-difficulty{
     position: absolute;
     width: 100%;
     height: 100%;
