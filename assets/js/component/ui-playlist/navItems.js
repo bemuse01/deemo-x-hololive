@@ -36,9 +36,18 @@ const getOpacity = ({len, current, key}) => {
     return opacity
 }
 
+const setColor = (style, key) => {
+    if(Songs[key].isDefault){
+        style.container.color = 'black'
+    }
+    else{
+        style.container.color = 'white'
+    }
+}
+
 export default {
     template: `
-        <div class="nav-item-box">
+        <div class="nav-item-box" :style="style.container">
             
             <div 
                 class="nav-item"
@@ -64,6 +73,9 @@ export default {
 
         // vars
         const store = useStore()
+        const style = reactive({
+            container: {color: 'black', transition: 'color 0.3s'}
+        })
         const radius1 = 170
         const radius2 = 210
         const count = 14 // count must be even num
@@ -92,6 +104,8 @@ export default {
         const initTween = (cur) => {
             if(!canClick) return
             canClick = false
+
+            setColor(style, cur)
 
             store.dispatch('playlist/setCrtKey', cur)
 
@@ -133,6 +147,7 @@ export default {
         }
 
         return{
+            style,
             items,
             initTween
         }

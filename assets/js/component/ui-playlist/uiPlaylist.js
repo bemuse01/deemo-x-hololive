@@ -1,4 +1,5 @@
-import BgContainer from '../public/bgContainer.js'
+// import BgContainer from '../public/bgContainer.js'
+import BgContainer from './bgContainer.js'
 import NavContainer from './navContainer.js'
 
 export default {

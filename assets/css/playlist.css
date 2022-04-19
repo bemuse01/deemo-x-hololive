@@ -19,8 +19,17 @@
 }
 
 /* bg */
+.playlist-bg-container{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    transition: transform 0.6s, filter 0.6s;
+}
 .playlist-bg-container div{
-    background: url('../src/bg.png') no-repeat center center / cover;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    /* background: url('../src/bg.png') no-repeat center center / cover; */
 }
 
 /* nav */

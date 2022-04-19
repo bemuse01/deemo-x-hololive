@@ -4,9 +4,14 @@ const getDeg = ({degree, deg, offset, key}) => {
     return (offset + degree) - deg * key
 }
 
+const setOpacity = (style, key) => {
+    if(Songs[key].isDefault) style.container.opacity = '1'
+    else style.container.opacity = '0.7'
+}
+
 export default {
     template: `
-        <div class="nav-background">
+        <div class="nav-background" :style="style.container">
         
             <div class="nav-background-child flare">
                 <img src="./assets/src/songselect_flare.png">
@@ -30,6 +35,7 @@ export default {
         const songCount = Songs.length
         const deg = degree / (songCount - 1)
         const style = reactive({
+            container: {opacity: '1', transition: 'opacity 0.3s'},
             flareBeam: {transform: `rotate(${getDeg({degree, deg, offset, key: store.getters['playlist/getCrtKey']})}deg)`}
         })
 
@@ -39,7 +45,9 @@ export default {
         }
         
         watchEffect(() => {
-            updateTransform(store.getters['playlist/getCrtKey'])
+            const key = store.getters['playlist/getCrtKey']
+            updateTransform(key)
+            setOpacity(style, key)
         })
 
         return{
