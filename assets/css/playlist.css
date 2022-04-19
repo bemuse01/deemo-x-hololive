@@ -23,7 +23,7 @@
     position: absolute;
     width: 100%;
     height: auto;
-    transition: transform 0.6s, filter 0.6s;
+    transition: transform 0.8s, filter 0.8s;
 }
 .playlist-bg-container div{
     position: relative;

@@ -12,7 +12,7 @@ const setBg = (style, key) => {
         style.container.filter = 'none'
     }
     else {
-        style.container.filter = 'brightness(1.125)'
+        style.container.filter = 'brightness(1.15)'
     }
 }
 
@@ -43,10 +43,10 @@ export default {
         const items = ref(Array.from(Songs, (item, key) => {
             const {bgSrc, isDefault} = item
 
-            const overlay = isDefault ? 'transparent' : 'rgba(0, 0, 0, 0.6)'
+            const overlay = isDefault ? 'transparent' : 'rgba(0, 0, 0, 1)'
 
             const style = {
-                background: `linear-gradient(to right, ${overlay}, transparent), url('${bgSrc}') no-repeat center center / cover`,
+                background: `linear-gradient(to right, ${overlay}, 30%, transparent), url('${bgSrc}') no-repeat center center / cover`,
             }
 
             return {key, style}
