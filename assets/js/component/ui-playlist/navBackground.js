@@ -6,7 +6,7 @@ const getDeg = ({degree, deg, offset, key}) => {
 
 const setOpacity = (style, key) => {
     if(Songs[key].isDefault) style.container.opacity = '1'
-    else style.container.opacity = '0.7'
+    else style.container.opacity = '0.5'
 }
 
 export default {
