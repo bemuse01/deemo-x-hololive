@@ -30,7 +30,7 @@ export default {
         const songCount = Songs.length
         const deg = degree / (songCount - 1)
         const style = reactive({
-            flareBeam: {transform: `rotate(${getDeg({degree, deg, offset, key: store.getters['playlist/getCrtMusicKey']})}deg)`}
+            flareBeam: {transform: `rotate(${getDeg({degree, deg, offset, key: store.getters['playlist/getCrtKey']})}deg)`}
         })
 
         const updateTransform = (key) => {
@@ -39,7 +39,7 @@ export default {
         }
         
         watchEffect(() => {
-            updateTransform(store.getters['playlist/getCrtMusicKey'])
+            updateTransform(store.getters['playlist/getCrtKey'])
         })
 
         return{

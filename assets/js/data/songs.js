@@ -3,9 +3,9 @@ export default [
         songSrc: '',
         bgSrc: '',
         name: 'Deemo x Hololive',
-        vocal: '',
-        composer: '',
-        length: '',
+        vocal: '\xa0',
+        composer: '\xa0',
+        length: '\xa0',
         type: '',
         default: true
     },

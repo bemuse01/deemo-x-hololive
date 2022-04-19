@@ -68,7 +68,7 @@ export default {
         const radius2 = 210
         const count = 14 // count must be even num
         const {upDegree, downDegree} = createDegree(count)
-        const current = store.getters['playlist/getCrtMusicKey']
+        const current = store.getters['playlist/getCrtKey']
         let canClick = true
 
         const items = ref(Array.from(Songs, (song, key) => {
@@ -93,7 +93,7 @@ export default {
             if(!canClick) return
             canClick = false
 
-            store.dispatch('playlist/setCrtMusicKey', cur)
+            store.dispatch('playlist/setCrtKey', cur)
 
             for(let i = 0; i < items.value.length; i++){
                 createTween(cur, i)

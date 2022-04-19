@@ -2,30 +2,30 @@ export default {
     namespaced: true,
     state: {
         showing: false,
-        currentMusicKey: 0
+        crtKey: 0
     },
     getters: {
         getShowing(state){
             return state.showing
         },
-        getCrtMusicKey(state){
-            return state.currentMusicKey
+        getCrtKey(state){
+            return state.crtKey
         }
     },
     mutations: {
         setShowing(state, value){
             state.showing = value
         },
-        setCrtMusicKey(state, value){
-            state.currentMusicKey = value
+        setCrtKey(state, value){
+            state.crtKey = value
         }
     },
     actions: {
         setShowing({commit}, value){
             commit('setShowing', value)
         },
-        setCrtMusicKey({commit}, value){
-            commit('setCrtMusicKey', value)
+        setCrtKey({commit}, value){
+            commit('setCrtKey', value)
         }
     }
 }
