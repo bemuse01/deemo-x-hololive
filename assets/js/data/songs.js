@@ -7,11 +7,10 @@ export default [
         composer: '\xa0',
         length: '\xa0',
         type: '',
-        overlay: 'transparent',
         isDefault: true,
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/kami_yamada.ogg',
         bgSrc: './assets/src/kami_yamada.jpg',
         name: 'Kamippoi na',
         vocal: 'Laplus Darknesss',
@@ -20,7 +19,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/ranbu_suisei.ogg',
         bgSrc: './assets/src/ranbu_suisei.jpg',
         name: 'Ranbu No Melody',
         vocal: 'Hoshimati Suisei',
@@ -29,7 +28,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/kakusei_suisei.ogg',
         bgSrc: './assets/src/kakusei_suisei.jpg',
         name: 'Kakusei',
         vocal: 'Hoshimati Suisei',
@@ -38,7 +37,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/phony_chima.ogg',
         bgSrc: './assets/src/phony_chima.jpg',
         name: 'Phony',
         vocal: 'Machita Chima',
@@ -47,7 +46,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/phony_suisei.ogg',
         bgSrc: './assets/src/phony_suisei.jpg',
         name: 'Phony',
         vocal: 'Hoshimati Suisei',
@@ -56,7 +55,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/king_chima.ogg',
         bgSrc: './assets/src/king_chima.jpg',
         name: 'KING',
         vocal: 'Machita Chima',
@@ -65,7 +64,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/king_suisei.ogg',
         bgSrc: './assets/src/king_suisei.jpg',
         name: 'KING',
         vocal: 'Hoshimati Suisei',
@@ -74,7 +73,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/error_towa.ogg',
         bgSrc: './assets/src/error_towa.jpg',
         name: 'Error',
         vocal: 'Tokoyami Towa',
@@ -83,7 +82,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/sparkle_mio.ogg',
         bgSrc: './assets/src/sparkle_mio.jpg',
         name: 'Sparkle',
         vocal: 'Ookami Mio',
@@ -92,7 +91,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/song/',
+        songSrc: './assets/song/goodbye_aqua.ogg',
         bgSrc: './assets/src/goodbye_aqua.jpg',
         name: 'Goodbye Sengen',
         vocal: 'Minato Aqua',
