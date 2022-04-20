@@ -31,6 +31,9 @@ export default {
                 audio.loop = true
                 audio.src = songSrc
                 audio.volume = 0
+                // audio.addEventListener('canplaythrough', () => {
+                //     audio.currentTime = audio.duration * 0.1
+                // })
             }
 
             return audio
@@ -45,10 +48,11 @@ export default {
                 e: {volume: maxVolume},
                 cbs: {
                     onStart: (audio) => {
-                        audio.currentTime = 0
+                        audio.currentTime = audio.duration * 0.2
                         audio.play()
                     }
-                }
+                },
+                delay: 500
             })
         }
 
@@ -60,16 +64,18 @@ export default {
                 e: {volume: 0},
                 cbs: {
                     onComplete: (audio) => audio.pause()
-                }
+                },
+                delay: 0
             })
         }
 
-        const createTween = ({audio, s, e, cbs}) => {
+        const createTween = ({audio, s, e, cbs, delay}) => {
             const start = s
             const end = e 
 
             const tw = new TWEEN.Tween(start)
             .to(end, 600)
+            .delay(delay)
             .onUpdate(() => onUpdateTween(audio, start))
             .start()
 
