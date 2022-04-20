@@ -31,9 +31,6 @@ export default {
                 audio.loop = true
                 audio.src = songSrc
                 audio.volume = 0
-                // audio.addEventListener('canplaythrough', () => {
-                //     audio.currentTime = audio.duration * 0.1
-                // })
             }
 
             return audio
