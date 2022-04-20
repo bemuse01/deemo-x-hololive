@@ -35,7 +35,7 @@ export default {
 
             return audio
         })
-        const maxVolume = 0.5
+        const maxVolume = 1
 
         const playAudio = (audio) => {
             if(!audio) return
