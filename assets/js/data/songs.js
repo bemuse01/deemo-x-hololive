@@ -1,7 +1,7 @@
 export default [
     {
         songSrc: '',
-        bgSrc: './assets/src/bg2.png',
+        bgSrc: './assets/src/bg.jpg',
         name: 'Deemo x Hololive',
         vocal: '\xa0',
         composer: '\xa0',
