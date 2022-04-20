@@ -11,7 +11,7 @@ export default [
         isDefault: true,
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/kami_yamada.jpg',
         name: 'Kamippoi na',
         vocal: 'Laplus Darknesss',
@@ -20,7 +20,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/ranbu_suisei.jpg',
         name: 'Ranbu No Melody',
         vocal: 'Hoshimati Suisei',
@@ -29,7 +29,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/kakusei_suisei.jpg',
         name: 'Kakusei',
         vocal: 'Hoshimati Suisei',
@@ -38,7 +38,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/phony_chima.jpg',
         name: 'Phony',
         vocal: 'Machita Chima',
@@ -47,7 +47,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/phony_suisei.jpg',
         name: 'Phony',
         vocal: 'Hoshimati Suisei',
@@ -56,7 +56,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/king_chima.jpg',
         name: 'KING',
         vocal: 'Machita Chima',
@@ -65,7 +65,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/king_suisei.jpg',
         name: 'KING',
         vocal: 'Hoshimati Suisei',
@@ -74,7 +74,7 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/error_towa.jpg',
         name: 'Error',
         vocal: 'Tokoyami Towa',
@@ -83,12 +83,21 @@ export default [
         type: '',
     },
     {
-        songSrc: './assets/songs/',
+        songSrc: './assets/song/',
         bgSrc: './assets/src/sparkle_mio.jpg',
         name: 'Sparkle',
         vocal: 'Ookami Mio',
         composer: 'RADWIMPS',
         length: '00:00',
         type: '',
+    },
+    {
+        songSrc: './assets/song/',
+        bgSrc: './assets/src/goodbye_aqua.jpg',
+        name: 'Goodbye Sengen',
+        vocal: 'Minato Aqua',
+        composer: 'Chinozo',
+        length: '00:00',
+        type: ''
     }
 ]
