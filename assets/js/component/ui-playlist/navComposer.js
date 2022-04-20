@@ -5,7 +5,7 @@ const setColor = (style, key) => {
         style.container.color = 'black'
     }
     else{
-        style.container.color = 'rgba(255, 255, 255, 0.9)'
+        style.container.color = 'white'
     }
 }
 
