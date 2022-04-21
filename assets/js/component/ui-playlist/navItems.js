@@ -81,6 +81,7 @@ export default {
         const radius2 = 210
         const count = 14 // count must be even num
         const {upDegree, downDegree} = createDegree(count)
+        const len = upDegree.length
         const current = store.getters['playlist/getCrtKey']
         let canClick = true
 
@@ -90,11 +91,13 @@ export default {
             const deg = getDeg({current, key, upDegree, downDegree, count})
             const {x, y} = updatePosition({deg, radius1, radius2})
 
-            const opacity = getOpacity({len: upDegree.length, current, key})
+            const opacity = getOpacity({len, current, key})
+            const display = Math.abs(current - key) < len ? 'block' : 'none'
 
             const style = {
                 transform: `translate(${x}px, ${y}px)`,
-                opacity: `${opacity}`
+                opacity: `${opacity}`,
+                display
             }
             
             return {key, name, style, deg, opacity, songSrc}
@@ -122,7 +125,7 @@ export default {
             const newDeg = getDeg({current: cur, key: idx, upDegree, downDegree, count})
 
             const oldOpacity = item.opacity
-            const newOpacity = getOpacity({len: upDegree.length, current: cur, key: idx})
+            const newOpacity = getOpacity({len, current: cur, key: idx})
 
             const start = {deg: oldDeg, opacity: oldOpacity}
             const end = {deg: newDeg, opacity: newOpacity}
@@ -130,9 +133,16 @@ export default {
             const tw = new TWEEN.Tween(start)
             .to(end, 600)
             .easing(TWEEN.Easing.Quadratic.InOut)
+            .onStart(() => onStartTween(item, cur, idx))
             .onUpdate(() => onUpdateTween(item, start))
-            .onComplete(() => onCompleteTween(item, newDeg, newOpacity))
+            .onComplete(() => onCompleteTween(item, newDeg, newOpacity, cur, idx))
             .start()
+        }
+
+        const onStartTween = (item, cur, idx) => {
+            if(Math.abs(cur - idx) < len){
+                item.style.display = 'block'
+            }
         }
 
         const onUpdateTween = (item, {deg, opacity}) => {
@@ -141,7 +151,10 @@ export default {
             item.style.opacity = `${opacity}`
         }
 
-        const onCompleteTween = (item, newDeg, newOpacity) => {
+        const onCompleteTween = (item, newDeg, newOpacity, cur, idx) => {
+            if(Math.abs(cur - idx) >= len){
+                item.style.display = 'none'
+            }
             item.deg = newDeg
             item.opacity = newOpacity
             canClick = true
