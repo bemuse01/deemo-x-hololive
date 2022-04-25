@@ -28,8 +28,7 @@ class ShaderPass extends Pass {
 				uniforms: this.uniforms,
 				vertexShader: shader.vertexShader,
 				fragmentShader: shader.fragmentShader,
-				transparent: true
-
+				transparent: true,
 			} );
 
 		}
