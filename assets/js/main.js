@@ -6,12 +6,14 @@ import Audio from './class/audio/audio.js'
 import BgContainer from './component/container/bgContainer.js'
 import CanvasContainer from './component/container/canvasContainer.js'
 import UiContainer from './component/container/uiContainer.js'
+import LoadingContainer from './component/container/loadingContainer.js'
 
 const vueApp = Vue.createApp({
     components: {
         'bg-container': BgContainer,
         'canvas-container': CanvasContainer,
         'ui-container': UiContainer,
+        'loading-container': LoadingContainer
     },
     setup(){
         const store = Vuex.useStore()

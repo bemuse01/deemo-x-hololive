@@ -39,10 +39,15 @@ export default {
         })
         const maxVolume = 1
 
+        const emitShowLoading = () => {
+            store.dispatch('loading/setShowing', true)
+            console.log('work')
+        }
+
         const setAudio = () => {
             if(!audios[key.value]) return
-            audio.value.close()
-            audio.value.create(audios[key.value])
+            // audio.value.create(audios[key.value], key.value)
+            emitShowLoading()
         }
 
         const onLoadAudio = (idx, audio) => {

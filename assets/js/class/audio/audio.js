@@ -6,6 +6,7 @@ export default class{
         }
 
         this.audio = null
+        this.sources = []
 
         this.init()
     }
@@ -18,18 +19,24 @@ export default class{
 
 
     // create
-    create(audio){
+    create(audio, key){
         this.audio = audio
 
-        this.createContext()
+        this.createContext(key)
     }
-    createContext(){
+    createContext(key){
         this.context = new AudioContext()
-        
-        const source = this.context.createMediaElementSource(this.audio)
-        
         this.analyser = this.context.createAnalyser()
-        source.connect(this.analyser)
+        
+        let source = null
+
+        if(this.sources[key]) source = this.sources[key]
+        else{
+            this.sources[key] = this.context.createMediaElementSource(this.audio)
+            source = this.sources[key]
+            source.connect(this.analyser)
+        }
+        
         this.analyser.connect(this.context.destination)
         this.analyser.fftSize = this.param.fft
         this.analyser.smoothingTimeConstant = this.param.smoothingTimeConstant
@@ -46,11 +53,9 @@ export default class{
     }
 
 
-    // close
-    close(){
+    // pause
+    pause(){
         if(!this.context) return
-        
-        this.context.close()
     }
 
 

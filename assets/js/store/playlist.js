@@ -6,13 +6,15 @@ export default {
         showing: false,
         crtKey: 0,
         songs: [...Songs],
-        durations: []
+        durations: [],
+        playing: false
     },
     getters: {
         getShowing: (state) => state.showing,
         getCrtKey: (state) => state.crtKey,
         getSong: (state) => (idx) => state.songs[idx],
-        getSongs: (state) => state.songs
+        getSongs: (state) => state.songs,
+        getPlaying: (state) => state.playing
     },
     mutations: {
         setShowing(state, value){
@@ -26,6 +28,9 @@ export default {
         },
         setSongByKey(state, {idx, key, value}){
             state.songs[idx][key] = value
+        },
+        setPlaying(state, value){
+            state.playing = value
         }
     },
     actions: {
@@ -43,6 +48,9 @@ export default {
         },
         setSongByKey({commit}, {idx, key, value}){
             commit('setSongByKey', {idx, key, value})
+        },
+        setPlaying({commit}, value){
+            commit('setPlayling', value)
         }
     }
 }
