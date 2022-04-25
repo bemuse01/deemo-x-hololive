@@ -26,6 +26,7 @@ export default {
         const store = useStore()
         const root = ref()
         const showing = computed(() => store.getters['playlist/getShowing'])
+        const playing = computed(() => store.getters['playlist/getPlayling'])
         const style = reactive({
             root: {opacity: '0'}
         })
@@ -48,17 +49,17 @@ export default {
             store.dispatch('playlist/setPlaying', true)
         }
 
-        const onTransitionend = () => {
-            store.dispatch('open/setShowing', false)
-            if(showing.value === false){
-                emitHideLoading()
-                emitPlaySong()
-            }
-        }
+        // const onTransitionend = () => {
+        //     store.dispatch('open/setShowing', false)
+        //     if(showing.value === false){
+        //         emitHideLoading()
+        //         emitPlaySong()
+        //     }
+        // }
 
-        onMounted(() => {
-            root.value.addEventListener('transitionend', onTransitionend)
-        })
+        // onMounted(() => {
+        //     root.value.addEventListener('transitionend', onTransitionend)
+        // })
 
         watchEffect(() => {
             if(store.getters['open/getAnim'].hololive){
@@ -66,8 +67,13 @@ export default {
             }
         })
 
-        watch(showing, (cur, val) => {
-            if(cur === false) hide()
+        // watch(showing, (cur, pre) => {
+        //     if(cur === false) hide()
+        // })
+
+        watch(playing, (cur, pre) => {
+            if(cur) hide()
+            else show()
         })
 
         return{

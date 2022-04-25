@@ -3,5 +3,4 @@
 }
 .fade-enter, .fade-leave-to{
     opacity: 0;
-    display: none;
 }

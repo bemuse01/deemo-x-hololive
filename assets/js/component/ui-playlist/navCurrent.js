@@ -51,7 +51,8 @@ export default {
             if(!audios[key.value]) return
             stopAudio(audios[key.value])
             setAudio()
-            emitShowLoading()
+            store.dispatch('playlist/setPlaying', true)
+            // emitShowLoading()
         }
 
         const onLoadAudio = (idx, audio) => {

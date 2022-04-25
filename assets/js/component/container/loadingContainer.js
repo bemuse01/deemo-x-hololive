@@ -9,60 +9,73 @@ export default {
         </div>
     `,
     setup(){
-        const {ref, onMounted, computed, watchEffect} = Vue
+        const {ref, onMounted, computed, watchEffect, watch} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
         const element = ref()
-        const style = ref({zIndex: '-1', opacity: '0'})
+        const style = ref({display: 'none', opacity: '0'})
         const showing = computed(() => store.getters['loading/getShowing'])
         const playlistShowing = computed(() => store.getters['playlist/getShowing'])
+        const playing = computed(() => store.getters['playlist/getPlaying'])
+        const ease = BezierEasing(0.25, 0.1, 0.25, 0.1)
 
         const show = () => {
-            style.value.opacity = '1'
+            const start = {opacity: 0}
+            const end = {opacity: 1}
+
+            const tw = new TWEEN.Tween(start)
+            .to(end, 600)
+            .easing(ease)
+            .onStart(() => onStartTween())
+            .onUpdate(() => onUpdateTween(start))
+
+            return tw
         }
 
         const hide = () => {
-            style.value.opacity = '0'
+            const start = {opacity: 1}
+            const end = {opacity: 0}
+
+            const tw = new TWEEN.Tween(start)
+            .to(end, 600)
+            .easing(ease)
+            .delay(600)
+            .onComplete(() => onCompleteTween())
+            .onUpdate(() => onUpdateTween(start))
+
+            return tw
         }
 
-        const emitShowPlaylist = () => {
-            store.dispatch('playlist/setShowing', true)
+        const onStartTween = () => {
+            style.value.display = 'block'
         }
 
-        const emitHidePlaylist = () => {
-            store.dispatch('playlist/setShowing', false)
+        const onUpdateTween = ({opacity}) => {
+            style.value.opacity = opacity
         }
 
-        const onTransitionstart = () => {
-            if(showing.value){
-                style.value.zIndex = '99999'
-            }
+        const onCompleteTween = () => {
+            style.value.display = 'none'
+        }
+        
+        const start = () => {
+            const showTw = show()
+            const hideTw = hide()
+
+            showTw.chain(hideTw)
+            showTw.start()
         }
 
-        const onTransitionend = () => {
-            if(showing.value === false){
-                style.value.zIndex = '-1'
-            }else{
-                if(playlistShowing.value) emitHidePlaylist()
-                else emitShowPlaylist()
-            }
-        }
-
-        watchEffect(() => {
-            if(showing.value) show()
-            else hide()
-        })
-
-        onMounted(() => {
-            element.value.addEventListener('transitionend', onTransitionend)
-            element.value.addEventListener('transitionstart', onTransitionstart)
+        watch(playing, (cur, pre) => {
+            start()
         })
 
         return{
             element,
             style,
-            showing
+            showing,
+            playing,
         }
     }
 }
