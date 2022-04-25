@@ -9,7 +9,7 @@ export default {
         'nav-current-difficulty': NavCurrentDifficulty
     },
     template: `
-        <div class="nav-current">
+        <div class="nav-current" @click="setAudio">
           
             <nav-current-info />
             <nav-current-difficulty />
@@ -22,6 +22,7 @@ export default {
 
         const store = useStore()
         const key = computed(() => store.getters['playlist/getCrtKey'])
+        const audio = computed(() => store.getters['getAudio'])
         const audios = Array.from({length: Songs.length}, (_, key) => {
             const {isDefault, songSrc} = Songs[key]
             
@@ -37,6 +38,12 @@ export default {
             return audio
         })
         const maxVolume = 1
+
+        const setAudio = () => {
+            if(!audios[key.value]) return
+            audio.value.close()
+            audio.value.create(audios[key.value])
+        }
 
         const onLoadAudio = (idx, audio) => {
             store.dispatch('playlist/setSongByKey', {idx, key: 'length', value: audio.duration})
@@ -92,5 +99,9 @@ export default {
             stopAudio(audios[pre])
             playAudio(audios[cur])
         })
+
+        return{
+            setAudio
+        }
     }
 }

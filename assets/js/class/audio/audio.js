@@ -48,6 +48,8 @@ export default class{
 
     // close
     close(){
+        if(!this.context) return
+        
         this.context.close()
     }
 
