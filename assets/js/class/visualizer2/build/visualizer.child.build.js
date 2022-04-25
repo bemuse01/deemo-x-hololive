@@ -4,11 +4,11 @@ import Spline from '../../../lib/cubic-spline.js'
 import Line from '../../objects/line.js'
 
 export default class{
-    constructor({group}){
+    constructor({group, radius}){
         this.group = group
 
         this.param = {
-            radius: 35,
+            radius: radius,
             count: 90,
             gap: 0,
             linewidth: 2,

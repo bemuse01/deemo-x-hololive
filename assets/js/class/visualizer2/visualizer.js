@@ -10,12 +10,13 @@ import PARTICLE from './build/visualizer.particle.build.js'
 import LOGO from './build/visualizer.logo.build.js'
 
 export default class{
-    constructor({app, audio, element, color, logoSrc}){
+    constructor({app, audio, element, color, logoSrc, radius}){
         this.renderer = app.renderer
         this.audio = audio
         this.element = document.querySelector(element)
         this.logoSrc = logoSrc
         this.color = color
+        this.radius = radius
 
         console.log(this.audio)
 
@@ -98,7 +99,7 @@ export default class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size, logoSrc: this.logoSrc})
+            this.comp[module] = new instance({group, size: this.size, logoSrc: this.logoSrc, radius: this.radius})
         }
 
         for(let i in this.group) this.build.add(this.group[i])

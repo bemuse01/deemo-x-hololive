@@ -3,7 +3,7 @@ import Edge from '../../objects/edge.js'
 import Plane from '../../objects/plane.js'
 
 export default class{
-    constructor({group}){
+    constructor({group, radius}){
         this.group = group
         
         this.param = {
@@ -11,7 +11,7 @@ export default class{
             count: 50,
             color: 0xffffff,
             linewidth: 2,
-            radius: 36,
+            radius: radius + 1,
             lineOpacity: 1,
             planeOpacity: 0.8
         }
