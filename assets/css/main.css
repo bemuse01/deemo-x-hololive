@@ -75,7 +75,7 @@ canvas#canvas{
     position: absolute;
     top: 0;
     left: 0;
-    filter: drop-shadow(0 0 2px #ffffff) brightness(1.5);
+    /* filter: drop-shadow(0 0 2px #ffffff) brightness(1.5); */
 }
 
 

@@ -23,7 +23,7 @@ export default {
         })
 
         onUnmounted(() => {
-
+            visualizer.value.dispose()
         })
 
         return{
