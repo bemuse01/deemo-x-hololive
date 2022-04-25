@@ -3,7 +3,7 @@ export default [
         songSrc: '',
         bgSrc: './assets/src/bg.jpg',
         name: 'Deemo x Hololive',
-        vocal: 'Hololive, Nijisanji...',
+        vocal: 'Hololive, Nijisanji',
         composer: '\xa0',
         length: '\xa0',
         type: '',

@@ -1,4 +1,6 @@
-import Songs from '../../data/songs.js'
+const checkTime = (time) => {
+    return time < 10 ? '0' + time : time
+}
 
 export default {
     template: `
@@ -33,7 +35,7 @@ export default {
                 <div class="song-text">
 
                     <div class="song-length">
-                        <span>{{crtItem.length}}</span>
+                        <span>{{crtDuration}}</span>
                     </div>
                 
                 </div>
@@ -43,27 +45,26 @@ export default {
         </div>
     `,
     setup(){
-        const {ref, onMounted, watchEffect} = Vue
+        const {computed} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
-        const crtItem = ref()
+        const crtKey = computed(() => store.getters['playlist/getCrtKey'])
+        const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
+        const crtDuration = computed(() => {
+            if(crtItem.value.isDefault) return '\xa0'
+            else{
+                const len = crtItem.value.length
+                const min = ~~(len / 60)
+                const sec = ~~(len % 60)
+                return `${checkTime(min)}:${checkTime(sec)}`
+            }
+        })
+
         
-        const setCurrentItem = () => {
-            const crtKey = store.getters['playlist/getCrtKey']
-            crtItem.value = Songs[crtKey]
-        }
-
-        watchEffect(() => {
-            setCurrentItem()
-        })
-
-        onMounted(() => {
-            setCurrentItem()
-        })
-
         return{
-            crtItem
+            crtItem,
+            crtDuration
         }
     }
 }

@@ -68,7 +68,7 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, ref} = Vue
+        const {reactive, ref, computed} = Vue
         const {useStore} = Vuex
 
 

@@ -31,11 +31,16 @@ export default {
                 audio.loop = true
                 audio.src = songSrc
                 audio.volume = 0
+                audio.addEventListener('canplaythrough', () => onLoadAudio(key, audio))
             }
 
             return audio
         })
         const maxVolume = 1
+
+        const onLoadAudio = (idx, audio) => {
+            store.dispatch('playlist/setSongByKey', {idx, key: 'length', value: audio.duration})
+        }
 
         const playAudio = (audio) => {
             if(!audio) return

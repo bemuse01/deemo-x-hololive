@@ -1,16 +1,18 @@
+import Songs from '../data/songs.js'
+
 export default {
     namespaced: true,
     state: {
         showing: false,
-        crtKey: 0
+        crtKey: 0,
+        songs: [...Songs],
+        durations: []
     },
     getters: {
-        getShowing(state){
-            return state.showing
-        },
-        getCrtKey(state){
-            return state.crtKey
-        }
+        getShowing: (state) => state.showing,
+        getCrtKey: (state) => state.crtKey,
+        getSong: (state) => (idx) => state.songs[idx],
+        getSongs: (state) => state.songs
     },
     mutations: {
         setShowing(state, value){
@@ -18,6 +20,12 @@ export default {
         },
         setCrtKey(state, value){
             state.crtKey = value
+        },
+        setSong(state, {idx, value}){
+            state.songs[idx] = value
+        },
+        setSongByKey(state, {idx, key, value}){
+            state.songs[idx][key] = value
         }
     },
     actions: {
@@ -26,6 +34,15 @@ export default {
         },
         setCrtKey({commit}, value){
             commit('setCrtKey', value)
+        },
+        setDuration({commit}, {idx, value}){
+            commit('setDuration', {idx, value})
+        },
+        setSong({commit}, {idx, value}){
+            commit('setSong', {idx, value})
+        },
+        setSongByKey({commit}, {idx, key, value}){
+            commit('setSongByKey', {idx, key, value})
         }
     }
 }
