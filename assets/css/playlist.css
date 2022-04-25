@@ -105,6 +105,7 @@
     width: 192px;
     height: 192px;
     white-space: nowrap;
+    cursor: pointer;
 }
 .song-difficulty{
     position: absolute;

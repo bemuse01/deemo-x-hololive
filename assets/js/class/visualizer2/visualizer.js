@@ -17,6 +17,8 @@ export default class{
         this.logoSrc = logoSrc
         this.color = color
 
+        console.log(this.audio)
+
         this.param = {
             fov: 60,
             near: 0.1,
@@ -45,6 +47,7 @@ export default class{
         this.create()
 
         this.animate()
+        window.addEventListener('resize', () => this.resize())
     }
     initGroup(){
         for(const module in this.modules){
@@ -170,6 +173,8 @@ export default class{
 
         this.camera.aspect = width / height
         this.camera.updateProjectionMatrix()
+
+        this.composer.setSize(width, height)
 
         this.size.el.w = width
         this.size.el.h = height

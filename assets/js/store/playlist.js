@@ -50,7 +50,7 @@ export default {
             commit('setSongByKey', {idx, key, value})
         },
         setPlaying({commit}, value){
-            commit('setPlayling', value)
+            commit('setPlaying', value)
         }
     }
 }

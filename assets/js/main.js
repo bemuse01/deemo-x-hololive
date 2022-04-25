@@ -20,7 +20,7 @@ const vueApp = Vue.createApp({
 
         Vue.nextTick(() => {
             store.dispatch('setApp', new App())
-            store.dispatch('setAudio', new Audio)
+            store.dispatch('setAudio', new Audio())
         })
 
         const animate = () => {

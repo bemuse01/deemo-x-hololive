@@ -8,7 +8,7 @@ export default [
         vocal: 'Hololive, Nijisanji',
         composer: '\xa0',
         length: '\xa0',
-        type: '',
+        type: '2',
         isDefault: true,
     },
     {
@@ -20,7 +20,7 @@ export default [
         vocal: 'Laplus Darknesss',
         composer: 'PINOCCHIOP',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/ranbu_suisei.ogg',
@@ -31,7 +31,7 @@ export default [
         vocal: 'Hoshimati Suisei',
         composer: 'SID',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/kakusei_suisei.ogg',
@@ -42,7 +42,7 @@ export default [
         vocal: 'Hoshimati Suisei',
         composer: 'Superfly',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/phony_chima.ogg',
@@ -53,7 +53,7 @@ export default [
         vocal: 'Machita Chima',
         composer: 'Tsumiki',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/phony_suisei.ogg',
@@ -64,7 +64,7 @@ export default [
         vocal: 'Hoshimati Suisei',
         composer: 'Tsumiki',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/king_chima.ogg',
@@ -75,7 +75,7 @@ export default [
         vocal: 'Machita Chima',
         composer: 'Kanaria',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/king_suisei.ogg',
@@ -86,7 +86,7 @@ export default [
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/error_towa.ogg',
@@ -97,7 +97,7 @@ export default [
         vocal: 'Tokoyami Towa',
         composer: 'niki',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/sparkle_mio.ogg',
@@ -108,7 +108,7 @@ export default [
         vocal: 'Ookami Mio',
         composer: 'RADWIMPS',
         length: '00:00',
-        type: '',
+        type: '2',
     },
     {
         songSrc: './assets/song/goodbye_aqua.ogg',
@@ -119,6 +119,6 @@ export default [
         vocal: 'Minato Aqua',
         composer: 'Chinozo',
         length: '00:00',
-        type: ''
+        type: '2'
     }
 ]

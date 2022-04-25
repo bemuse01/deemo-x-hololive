@@ -4,10 +4,10 @@ const VolumetericLightShader = {
     uniforms: {
         tDiffuse: {value:null},
         lightPosition: {value: new Vector2(0.5, 0.5)},
-        exposure: {value: 0.18},
-        decay: {value: 0.95},
+        exposure: {value: 0.3},
+        decay: {value: 0.875},
         // density: {value: 0.8},
-        density: {value: 0.6},
+        density: {value: 0.7},
         weight: {value: 0.4},
         samples: {value: 50}
     },

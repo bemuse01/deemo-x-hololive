@@ -7,6 +7,7 @@ export default class{
 
         this.audio = null
         this.sources = []
+        this.canPlay = false
 
         this.init()
     }
@@ -48,8 +49,11 @@ export default class{
 
 
     // play
-    play(){
+    play(time = 0){
+        this.audio.volume = 1
+        this.audio.currentTime = time
         this.audio.play()
+        this.canPlay = true
     }
 
 
@@ -59,23 +63,34 @@ export default class{
     }
 
 
-    // animate
-    animate(){
-        if(!this.analyser) return
+    // stop
+    stop(){
+        createTween()
+    }
+    createTween(){
+        const start = {volume: 1}
+        const end = {volume: 0}
 
-        this.analyser.getByteFrequencyData(this.audioData)
-
-        // const len = ~~(this.audioData.length / 4)
-        const half = [...this.audioData].slice(0, this.audioData.length)
-        this.audioDataAvg = half[~~(half.length * 0.1)] / 255
-
-        requestAnimationFrame(() => this.animate())
+        const tw = new TWEEN.Tween(start)
+        .to(end, 600)
+        .onUpdate(() => this.onUpdateTween(start))
+        .start()
+    }
+    onUpdateTween({volume}){
+        this.audio.volume = volume
     }
 
 
-    // play
-    play(){
-        this.audio.play()
-        this.context.resume()
+    // animate
+    animate(){
+        if(this.analyser){
+            this.analyser.getByteFrequencyData(this.audioData)
+
+            // const len = ~~(this.audioData.length / 4)
+            const half = [...this.audioData].slice(0, this.audioData.length)
+            this.audioDataAvg = half[~~(half.length * 0.1)] / 255
+        }
+
+        requestAnimationFrame(() => this.animate())
     }
 }

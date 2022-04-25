@@ -20,21 +20,40 @@ export default {
         </div>
     `,
     setup(){
-        const {ref, reactive, watchEffect, onMounted} = Vue
+        const {ref, reactive, watchEffect, onMounted, computed, watch} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
         const root = ref()
+        const showing = computed(() => store.getters['playlist/getShowing'])
         const style = reactive({
             root: {opacity: '0'}
         })
 
         const show = () => {
             style.root.opacity = '1'
+            store.dispatch('playlist/setShowing', true)
+        }
+
+        const hide = () => {
+            style.root.opacity = '0'
+            store.dispatch('playlist/setShowing', false)
+        }
+
+        const emitHideLoading = () => {
+            store.dispatch('loading/setShowing', false)
+        }
+
+        const emitPlaySong = () => {
+            store.dispatch('playlist/setPlaying', true)
         }
 
         const onTransitionend = () => {
             store.dispatch('open/setShowing', false)
+            if(showing.value === false){
+                emitHideLoading()
+                emitPlaySong()
+            }
         }
 
         onMounted(() => {
@@ -45,6 +64,10 @@ export default {
             if(store.getters['open/getAnim'].hololive){
                 show()
             }
+        })
+
+        watch(showing, (cur, val) => {
+            if(cur === false) hide()
         })
 
         return{

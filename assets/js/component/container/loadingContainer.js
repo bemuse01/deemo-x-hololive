@@ -1,17 +1,12 @@
 export default {
     template: `
-        <transition
-            @beforeEnter="beforeEnter"
-        >
         <div 
-            v-show="showing"
             id="loading-container" 
             :ref="el => element = el"
             :style="style"
         >
             <div></div>
         </div>
-        </transition>
     `,
     setup(){
         const {ref, onMounted, computed, watchEffect} = Vue
@@ -19,7 +14,7 @@ export default {
 
         const store = useStore()
         const element = ref()
-        const style = ref({display: 'none', opacity: '0'})
+        const style = ref({zIndex: '-1', opacity: '0'})
         const showing = computed(() => store.getters['loading/getShowing'])
 
         const show = () => {
@@ -30,30 +25,32 @@ export default {
             style.value.opacity = '0'
         }
 
-        const beforeEnter = () => {
-            
+        const emitHidePlaylist = () => {
+            store.dispatch('playlist/setShowing', false)
         }
 
-        const enter = () => {
-
-        }
-
-        const afterEnter = () => {
-
+        const onTransitionstart = () => {
+            if(showing.value){
+                style.value.zIndex = '99999'
+            }
         }
 
         const onTransitionend = () => {
             if(showing.value === false){
-                style.value.display = 'none'
+                style.value.zIndex = '-1'
+            }else{
+                emitHidePlaylist()
             }
         }
 
-        // watchEffect(() => {
-        //     if(showing.value) show()
-        //     else hide()
-        // })
+        watchEffect(() => {
+            if(showing.value) show()
+            else hide()
+        })
 
         onMounted(() => {
+            element.value.addEventListener('transitionend', onTransitionend)
+            element.value.addEventListener('transitionstart', onTransitionstart)
         })
 
         return{

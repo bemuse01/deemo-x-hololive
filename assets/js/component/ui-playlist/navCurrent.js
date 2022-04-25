@@ -9,7 +9,7 @@ export default {
         'nav-current-difficulty': NavCurrentDifficulty
     },
     template: `
-        <div class="nav-current" @click="setAudio">
+        <div class="nav-current" @click="clickToPlay">
           
             <nav-current-info />
             <nav-current-difficulty />
@@ -41,12 +41,16 @@ export default {
 
         const emitShowLoading = () => {
             store.dispatch('loading/setShowing', true)
-            console.log('work')
         }
 
         const setAudio = () => {
             if(!audios[key.value]) return
-            // audio.value.create(audios[key.value], key.value)
+            audio.value.create(audios[key.value], key.value)
+        }
+
+        const clickToPlay = () => {
+            stopAudio(audios[key.value])
+            setAudio()
             emitShowLoading()
         }
 
@@ -106,7 +110,7 @@ export default {
         })
 
         return{
-            setAudio
+            clickToPlay
         }
     }
 }
