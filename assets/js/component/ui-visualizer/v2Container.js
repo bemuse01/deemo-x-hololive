@@ -15,7 +15,7 @@ export default {
         const app = computed(() => store.getters['getApp'])
         const audio = computed(() => store.getters['getAudio'])
         const element = '.visualizer-v2-container > div'
-        const radius = 30
+        const radius = 28
 
         onMounted(() => {
             nextTick(() => {

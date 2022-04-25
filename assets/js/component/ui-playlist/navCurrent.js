@@ -44,11 +44,11 @@ export default {
         }
 
         const setAudio = () => {
-            if(!audios[key.value]) return
             audio.value.create(audios[key.value], key.value)
         }
 
         const clickToPlay = () => {
+            if(!audios[key.value]) return
             stopAudio(audios[key.value])
             setAudio()
             emitShowLoading()
