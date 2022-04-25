@@ -52,9 +52,9 @@ export default {
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const crtDuration = computed(() => {
-            if(crtItem.value.isDefault) return '\xa0'
+            const len = crtItem.value.length
+            if(crtItem.value.isDefault) return len
             else{
-                const len = crtItem.value.length
                 const min = ~~(len / 60)
                 const sec = ~~(len % 60)
                 return `${checkTime(min)}:${checkTime(sec)}`
