@@ -16,6 +16,7 @@ export default {
         const element = ref()
         const style = ref({zIndex: '-1', opacity: '0'})
         const showing = computed(() => store.getters['loading/getShowing'])
+        const playlistShowing = computed(() => store.getters['playlist/getShowing'])
 
         const show = () => {
             style.value.opacity = '1'
@@ -23,6 +24,10 @@ export default {
 
         const hide = () => {
             style.value.opacity = '0'
+        }
+
+        const emitShowPlaylist = () => {
+            store.dispatch('playlist/setShowing', true)
         }
 
         const emitHidePlaylist = () => {
@@ -39,7 +44,8 @@ export default {
             if(showing.value === false){
                 style.value.zIndex = '-1'
             }else{
-                emitHidePlaylist()
+                if(playlistShowing.value) emitHidePlaylist()
+                else emitShowPlaylist()
             }
         }
 

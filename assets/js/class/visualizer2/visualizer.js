@@ -18,8 +18,6 @@ export default class{
         this.color = color
         this.radius = radius
 
-        console.log(this.audio)
-
         this.param = {
             fov: 60,
             near: 0.1,
