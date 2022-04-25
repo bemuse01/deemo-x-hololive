@@ -1,12 +1,15 @@
 import Store from './store/index.js'
 
 import App from './class/app/app.js'
+import Audio from './class/audio/audio.js'
 
+import BgContainer from './component/container/bgContainer.js'
 import CanvasContainer from './component/container/canvasContainer.js'
 import UiContainer from './component/container/uiContainer.js'
 
 const vueApp = Vue.createApp({
     components: {
+        'bg-container': BgContainer,
         'canvas-container': CanvasContainer,
         'ui-container': UiContainer,
     },
@@ -15,6 +18,7 @@ const vueApp = Vue.createApp({
 
         Vue.nextTick(() => {
             store.dispatch('setApp', new App())
+            store.dispatch('setAudio', new Audio)
         })
 
         const animate = () => {

@@ -72,6 +72,11 @@ export default {
         const {useStore} = Vuex
 
 
+        // to-do
+        // list render (ref => computed)
+        // style (ref => computed)
+
+
         // vars
         const store = useStore()
         const style = reactive({

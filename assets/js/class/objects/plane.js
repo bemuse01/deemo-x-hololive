@@ -45,6 +45,9 @@ export default class{
                 if(!uniforms[name].value.dispose) continue 
                 uniforms[name].value.dispose()
             }
+        }else{
+            if(!this.getMaterial().map.dispose) return
+            this.getMaterial().map.dispose()
         }
     }
 

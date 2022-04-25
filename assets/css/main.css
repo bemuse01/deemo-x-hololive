@@ -1,6 +1,7 @@
 @import './public/bgContainer.css';
 @import './open.css';
 @import './playlist.css';
+@import './visualizer.css';
 @import './animation.css';
 
 
@@ -43,6 +44,25 @@ div#wrap{
     width: 100vw;
     height: 100vh;
 }
+
+
+/* bg */
+div#bg-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+div#bg-container > div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.bg-img{
+    filter: blur(0 0 6px);
+}
+/* .bg-overlay{
+    background: rgba(0, 0, 0, 0.8);
+} */
 
 
 /* canvas */

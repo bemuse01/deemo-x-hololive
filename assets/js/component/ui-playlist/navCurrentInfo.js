@@ -60,7 +60,6 @@ export default {
                 return `${checkTime(min)}:${checkTime(sec)}`
             }
         })
-
         
         return{
             crtItem,

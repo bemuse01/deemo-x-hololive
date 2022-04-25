@@ -1,0 +1,185 @@
+import * as THREE from '../../lib/three.module.js'
+import PublicMethod from '../../method/method.js'
+import {EffectComposer} from '../../postprocess/EffectComposer.js'
+import {RenderPass} from '../../postprocess/RenderPass.js'
+import {ShaderPass} from '../../postprocess/ShaderPass.js'
+import {VolumetericLightShader} from '../../postprocess/VolumetericLightShader.js'
+
+import Child from './build/visualizer.child.build.js'
+import PARTICLE from './build/visualizer.particle.build.js'
+import LOGO from './build/visualizer.logo.build.js'
+
+export default class{
+    constructor({app, audio, element, color, logoSrc}){
+        this.renderer = app.renderer
+        this.audio = audio
+        this.element = document.querySelector(element)
+        this.logoSrc = logoSrc
+        this.color = color
+
+        this.param = {
+            fov: 60,
+            near: 0.1,
+            far: 10000,
+            pos: 100,
+        }
+
+        this.modules = {
+            child: Child,
+            particle: PARTICLE,
+            logo: LOGO
+        }
+        this.group = {}
+        this.comp = {}
+        this.build = new THREE.Group()
+
+        this.init()
+    }
+
+
+    // init
+    init(){
+        this.initGroup()
+        this.initRenderObject()
+        this.initComposer()
+        this.create()
+
+        this.animate()
+    }
+    initGroup(){
+        for(const module in this.modules){
+            this.group[module] = new THREE.Group()
+            this.comp[module] = null
+        }
+    }
+    initRenderObject(){
+        const {width, height} = this.element.getBoundingClientRect()
+
+        this.scene = new THREE.Scene()
+
+        this.camera = new THREE.PerspectiveCamera(this.param.fov, width / height, this.param.near, this.param.far)
+        this.camera.position.z = this.param.pos
+        
+        this.size = {
+            el: {
+                w: width,
+                h: height
+            },
+            obj: {
+                w: PublicMethod.getVisibleWidth(this.camera, 0),
+                h: PublicMethod.getVisibleHeight(this.camera, 0)
+            }
+        }
+    }
+    initComposer(){
+        const {right, left, bottom, top} = this.element.getBoundingClientRect()
+        const width = right - left
+        const height = bottom - top
+
+        const renderScene = new RenderPass( this.scene, this.camera )
+
+        const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 2048})
+        this.composer = new EffectComposer(this.renderer, renderTarget)
+
+        const volumePass = new ShaderPass(VolumetericLightShader)
+        volumePass.needsSwap = false
+
+        this.composer.addPass(renderScene)
+        this.composer.addPass(volumePass)
+    }
+
+
+    // create
+    create(){
+        for(const module in this.modules){
+            const instance = this.modules[module]
+            const group = this.group[module]
+
+            this.comp[module] = new instance({group, size: this.size, logoSrc: this.logoSrc})
+        }
+
+        for(let i in this.group) this.build.add(this.group[i])
+        
+        this.scene.add(this.build)
+    }
+    
+
+    // remove
+    dispose(){
+        for(const comp in this.comp){
+            this.comp[comp].dispose()
+        }
+
+        cancelAnimationFrame(this.animation)
+    }
+
+
+    // animate
+    animate(){
+        this.render()
+        this.animateObject()
+
+        this.animation = requestAnimationFrame(() => this.animate())
+    }
+    render(){
+        const rect = this.element.getBoundingClientRect()
+        const width = rect.right - rect.left
+        const height = rect.bottom - rect.top
+        const left = rect.left
+        const bottom = this.renderer.domElement.clientHeight - rect.bottom
+
+        this.renderer.setScissor(left, bottom, width, height)
+        this.renderer.setViewport(left, bottom, width, height)
+    
+        this.renderer.autoClear = false
+        this.renderer.clearDepth()
+
+        this.composer.render()
+    }
+    animateObject(){
+        const {audioData, audioDataAvg} = this.audio
+
+        for(let i in this.comp){
+            if(!this.comp[i] || !this.comp[i].animate) continue
+            this.comp[i].animate({renderer: this.renderer, audioData, audioDataAvg})
+        }
+    }
+    setMaterial(){
+        for(let i in this.comp){
+            if(!this.comp[i] || !this.comp[i].setMaterial) continue
+            this.comp[i].setMaterial()
+        } 
+    }
+    restoreMaterial(){
+        for(let i in this.comp){
+            if(!this.comp[i] || !this.comp[i].restoreMaterial) continue
+            this.comp[i].restoreMaterial()
+        } 
+    }
+
+
+    // resize
+    resize(){
+        this.resizeRenderObject()
+        this.resizeObject()
+    }
+    resizeRenderObject(){
+        const rect = this.element.getBoundingClientRect()
+        const width = rect.right - rect.left
+        const height = rect.bottom - rect.top
+
+        this.camera.aspect = width / height
+        this.camera.updateProjectionMatrix()
+
+        this.size.el.w = width
+        this.size.el.h = height
+        this.size.obj.w = PublicMethod.getVisibleWidth(this.camera, 0)
+        this.size.obj.h = PublicMethod.getVisibleHeight(this.camera, 0)
+    }
+    resizeObject(){
+        for(const comp in this.comp){
+            if(!this.comp[comp] || !this.comp[comp].resize) continue
+            this.comp[comp].resize(this.size)
+        }
+    }
+}

@@ -2,6 +2,8 @@ export default [
     {
         songSrc: '',
         bgSrc: './assets/src/bg.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Deemo x Hololive',
         vocal: 'Hololive, Nijisanji',
         composer: '\xa0',
@@ -12,6 +14,8 @@ export default [
     {
         songSrc: './assets/song/kami_yamada.ogg',
         bgSrc: './assets/src/kami_yamada.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Kamippoi na',
         vocal: 'Laplus Darknesss',
         composer: 'PINOCCHIOP',
@@ -21,6 +25,8 @@ export default [
     {
         songSrc: './assets/song/ranbu_suisei.ogg',
         bgSrc: './assets/src/ranbu_suisei.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Ranbu No Melody',
         vocal: 'Hoshimati Suisei',
         composer: 'SID',
@@ -30,6 +36,8 @@ export default [
     {
         songSrc: './assets/song/kakusei_suisei.ogg',
         bgSrc: './assets/src/kakusei_suisei.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Kakusei',
         vocal: 'Hoshimati Suisei',
         composer: 'Superfly',
@@ -39,6 +47,8 @@ export default [
     {
         songSrc: './assets/song/phony_chima.ogg',
         bgSrc: './assets/src/phony_chima.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Phony',
         vocal: 'Machita Chima',
         composer: 'Tsumiki',
@@ -48,6 +58,8 @@ export default [
     {
         songSrc: './assets/song/phony_suisei.ogg',
         bgSrc: './assets/src/phony_suisei.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Phony',
         vocal: 'Hoshimati Suisei',
         composer: 'Tsumiki',
@@ -57,6 +69,8 @@ export default [
     {
         songSrc: './assets/song/king_chima.ogg',
         bgSrc: './assets/src/king_chima.jpg',
+        logoSrc: '',
+        color: '',
         name: 'KING',
         vocal: 'Machita Chima',
         composer: 'Kanaria',
@@ -66,6 +80,8 @@ export default [
     {
         songSrc: './assets/song/king_suisei.ogg',
         bgSrc: './assets/src/king_suisei.jpg',
+        logoSrc: '',
+        color: '',
         name: 'KING',
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
@@ -75,6 +91,8 @@ export default [
     {
         songSrc: './assets/song/error_towa.ogg',
         bgSrc: './assets/src/error_towa.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Error',
         vocal: 'Tokoyami Towa',
         composer: 'niki',
@@ -84,6 +102,8 @@ export default [
     {
         songSrc: './assets/song/sparkle_mio.ogg',
         bgSrc: './assets/src/sparkle_mio.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Sparkle',
         vocal: 'Ookami Mio',
         composer: 'RADWIMPS',
@@ -93,6 +113,8 @@ export default [
     {
         songSrc: './assets/song/goodbye_aqua.ogg',
         bgSrc: './assets/src/goodbye_aqua.jpg',
+        logoSrc: '',
+        color: '',
         name: 'Goodbye Sengen',
         vocal: 'Minato Aqua',
         composer: 'Chinozo',
