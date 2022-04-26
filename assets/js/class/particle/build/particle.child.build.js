@@ -8,7 +8,7 @@ export default class{
         this.size = size
 
         this.param = {
-            count: 1000,
+            count: 800,
             color,
         }
 
@@ -62,7 +62,7 @@ export default class{
             const y = Math.random() * h - hh
             
             position.push(x, y, 0)
-            size.push(THREE.Math.randFloat(1, 4))
+            size.push(THREE.Math.randFloat(0.1, 4))
         }
 
         return {position, size}
