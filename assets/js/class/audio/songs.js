@@ -7,6 +7,8 @@ export default class{
         this.fft = 2 ** 14
         this.smoothingTimeConstant = 0.65
 
+        this.context = new AudioContext()
+        this.source = null
         this.sources = []
         this.canPlay = false
 
@@ -102,18 +104,16 @@ export default class{
 
     // web audio api
     createContext(idx){
-        this.context = new AudioContext()
+        if(this.source) this.source.disconnect()
         this.analyser = this.context.createAnalyser()
         
-        let source = null
-
-        if(this.sources[idx]) source = this.sources[idx]
+        if(this.sources[idx]) this.source = this.sources[idx]
         else{
             this.sources[idx] = this.context.createMediaElementSource(this.getAudio(idx))
-            source = this.sources[idx]
-            source.connect(this.analyser)
+            this.source = this.sources[idx]
         }
 
+        this.source.connect(this.analyser)
         this.analyser.connect(this.context.destination)
         this.analyser.fftSize = this.fft
         this.analyser.smoothingTimeConstant = this.smoothingTimeConstant
