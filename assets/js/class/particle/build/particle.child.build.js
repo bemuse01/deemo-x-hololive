@@ -12,7 +12,7 @@ export default class{
             color,
         }
 
-        this.velocity = Array.from({length: this.param.count}, () => ({vx: THREE.Math.randFloat(0.25, 0.5), vy: -THREE.Math.randFloat(0.25, 0.5)}))
+        this.velocity = Array.from({length: this.param.count}, () => ({vx: THREE.Math.randFloat(0.2, 0.6), vy: -THREE.Math.randFloat(0.25, 0.5)}))
 
         this.init()
     }
