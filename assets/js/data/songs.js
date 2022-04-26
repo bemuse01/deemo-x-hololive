@@ -74,7 +74,7 @@ export default [
         songSrc: './assets/song/king_suisei.ogg',
         bgSrc: './assets/src/king_suisei.jpg',
         logoSrc: '',
-        color: 0x3739ff,
+        color: 0x426aff,
         name: 'KING',
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
