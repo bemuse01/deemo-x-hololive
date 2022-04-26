@@ -1,9 +1,7 @@
 import {
 	AdditiveBlending,
 	Color,
-	LinearFilter,
 	MeshBasicMaterial,
-	RGBAFormat,
 	ShaderMaterial,
 	UniformsUtils,
 	Vector2,
@@ -38,27 +36,26 @@ class UnrealBloomPass extends Pass {
 		this.clearColor = new Color( 0, 0, 0 );
 
 		// render targets
-		const pars = { minFilter: LinearFilter, magFilter: LinearFilter, format: RGBAFormat };
 		this.renderTargetsHorizontal = [];
 		this.renderTargetsVertical = [];
 		this.nMips = 5;
 		let resx = Math.round( this.resolution.x / 2 );
 		let resy = Math.round( this.resolution.y / 2 );
 
-		this.renderTargetBright = new WebGLRenderTarget( resx, resy, pars );
+		this.renderTargetBright = new WebGLRenderTarget( resx, resy );
 		this.renderTargetBright.texture.name = 'UnrealBloomPass.bright';
 		this.renderTargetBright.texture.generateMipmaps = false;
 
 		for ( let i = 0; i < this.nMips; i ++ ) {
 
-			const renderTargetHorizonal = new WebGLRenderTarget( resx, resy, pars );
+			const renderTargetHorizonal = new WebGLRenderTarget( resx, resy );
 
 			renderTargetHorizonal.texture.name = 'UnrealBloomPass.h' + i;
 			renderTargetHorizonal.texture.generateMipmaps = false;
 
 			this.renderTargetsHorizontal.push( renderTargetHorizonal );
 
-			const renderTargetVertical = new WebGLRenderTarget( resx, resy, pars );
+			const renderTargetVertical = new WebGLRenderTarget( resx, resy );
 
 			renderTargetVertical.texture.name = 'UnrealBloomPass.v' + i;
 			renderTargetVertical.texture.generateMipmaps = false;
@@ -86,10 +83,7 @@ class UnrealBloomPass extends Pass {
 			uniforms: this.highPassUniforms,
 			vertexShader: highPassShader.vertexShader,
 			fragmentShader: highPassShader.fragmentShader,
-			defines: {},
-			// custom
-			transparent: true,
-			blending: AdditiveBlending,
+			defines: {}
 		} );
 
 		// Gaussian Blur Materials
@@ -154,7 +148,7 @@ class UnrealBloomPass extends Pass {
 		this._oldClearColor = new Color();
 		this.oldClearAlpha = 1;
 
-		this.basic = new MeshBasicMaterial();
+		this.basic = new MeshBasicMaterial({transparent: true});
 
 		this.fsQuad = new FullScreenQuad( null );
 
@@ -330,17 +324,17 @@ class UnrealBloomPass extends Pass {
 					vec2 invSize = 1.0 / texSize;
 					float fSigma = float(SIGMA);
 					float weightSum = gaussianPdf(0.0, fSigma);
-					vec3 diffuseSum = texture2D( colorTexture, vUv).rgb * weightSum;
+					vec4 diffuseSum = texture2D( colorTexture, vUv) * weightSum;
 					for( int i = 1; i < KERNEL_RADIUS; i ++ ) {
 						float x = float(i);
 						float w = gaussianPdf(x, fSigma);
 						vec2 uvOffset = direction * invSize * x;
-						vec3 sample1 = texture2D( colorTexture, vUv + uvOffset).rgb;
-						vec3 sample2 = texture2D( colorTexture, vUv - uvOffset).rgb;
+						vec4 sample1 = texture2D( colorTexture, vUv + uvOffset);
+						vec4 sample2 = texture2D( colorTexture, vUv - uvOffset);
 						diffuseSum += (sample1 + sample2) * w;
 						weightSum += 2.0 * w;
 					}
-					gl_FragColor = vec4(diffuseSum/weightSum, 1.0);
+					gl_FragColor = vec4(diffuseSum/weightSum);
 				}`
 		} );
 

@@ -1,8 +1,9 @@
 import * as THREE from '../../lib/three.module.js'
 
 export default class{
-    constructor({count, lifeVelocity, materialOpt}){
+    constructor({count, lifeVelocity, materialName, materialOpt}){
         this.count = count
+        this.materialName = materialName
         this.materialOpt = materialOpt
 
         if(lifeVelocity){
@@ -27,21 +28,16 @@ export default class{
     }
     createGeometry(){
         this.geometry = new THREE.BufferGeometry()
-
-        this.geometry.setAttribute('position', new THREE.Float32BufferAttribute(Array.from({length: this.count * 3}, _ => 0), 3))
     }
     createMaterial(){
-        if(this.materialOpt.vertexShader){
-            this.material = new THREE.ShaderMaterial(this.materialOpt)
-        }else{
-            this.material = new THREE.PointsMaterial(this.materialOpt)
-        }
+        this.material = new THREE[this.materialName](this.materialOpt)
     }
 
 
     // dispose
     dispose(){
-        
+        this.mesh.geometry.dispose()
+        this.mesh.material.dispose()
     }
 
 
@@ -50,7 +46,7 @@ export default class{
         this.mesh.geometry.setAttribute(name, new THREE.BufferAttribute(array, itemSize))
     }
     setUniform(name, value){
-        this.mesh.material.uniforms[name].value = value
+        this.material.uniforms[name].value = value
     }
 
 
@@ -60,5 +56,8 @@ export default class{
     }
     getAttribute(name){
         return this.mesh.geometry.attributes[name]
+    }
+    getMaterial(){
+        return this.material
     }
 }

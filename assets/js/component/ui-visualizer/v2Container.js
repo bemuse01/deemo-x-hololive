@@ -12,8 +12,10 @@ export default {
 
         const store = useStore()
         const visualizer = ref()
+        
         const app = computed(() => store.getters['getApp'])
         const audio = computed(() => store.getters['playlist/getSongs'])
+
         const element = '.visualizer-v2-container > div'
         const radius = 28
 

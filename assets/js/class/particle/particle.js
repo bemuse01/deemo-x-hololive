@@ -2,33 +2,30 @@ import * as THREE from '../../lib/three.module.js'
 import PublicMethod from '../../method/method.js'
 import {EffectComposer} from '../../postprocess/EffectComposer.js'
 import {RenderPass} from '../../postprocess/RenderPass.js'
-import {ShaderPass} from '../../postprocess/ShaderPass.js'
-import {VolumetericLightShader} from '../../postprocess/VolumetericLightShader.js'
+import {AfterimagePass} from '../../postprocess/AfterimagePass.js'
 
-import Child from './build/visualizer.child.build.js'
-import PARTICLE from './build/visualizer.particle.build.js'
-import LOGO from './build/visualizer.logo.build.js'
+import Child from './build/particle.child.build.js'
 
 export default class{
-    constructor({app, audio, element, color, logoSrc, radius}){
+    constructor({app, audio, element, color}){
         this.renderer = app.renderer
         this.audio = audio
         this.element = document.querySelector(element)
-        this.logoSrc = logoSrc
         this.color = color
-        this.radius = radius
 
         this.param = {
             fov: 60,
             near: 0.1,
             far: 10000,
             pos: 100,
+            bloom: 2.5,
+            strength: 2,
+            radius: 0,
+            threshold: 0,
         }
 
         this.modules = {
             child: Child,
-            particle: PARTICLE,
-            logo: LOGO
         }
         this.group = {}
         this.comp = {}
@@ -74,20 +71,19 @@ export default class{
         }
     }
     initComposer(){
-        const {right, left, bottom, top} = this.element.getBoundingClientRect()
-        const width = right - left
-        const height = bottom - top
+        // const {right, left, bottom, top} = this.element.getBoundingClientRect()
+        // const width = right - left
+        // const height = bottom - top
 
         const renderScene = new RenderPass( this.scene, this.camera )
 
-        const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 2048})
-        this.composer = new EffectComposer(this.renderer, renderTarget)
+        this.motionComposer = new EffectComposer(this.renderer)
 
-        const volumePass = new ShaderPass(VolumetericLightShader)
-        volumePass.needsSwap = false
+        this.afterimagePass = new AfterimagePass()
+        this.afterimagePass.uniforms.damp.value = 0.85
 
-        this.composer.addPass(renderScene)
-        this.composer.addPass(volumePass)
+        this.motionComposer.addPass(renderScene)
+        this.motionComposer.addPass(this.afterimagePass)
     }
 
 
@@ -97,14 +93,14 @@ export default class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size, logoSrc: this.logoSrc, radius: this.radius})
+            this.comp[module] = new instance({group, size: this.size, color: this.color})
         }
 
         for(let i in this.group) this.build.add(this.group[i])
         
         this.scene.add(this.build)
     }
-    
+
 
     // remove
     dispose(){
@@ -135,18 +131,20 @@ export default class{
 
         this.renderer.setScissor(left, bottom, width, height)
         this.renderer.setViewport(left, bottom, width, height)
-    
+
         this.renderer.autoClear = false
         this.renderer.clearDepth()
-
-        this.composer.render()
+        
+        this.motionComposer.render()
     }
     animateObject(){
-        const {audioData, audioDataAvg} = this.audio
+        const {audioDataAvg} = this.audio
+
+        this.afterimagePass.uniforms.damp.value = THREE.Math.clamp(audioDataAvg * 2, 0, 0.85)
 
         for(let i in this.comp){
             if(!this.comp[i] || !this.comp[i].animate) continue
-            this.comp[i].animate({renderer: this.renderer, audioData, audioDataAvg})
+            this.comp[i].animate({audioDataAvg})
         }
     }
 
@@ -164,7 +162,7 @@ export default class{
         this.camera.aspect = width / height
         this.camera.updateProjectionMatrix()
 
-        this.composer.setSize(width, height)
+        this.motionComposer.setSize(width, height)
 
         this.size.el.w = width
         this.size.el.h = height

@@ -1,15 +1,16 @@
+import v1Container from './v1Container.js'
 import v2Container from './v2Container.js'
 
 export default {
     components: {
+        'v1-container': v1Container,
         'v2-container': v2Container
     },
     template: `
         <div class="ui ui-visualizer" @click="click">
 
-        <transition name="fade">
-            <v2-container v-if="type === 2"></v2-container>
-        </transition>
+            <v1-container v-if="type === 1" />
+            <v2-container v-else-if="type === 2" />
 
         </div>
     `,
@@ -22,19 +23,30 @@ export default {
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const songs = computed(() => store.getters['playlist/getSongs'])
         const playing = computed(() => store.getters['playlist/getPlaying'])
-        const audio = computed(() => store.getters['getAudio'])
+        const loadingDelay = store.getters['loading/getLoadingDelay']
+        const needsShow = ref(false)
+
         const type = computed(() => {
             if(crtItem.value.isDefault) return 3
             else{
-                if(playing.value) return +crtItem.value.type
+                if(playing.value || needsShow.value) return +crtItem.value.type
                 else return 3
             }
         })
 
+        const show = () => {
+            needsShow.value = true
+        }
+
+        const hide = () => {
+            needsShow.value = false
+        }
+
         watch(playing, (cur, pre) => {
             if(cur){
-                // console.log(audio.value.audio.paused)
-                // audio.value.play()
+                show()
+            }else{
+                setTimeout(() => hide(), loadingDelay)
             }
         })
 

@@ -3,18 +3,16 @@ import PublicMethod from '../../method/method.js'
 import {EffectComposer} from '../../postprocess/EffectComposer.js'
 import {RenderPass} from '../../postprocess/RenderPass.js'
 import {ShaderPass} from '../../postprocess/ShaderPass.js'
-import {VolumetericLightShader} from '../../postprocess/VolumetericLightShader.js'
+import {UnrealBloomPass} from '../../postprocess/UnrealBloomPass.js'
+import {TestShader} from '../../postprocess/TestShader.js'
 
 import Child from './build/visualizer.child.build.js'
-import PARTICLE from './build/visualizer.particle.build.js'
-import LOGO from './build/visualizer.logo.build.js'
 
 export default class{
-    constructor({app, audio, element, color, logoSrc, radius}){
+    constructor({app, audio, element, color, radius}){
         this.renderer = app.renderer
         this.audio = audio
         this.element = document.querySelector(element)
-        this.logoSrc = logoSrc
         this.color = color
         this.radius = radius
 
@@ -23,12 +21,13 @@ export default class{
             near: 0.1,
             far: 10000,
             pos: 100,
+            strength: 3,
+            radius: 0,
+            threshold: 0,
         }
 
         this.modules = {
             child: Child,
-            particle: PARTICLE,
-            logo: LOGO
         }
         this.group = {}
         this.comp = {}
@@ -80,14 +79,38 @@ export default class{
 
         const renderScene = new RenderPass( this.scene, this.camera )
 
+        // bloom composer
+        const bloomPass = new UnrealBloomPass( new THREE.Vector2( width, height ), 
+            this.param.strength,
+            this.param.radius,
+            this.param.threshold
+        )
+
+        this.bloomComposer = new EffectComposer(this.renderer)
+        this.bloomComposer.renderToScreen = false
+        this.bloomComposer.addPass(renderScene)
+        this.bloomComposer.addPass(bloomPass)
+
+
+        // final composer
+        const finalPass = new ShaderPass(
+            new THREE.ShaderMaterial({
+                uniforms: {
+                    baseTexture: {value: null},
+                    bloomTexture: {value: this.bloomComposer.renderTarget2.texture}
+                },
+                vertexShader: TestShader.vertexShader,
+                fragmentShader: TestShader.fragmentShader,
+                transparent: true,
+                defines: {}
+            }), "baseTexture"
+        )
+        finalPass.needsSwap = true
+
         const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 2048})
-        this.composer = new EffectComposer(this.renderer, renderTarget)
-
-        const volumePass = new ShaderPass(VolumetericLightShader)
-        volumePass.needsSwap = false
-
-        this.composer.addPass(renderScene)
-        this.composer.addPass(volumePass)
+        this.finalComposer = new EffectComposer(this.renderer, renderTarget)
+        this.finalComposer.addPass(renderScene)
+        this.finalComposer.addPass(finalPass)
     }
 
 
@@ -97,14 +120,14 @@ export default class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size, logoSrc: this.logoSrc, radius: this.radius})
+            this.comp[module] = new instance({group, size: this.size, radius: this.radius, color: this.color})
         }
 
         for(let i in this.group) this.build.add(this.group[i])
         
         this.scene.add(this.build)
     }
-    
+
 
     // remove
     dispose(){
@@ -139,7 +162,10 @@ export default class{
         this.renderer.autoClear = false
         this.renderer.clearDepth()
 
-        this.composer.render()
+        this.setMaterial()
+        this.bloomComposer.render()
+        this.restoreMaterial()
+        this.finalComposer.render()
     }
     animateObject(){
         const {audioData, audioDataAvg} = this.audio
@@ -148,6 +174,18 @@ export default class{
             if(!this.comp[i] || !this.comp[i].animate) continue
             this.comp[i].animate({renderer: this.renderer, audioData, audioDataAvg})
         }
+    }
+    setMaterial(){
+        for(let i in this.comp){
+            if(!this.comp[i] || !this.comp[i].setMaterial) continue
+            this.comp[i].setMaterial()
+        } 
+    }
+    restoreMaterial(){
+        for(let i in this.comp){
+            if(!this.comp[i] || !this.comp[i].restoreMaterial) continue
+            this.comp[i].restoreMaterial()
+        } 
     }
 
 
@@ -164,7 +202,8 @@ export default class{
         this.camera.aspect = width / height
         this.camera.updateProjectionMatrix()
 
-        this.composer.setSize(width, height)
+        this.bloomComposer.setSize(width, height)
+        this.finalComposer.setSize(width, height)
 
         this.size.el.w = width
         this.size.el.h = height
