@@ -147,7 +147,10 @@ export default class{
         this.objects.forEach(object => object.dispose())
         this.objects.length = 0
 
-        this.tws.forEach(tw => TWEEN.remove(tw))
+        this.tws.forEach(tw => {
+            tw.stop()
+            TWEEN.remove(tw)
+        })
         this.tws.length = 0
 
         this.play = false
