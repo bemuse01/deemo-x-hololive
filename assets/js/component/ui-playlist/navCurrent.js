@@ -1,8 +1,6 @@
 import NavCurrentInfo from './navCurrentInfo.js'
 import NavCurrentDifficulty from './navCurrentDifficulty.js'
 
-import Songs from '../../data/songs.js'
-
 export default {
     components: {
         'nav-current-info': NavCurrentInfo,
@@ -17,12 +15,11 @@ export default {
         </div>
     `,
     setup(){
-        const {computed, watch} = Vue
+        const {computed, watch, onMounted} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
         const key = computed(() => store.getters['playlist/getCrtKey'])
-        const audio = computed(() => store.getters['getAudio'])
         const songs = computed(() => store.getters['playlist/getSongs'])
 
         const setAudio = () => {

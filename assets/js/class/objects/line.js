@@ -46,6 +46,9 @@ export default class{
     getGeometry(){
         return this.mesh.geometry
     }
+    getMaterial(){
+        return this.mesh.material
+    }
     getPosition(){
         return this.position
     }

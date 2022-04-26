@@ -141,7 +141,7 @@ export default class{
 
     // dispose
     dispose(){
-        this.group.forEach(group => group.clear())
+        this.group.children.forEach(group => group.clear())
         this.group.clear()
         
         this.objects.forEach(object => object.dispose())
@@ -149,6 +149,8 @@ export default class{
 
         this.tws.forEach(tw => TWEEN.remove(tw))
         this.tws.length = 0
+
+        this.play = false
     }
 
 

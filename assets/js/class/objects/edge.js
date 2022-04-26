@@ -30,6 +30,13 @@ export default class{
     }
 
 
+    // dispose
+    dispose(){
+        this.getGeometry().dispose()
+        this.getMaterial().dispose()
+    }
+
+
     // set
     setAttribute(name, array, itemSize){
         this.mesh.geometry.setAttribute(name, new THREE.BufferAttribute(array, itemSize))

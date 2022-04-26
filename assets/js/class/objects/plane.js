@@ -35,9 +35,6 @@ export default class{
 
     // dispose
     dispose(){
-        this.getGeometry().dispose()
-        this.getMaterial().dispose()
-
         const uniforms = this.getUniforms()
 
         if(uniforms){
@@ -46,9 +43,11 @@ export default class{
                 uniforms[name].value.dispose()
             }
         }else{
-            if(!this.getMaterial().map.dispose) return
-            this.getMaterial().map.dispose()
+            if(this.getMaterial().map) this.getMaterial().map.dispose()
         }
+
+        this.getGeometry().dispose()
+        this.getMaterial().dispose()
     }
 
 

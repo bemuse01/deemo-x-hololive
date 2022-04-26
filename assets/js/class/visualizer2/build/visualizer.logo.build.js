@@ -49,6 +49,8 @@ export default class{
 
     // dispose
     dispose(){
+        if(!this.src) return
+        
         this.group.clear()
         this.object.dispose()
     }
