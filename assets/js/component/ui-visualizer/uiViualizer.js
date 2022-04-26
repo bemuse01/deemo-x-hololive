@@ -7,7 +7,9 @@ export default {
     template: `
         <div class="ui ui-visualizer" @click="click">
 
+        <transition name="fade">
             <v2-container v-if="type === 2"></v2-container>
+        </transition>
 
         </div>
     `,

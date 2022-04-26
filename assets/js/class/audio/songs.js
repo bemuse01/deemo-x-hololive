@@ -113,7 +113,7 @@ export default class{
             source = this.sources[idx]
             source.connect(this.analyser)
         }
-        
+
         this.analyser.connect(this.context.destination)
         this.analyser.fftSize = this.fft
         this.analyser.smoothingTimeConstant = this.smoothingTimeConstant

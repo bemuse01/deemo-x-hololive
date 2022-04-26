@@ -30,13 +30,15 @@ export default {
         const hololive = computed(() => store.getters['open/getAnim'].hololive)
         const style = ref({display: 'none', opacity: '0'})
         const ease = BezierEasing(0.25, 0.1, 0.25, 0.1)
+        const loadingDelay = store.getters['loading/getLoadingDelay']
 
-        const show = (cbs) => {
+        const show = (delay = 0, cbs) => {
             const start = {opacity: 0}
             const end = {opacity: 1}
 
             const tw = new TWEEN.Tween(start)
             .to(end, 600)
+            .delay(delay)
             .easing(ease)
             .onStart(() => onStartTween())
             .onUpdate(() => onUpdateTween(start))
@@ -45,14 +47,14 @@ export default {
             for(const cb in cbs) tw[cb](() => cbs[cb]())
         }
 
-        const hide = () => {
+        const hide = (delay) => {
             const start = {opacity: 1}
             const end = {opacity: 0}
 
             const tw = new TWEEN.Tween(start)
             .to(end, 600)
             .easing(ease)
-            .delay(600)
+            .delay(delay)
             .onComplete(() => onCompleteTween())
             .onUpdate(() => onUpdateTween(start))
             .start()
@@ -75,12 +77,12 @@ export default {
         }
 
         watch(hololive, (cur, pre) => {
-            if(cur) show({onComplete: emitHideOpen})
+            if(cur) show(0, {onComplete: emitHideOpen})
         })
 
         watch(playing, (cur, pre) => {
-            if(cur) hide()
-            else show()
+            if(cur) hide(loadingDelay)
+            else show(loadingDelay)
         })
 
         return{
