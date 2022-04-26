@@ -104,7 +104,7 @@ export default class{
 
     // web audio api
     createContext(idx){
-        if(this.source) this.source.disconnect()
+        // if(this.source) this.source.disconnect()
         if(this.analyser) this.analyser.disconnect()
         this.analyser = this.context.createAnalyser()
         
