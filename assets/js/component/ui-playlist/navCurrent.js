@@ -23,91 +23,22 @@ export default {
         const store = useStore()
         const key = computed(() => store.getters['playlist/getCrtKey'])
         const audio = computed(() => store.getters['getAudio'])
-        const audios = Array.from({length: Songs.length}, (_, key) => {
-            const {isDefault, songSrc} = Songs[key]
-            
-            const audio = isDefault ? undefined : new Audio()
-
-            if(audio){
-                audio.loop = true
-                audio.src = songSrc
-                audio.volume = 0
-                audio.addEventListener('canplaythrough', () => onLoadAudio(key, audio))
-            }
-
-            return audio
-        })
-        const maxVolume = 1
-
-        const emitShowLoading = () => {
-            store.dispatch('loading/setShowing', true)
-        }
+        const songs = computed(() => store.getters['playlist/getSongs'])
 
         const setAudio = () => {
-            audio.value.create(audios[key.value], key.value)
+            songs.value.createContext(key.value)
         }
 
         const clickToPlay = () => {
-            if(!audios[key.value]) return
-            stopAudio(audios[key.value])
+            if(!songs.value.getAudio(key.value)) return
             setAudio()
+            songs.value.stopAudio(key.value, true)
             store.dispatch('playlist/setPlaying', true)
-            // emitShowLoading()
-        }
-
-        const onLoadAudio = (idx, audio) => {
-            store.dispatch('playlist/setSongByKey', {idx, key: 'length', value: audio.duration})
-        }
-
-        const playAudio = (audio) => {
-            if(!audio) return
-
-            createTween({audio, 
-                s: {volume: 0},
-                e: {volume: maxVolume},
-                cbs: {
-                    onStart: (audio) => {
-                        audio.currentTime = audio.duration * 0.2
-                        audio.play()
-                    }
-                },
-                delay: 500
-            })
-        }
-
-        const stopAudio = (audio) => {
-            if(!audio) return
-
-            createTween({audio, 
-                s: {volume: maxVolume},
-                e: {volume: 0},
-                cbs: {
-                    onComplete: (audio) => audio.pause()
-                },
-                delay: 0
-            })
-        }
-
-        const createTween = ({audio, s, e, cbs, delay}) => {
-            const start = s
-            const end = e 
-
-            const tw = new TWEEN.Tween(start)
-            .to(end, 600)
-            .delay(delay)
-            .onUpdate(() => onUpdateTween(audio, start))
-            .start()
-
-            for(const cb in cbs) tw[cb](() => cbs[cb](audio))
-        }
-
-        const onUpdateTween = (audio, {volume}) => {
-            audio.volume = volume
         }
 
         watch(key, (cur, pre) => {
-            stopAudio(audios[pre])
-            playAudio(audios[cur])
+            songs.value.stopAudio(pre)
+            songs.value.playAudio(cur)
         })
 
         return{

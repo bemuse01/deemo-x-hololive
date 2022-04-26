@@ -11,23 +11,10 @@ export default {
     template: `
         <div id="ui-container">
 
-            <ui-open v-if="openShowing"></ui-open>
+            <ui-open></ui-open>
             <ui-visualizer></ui-visualizer>
             <ui-playlist></ui-playlist>
 
         </div>
-    `,
-    setup(){
-        const {reactive, computed} = Vue
-        const {useStore} = Vuex
-
-        const store = useStore()
-        const openShowing = computed(() => store.getters['open/getShowing'])
-        const playlistShowing = computed(() => store.getters['playlist/getShowing'])
-
-        return{
-            openShowing,
-            playlistShowing
-        }
-    }
+    `
 }

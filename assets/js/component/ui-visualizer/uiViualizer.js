@@ -30,7 +30,7 @@ export default {
         watch(playing, (cur, pre) => {
             if(cur){
                 // console.log(audio.value.audio.paused)
-                audio.value.play()
+                // audio.value.play()
             }
         })
 

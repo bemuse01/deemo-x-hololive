@@ -9,7 +9,7 @@ export default {
         'bg-container': BgContainer
     },
     template: `
-        <div class="ui ui-open">
+        <div class="ui ui-open" v-if="showing">
 
             <div class="open-logo-box">
 
@@ -21,15 +21,14 @@ export default {
         </div>
     `,
     setup(){
-        // const {watchEffect} = Vue
-        // const {useStore} = Vuex
+        const {computed} = Vue
+        const {useStore} = Vuex
 
-        // const store = useStore()
+        const store = useStore()
+        const showing = computed(() => store.getters['open/getShowing'])
 
-        // watchEffect(() => {
-        //     if(store.getters['open/getAnim'].hololive){
-        //         store.dispatch('open/setShowing', false)
-        //     }
-        // })
+        return{
+            showing
+        }
     }
 }

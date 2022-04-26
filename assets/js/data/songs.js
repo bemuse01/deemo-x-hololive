@@ -7,7 +7,6 @@ export default [
         name: 'Deemo x Hololive',
         vocal: 'Hololive, Nijisanji',
         composer: '\xa0',
-        length: '\xa0',
         type: '2',
         isDefault: true,
     },
@@ -19,7 +18,6 @@ export default [
         name: 'Kamippoi na',
         vocal: 'Laplus Darknesss',
         composer: 'PINOCCHIOP',
-        length: '00:00',
         type: '2',
     },
     {
@@ -30,7 +28,6 @@ export default [
         name: 'Ranbu No Melody',
         vocal: 'Hoshimati Suisei',
         composer: 'SID',
-        length: '00:00',
         type: '2',
     },
     {
@@ -41,7 +38,6 @@ export default [
         name: 'Kakusei',
         vocal: 'Hoshimati Suisei',
         composer: 'Superfly',
-        length: '00:00',
         type: '2',
     },
     {
@@ -52,7 +48,6 @@ export default [
         name: 'Phony',
         vocal: 'Machita Chima',
         composer: 'Tsumiki',
-        length: '00:00',
         type: '2',
     },
     {
@@ -63,7 +58,6 @@ export default [
         name: 'Phony',
         vocal: 'Hoshimati Suisei',
         composer: 'Tsumiki',
-        length: '00:00',
         type: '2',
     },
     {
@@ -74,7 +68,6 @@ export default [
         name: 'KING',
         vocal: 'Machita Chima',
         composer: 'Kanaria',
-        length: '00:00',
         type: '2',
     },
     {
@@ -85,7 +78,6 @@ export default [
         name: 'KING',
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
-        length: '00:00',
         type: '2',
     },
     {
@@ -96,7 +88,6 @@ export default [
         name: 'Error',
         vocal: 'Tokoyami Towa',
         composer: 'niki',
-        length: '00:00',
         type: '2',
     },
     {
@@ -107,7 +98,6 @@ export default [
         name: 'Sparkle',
         vocal: 'Ookami Mio',
         composer: 'RADWIMPS',
-        length: '00:00',
         type: '2',
     },
     {
@@ -118,7 +108,6 @@ export default [
         name: 'Goodbye Sengen',
         vocal: 'Minato Aqua',
         composer: 'Chinozo',
-        length: '00:00',
         type: '2'
     }
 ]

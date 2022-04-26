@@ -10,7 +10,7 @@ export default {
     template: `
         <div 
             class="ui ui-playlist" 
-            :style="style.root"
+            :style="style"
             :ref="el => root = el"
         >
 
@@ -26,50 +26,57 @@ export default {
         const store = useStore()
         const root = ref()
         const showing = computed(() => store.getters['playlist/getShowing'])
-        const playing = computed(() => store.getters['playlist/getPlayling'])
-        const style = reactive({
-            root: {opacity: '0'}
-        })
+        const playing = computed(() => store.getters['playlist/getPlaying'])
+        const hololive = computed(() => store.getters['open/getAnim'].hololive)
+        const style = ref({display: 'none', opacity: '0'})
+        const ease = BezierEasing(0.25, 0.1, 0.25, 0.1)
 
-        const show = () => {
-            style.root.opacity = '1'
-            store.dispatch('playlist/setShowing', true)
+        const show = (cbs) => {
+            const start = {opacity: 0}
+            const end = {opacity: 1}
+
+            const tw = new TWEEN.Tween(start)
+            .to(end, 600)
+            .easing(ease)
+            .onStart(() => onStartTween())
+            .onUpdate(() => onUpdateTween(start))
+            .start()
+
+            for(const cb in cbs) tw[cb](() => cbs[cb]())
         }
 
         const hide = () => {
-            style.root.opacity = '0'
-            store.dispatch('playlist/setShowing', false)
+            const start = {opacity: 1}
+            const end = {opacity: 0}
+
+            const tw = new TWEEN.Tween(start)
+            .to(end, 600)
+            .easing(ease)
+            .delay(600)
+            .onComplete(() => onCompleteTween())
+            .onUpdate(() => onUpdateTween(start))
+            .start()
         }
 
-        const emitHideLoading = () => {
-            store.dispatch('loading/setShowing', false)
+        const onStartTween = () => {
+            style.value.display = 'block'
         }
 
-        const emitPlaySong = () => {
-            store.dispatch('playlist/setPlaying', true)
+        const onUpdateTween = ({opacity}) => {
+            style.value.opacity = opacity
         }
 
-        // const onTransitionend = () => {
-        //     store.dispatch('open/setShowing', false)
-        //     if(showing.value === false){
-        //         emitHideLoading()
-        //         emitPlaySong()
-        //     }
-        // }
+        const onCompleteTween = () => {
+            style.value.display = 'none'
+        }
 
-        // onMounted(() => {
-        //     root.value.addEventListener('transitionend', onTransitionend)
-        // })
+        const emitHideOpen = () => {
+            store.dispatch('open/setShowing', false)
+        }
 
-        watchEffect(() => {
-            if(store.getters['open/getAnim'].hololive){
-                show()
-            }
+        watch(hololive, (cur, pre) => {
+            if(cur) show({onComplete: emitHideOpen})
         })
-
-        // watch(showing, (cur, pre) => {
-        //     if(cur === false) hide()
-        // })
 
         watch(playing, (cur, pre) => {
             if(cur) hide()
@@ -77,7 +84,6 @@ export default {
         })
 
         return{
-            root,
             style
         }
     }
