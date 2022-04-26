@@ -94,7 +94,7 @@ export default [
         songSrc: './assets/song/sparkle_mio.ogg',
         bgSrc: './assets/src/sparkle_mio.jpg',
         logoSrc: '',
-        color: 0x259ddf,
+        color: 0x449cff,
         name: 'Sparkle',
         vocal: 'Ookami Mio',
         composer: 'RADWIMPS',
