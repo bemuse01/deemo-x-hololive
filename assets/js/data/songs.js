@@ -78,7 +78,7 @@ export default [
         name: 'KING',
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
-        type: '2',
+        type: '1',
     },
     {
         songSrc: './assets/song/error_towa.ogg',
