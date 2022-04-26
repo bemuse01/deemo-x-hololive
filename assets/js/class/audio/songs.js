@@ -9,7 +9,9 @@ export default class{
 
         this.context = new AudioContext()
         this.source = null
+        this.analyser = null
         this.sources = []
+        this.analysers = []
         this.canPlay = false
 
         this.init()
@@ -105,8 +107,7 @@ export default class{
     // web audio api
     createContext(idx){
         // if(this.source) this.source.disconnect()
-        if(this.analyser) this.analyser.disconnect()
-        this.analyser = this.context.createAnalyser()
+        // if(this.analyser) this.analyser.disconnect()
         
         if(this.sources[idx]) this.source = this.sources[idx]
         else{
@@ -114,8 +115,14 @@ export default class{
             this.source = this.sources[idx]
         }
 
-        this.source.connect(this.analyser)
-        this.analyser.connect(this.context.destination)
+        if(this.analysers[idx]) this.analyser = this.analysers[idx]
+        else{
+            this.analysers[idx] = this.context.createAnalyser()
+            this.analyser = this.analysers[idx]
+            this.analyser.connect(this.context.destination)
+            this.source.connect(this.analyser)
+        }
+
         this.analyser.fftSize = this.fft
         this.analyser.smoothingTimeConstant = this.smoothingTimeConstant
         
