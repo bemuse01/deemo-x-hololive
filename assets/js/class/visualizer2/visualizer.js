@@ -112,6 +112,9 @@ export default class{
             this.comp[comp].dispose()
         }
 
+        this.build.clear()
+        this.scene.clear()
+
         cancelAnimationFrame(this.animation)
     }
 
