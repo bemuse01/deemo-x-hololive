@@ -34,8 +34,11 @@ export default class{
 
     // dispose
     dispose(){
-        this.getGeometry().dispose()
-        this.getMaterial().dispose()
+        this.mesh.geometry.dispose()
+        this.mesh.material.dispose()
+        this.mesh.geometry = null
+        this.mesh.material = null
+        this.mesh = null
     }
 
 

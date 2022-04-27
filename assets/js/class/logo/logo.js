@@ -76,11 +76,19 @@ export default class{
 
     // remove
     dispose(){
+        cancelAnimationFrame(this.animation)
+
         for(const comp in this.comp){
             this.comp[comp].dispose()
         }
 
-        cancelAnimationFrame(this.animation)
+        this.build.clear()
+        this.scene.clear()
+
+        this.build = null
+        this.scene = null
+
+        this.renderer.renderLists.dispose()
     }
 
 

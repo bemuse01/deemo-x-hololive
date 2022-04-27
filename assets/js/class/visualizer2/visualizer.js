@@ -108,14 +108,31 @@ export default class{
 
     // remove
     dispose(){
+        cancelAnimationFrame(this.animation)
+
         for(const comp in this.comp){
             this.comp[comp].dispose()
         }
 
         this.build.clear()
         this.scene.clear()
+        this.build = null
+        this.scene = null
+        
+        this.disposeComposer('composer')
 
-        cancelAnimationFrame(this.animation)
+        this.renderer.renderLists.dispose()
+    }
+    disposeComposer(name){
+        this[name].passes.forEach(pass => {
+            this[name].removePass(pass)
+            if(pass.dispose) pass.dispose()
+        })
+
+        this[name].renderTarget1.dispose()
+        this[name].renderTarget2.dispose()
+
+        this[name] = null
     }
 
 
