@@ -14,13 +14,13 @@ export default {
         const {useStore} = Vuex
 
         const store = useStore()
-        const logo = ref()
         const anim = reactive({
             child: false
         })
         const style = reactive({
             container: {right: '50%', transform: 'translate(50%, -50%)'}
         })
+        let logo = null
         const src = './assets/src/logo.png'
         const element = '.open-deemo-container'
 
@@ -39,11 +39,11 @@ export default {
         })
 
         onUnmounted(() => {
-            logo.value.dispose()
+            logo.dispose()
         })
 
         nextTick(() => {
-            logo.value = new Logo(store, anim, src, element)
+            logo = new Logo(store, anim, src, element)
         })
 
         return{

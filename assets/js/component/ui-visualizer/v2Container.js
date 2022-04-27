@@ -11,7 +11,7 @@ export default {
         const {useStore} = Vuex
 
         const store = useStore()
-        const visualizer = ref()
+        let visualizer = null
         
         const app = computed(() => store.getters['getApp'])
         const audio = computed(() => store.getters['playlist/getSongs'])
@@ -21,12 +21,12 @@ export default {
 
         onMounted(() => {
             nextTick(() => {
-                visualizer.value = new Visualizer({app: app.value, audio: audio.value, color: 0xffffff, element, radius})
+                visualizer = new Visualizer({app: app.value, audio: audio.value, color: 0xffffff, element, radius})
             })
         })
 
         onUnmounted(() => {
-            visualizer.value.dispose()
+            visualizer.dispose()
         })
 
         return{

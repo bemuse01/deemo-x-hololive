@@ -12,8 +12,8 @@ export default {
         const {useStore} = Vuex
 
         const store = useStore()
-        const visualizer = ref()
-        const particle = ref()
+        let visualizer = null
+        let particle = null
 
         const app = computed(() => store.getters['getApp'])
         const audio = computed(() => store.getters['playlist/getSongs'])
@@ -26,14 +26,14 @@ export default {
 
         onMounted(() => {
             nextTick(() => {
-                particle.value = new Particle({app: app.value, audio: audio.value, color, element})
-                visualizer.value = new Visualizer({app: app.value, audio: audio.value, color, element, radius})
+                particle = new Particle({app: app.value, audio: audio.value, color, element})
+                visualizer = new Visualizer({app: app.value, audio: audio.value, color, element, radius})
             })
         })
 
         onUnmounted(() => {
-            visualizer.value.dispose()
-            particle.value.dispose()
+            visualizer.dispose()
+            particle.dispose()
         })
 
         return{

@@ -123,7 +123,7 @@ export default class{
 
         this.renderer.renderLists.dispose()
 
-        console.log(this.renderer.info.memory)
+        console.log(this.renderer.info)
     }
     disposeComposer(name){
         while(this[name].passes.length !== 0){
@@ -139,6 +139,12 @@ export default class{
         this[name].renderTarget1.dispose()
         this[name].renderTarget2.dispose()
 
+        this[name].renderTarget1 = null
+        this[name].renderTarget2 = null
+
+        this[name].copyPass.fsQuad.dispose()
+        this[name].copyPass.fsQuad.material.dispose()
+        
         this[name] = null
     }
 

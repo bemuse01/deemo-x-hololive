@@ -119,8 +119,9 @@ export default class{
 
     // dispose
     dispose(){
-        this.group.remove(this.object.get())
+        this.group.clear()
         this.object.dispose()
+        this.object = null
     }
 
 
