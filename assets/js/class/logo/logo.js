@@ -6,10 +6,10 @@ import PublicMethod from '../../method/method.js'
 import Child from './build/logo.child.build.js'
 
 export default class{
-    constructor(store, anim, src, element){
+    constructor(app, anim, src, element){
         this.anim = anim
         this.src = src
-        this.renderer = store.getters.getApp.renderer
+        this.renderer = app.renderer
         this.element = document.querySelector(element)
 
         this.modules = {
@@ -30,7 +30,12 @@ export default class{
         this.create()
 
         this.animate()
-        window.addEventListener('resize', () => this.resize())
+                
+        this.resizeEvent = () => {
+            this.resize()
+        }
+
+        window.addEventListener('resize', this.resizeEvent)
     }
     initGroup(){
         for(const module in this.modules){
@@ -77,6 +82,7 @@ export default class{
     // remove
     dispose(){
         cancelAnimationFrame(this.animation)
+        window.removeEventListener('resize', this.resizeEvent)
 
         this.build.clear()
         this.scene.clear()
@@ -92,8 +98,6 @@ export default class{
         this.group = null
 
         this.renderer.renderLists.dispose()
-
-        console.log(this.renderer.info.memory)
     }
 
 

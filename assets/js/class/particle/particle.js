@@ -43,7 +43,12 @@ export default class{
         this.create()
 
         this.animate()
-        window.addEventListener('resize', () => this.resize())
+        
+        this.resizeEvent = () => {
+            this.resize()
+        }
+
+        window.addEventListener('resize', this.resizeEvent)
     }
     initGroup(){
         for(const module in this.modules){
@@ -105,6 +110,7 @@ export default class{
     // remove
     dispose(){
         cancelAnimationFrame(this.animation)
+        window.removeEventListener('resize', this.resizeEvent)
 
         this.build.clear()
         this.scene.clear()
@@ -122,8 +128,6 @@ export default class{
         this.disposeComposer('motionComposer')
 
         this.renderer.renderLists.dispose()
-
-        console.log(this.renderer.info)
     }
     disposeComposer(name){
         while(this[name].passes.length !== 0){

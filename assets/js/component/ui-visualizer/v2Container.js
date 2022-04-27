@@ -27,6 +27,8 @@ export default {
 
         onUnmounted(() => {
             visualizer.dispose()
+            visualizer = null
+            // console.log(app.value.renderer.info)
         })
 
         return{

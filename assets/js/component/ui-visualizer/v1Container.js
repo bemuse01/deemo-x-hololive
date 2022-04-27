@@ -34,6 +34,9 @@ export default {
         onUnmounted(() => {
             visualizer.dispose()
             particle.dispose()
+            visualizer = null
+            particle = null
+            // console.log(app.value.renderer.info)
         })
 
         return{

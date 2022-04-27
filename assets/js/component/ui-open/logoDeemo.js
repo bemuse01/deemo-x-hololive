@@ -10,19 +10,20 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, ref, watchEffect, onUnmounted, nextTick} = Vue
+        const {reactive, computed, watchEffect, onUnmounted, nextTick, onMounted} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
+        const app = computed(() => store.getters['getApp'])
         const anim = reactive({
             child: false
         })
         const style = reactive({
             container: {right: '50%', transform: 'translate(50%, -50%)'}
         })
-        let logo = null
         const src = './assets/src/logo.png'
         const element = '.open-deemo-container'
+        let logo = null
 
         const slide = () => {
             style.container.right = '0'
@@ -38,12 +39,16 @@ export default {
             store.dispatch('open/setAnim', {name: 'deemo', value: true})
         })
 
+        onMounted(() => {
+            nextTick(() => {
+                logo = new Logo(app.value, anim, src, element)
+            })
+        })
+        
         onUnmounted(() => {
             logo.dispose()
-        })
-
-        nextTick(() => {
-            logo = new Logo(store, anim, src, element)
+            logo = null
+            // console.log(app.value.renderer.info)
         })
 
         return{
