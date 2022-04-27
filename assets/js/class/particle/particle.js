@@ -104,16 +104,43 @@ export default class{
 
     // remove
     dispose(){
-        for(const comp in this.comp){
-            this.comp[comp].dispose()
-        }
+        cancelAnimationFrame(this.animation)
 
         this.build.clear()
         this.scene.clear()
 
-        cancelAnimationFrame(this.animation)
-    }
+        this.build = null
+        this.scene = null
 
+        for(const comp in this.comp){
+            this.comp[comp].dispose()
+        }
+
+        this.comp = null
+        this.group = null
+
+        this.disposeComposer('motionComposer')
+
+        this.renderer.renderLists.dispose()
+
+        console.log(this.renderer.info.memory)
+    }
+    disposeComposer(name){
+        while(this[name].passes.length !== 0){
+            const pass = this[name].passes.pop()
+
+            if(pass.dispose) pass.dispose()
+            if(pass.fsQuad){
+                pass.fsQuad.dispose()
+                pass.fsQuad.material.dispose()
+            }
+        }
+
+        this[name].renderTarget1.dispose()
+        this[name].renderTarget2.dispose()
+
+        this[name] = null
+    }
 
     // animate
     animate(){

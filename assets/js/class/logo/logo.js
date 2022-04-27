@@ -78,17 +78,22 @@ export default class{
     dispose(){
         cancelAnimationFrame(this.animation)
 
-        for(const comp in this.comp){
-            this.comp[comp].dispose()
-        }
-
         this.build.clear()
         this.scene.clear()
 
         this.build = null
         this.scene = null
 
+        for(const comp in this.comp){
+            this.comp[comp].dispose()
+        }
+
+        this.comp = null
+        this.group = null
+
         this.renderer.renderLists.dispose()
+
+        console.log(this.renderer.info.memory)
     }
 
 

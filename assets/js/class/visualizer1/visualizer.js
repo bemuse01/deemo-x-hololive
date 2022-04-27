@@ -133,26 +133,38 @@ export default class{
     dispose(){
         cancelAnimationFrame(this.animation)
 
-        for(const comp in this.comp){
-            this.comp[comp].dispose()
-        }
-
         this.build.clear()
         this.scene.clear()
 
         this.build = null
         this.scene = null
 
+        for(const comp in this.comp){
+            this.comp[comp].dispose()
+        }
+
+        this.comp = null
+        this.group = null
+
         this.disposeComposer('bloomComposer')
         this.disposeComposer('finalComposer')
 
         this.renderer.renderLists.dispose()
+
+        console.log(this.renderer.info.memory)
     }
     disposeComposer(name){
-        this[name].passes.forEach(pass => {
-            this[name].removePass(pass)
-            if(pass.dispose) pass.dispose()
-        })
+        while(this[name].passes.length !== 0){
+            const pass = this[name].passes.pop()
+
+            if(pass.dispose) {
+                pass.dispose()
+            }
+            if(pass.fsQuad){
+                pass.fsQuad.dispose()
+                pass.fsQuad.material.dispose()
+            }
+        }
 
         this[name].renderTarget1.dispose()
         this[name].renderTarget2.dispose()

@@ -56,6 +56,17 @@ class AfterimagePass extends Pass {
 
 	}
 
+	dispose(){
+		this.compFsQuad.dispose()
+		this.compFsQuad.material.dispose()
+
+		this.copyFsQuad.dispose()
+		this.copyFsQuad.material.dispose()
+
+		this.textureComp.dispose()
+		this.textureOld.dispose()
+	}
+
 	render( renderer, writeBuffer, readBuffer/*, deltaTime, maskActive*/ ) {
 
 		this.uniforms[ 'tOld' ].value = this.textureOld.texture;

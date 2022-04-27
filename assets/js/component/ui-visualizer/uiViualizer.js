@@ -53,6 +53,7 @@ export default {
         const click = () => {
             store.dispatch('playlist/setPlaying', false)
             songs.value.stopAudio(crtKey.value, true)
+            songs.value.setAnimate(false)
         }
 
         return{

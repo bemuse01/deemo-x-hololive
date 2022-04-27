@@ -13,6 +13,7 @@ export default class{
         this.sources = []
         this.analysers = []
         this.canPlay = false
+        this.anim = false
 
         this.init()
     }
@@ -33,7 +34,7 @@ export default class{
             const {isDefault, songSrc} = song
             
             const audio = isDefault ? undefined : new Audio()
-            const length = '00:00'
+            const length = isDefault ? '\xa0' : '00:00'
 
             if(audio){
                 audio.loop = true
@@ -143,7 +144,7 @@ export default class{
 
     // animate
     animate(){
-        if(this.analyser){
+        if(this.analyser && this.anim){
             this.analyser.getByteFrequencyData(this.audioData)
 
             // const len = ~~(this.audioData.length / 4)
@@ -152,5 +153,8 @@ export default class{
         }
 
         requestAnimationFrame(() => this.animate())
+    }
+    setAnimate(anim){
+        this.anim = anim
     }
 }
