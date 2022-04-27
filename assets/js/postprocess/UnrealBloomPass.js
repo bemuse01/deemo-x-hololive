@@ -156,6 +156,13 @@ class UnrealBloomPass extends Pass {
 
 	dispose() {
 
+		for(const name in this){
+			const className = this[name].constructor.name
+			if(className === 'MeshBasicMaterial' || className === 'ShaderMaterial'){
+				this[name].dispose()
+			}
+		}
+
 		for ( let i = 0; i < this.renderTargetsHorizontal.length; i ++ ) {
 
 			this.renderTargetsHorizontal[ i ].dispose();
