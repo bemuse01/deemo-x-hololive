@@ -156,6 +156,8 @@ const Visualizer1 = class{
         this.disposeComposer('finalComposer')
 
         this.renderer.renderLists.dispose()
+        this.renderer.info.programs.forEach(program => program.destroy())
+        this.renderer.info.programs.length = 0
     }
     disposeComposer(name){
         while(this[name].passes.length !== 0){

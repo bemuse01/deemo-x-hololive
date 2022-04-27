@@ -98,6 +98,8 @@ export default class{
         this.group = null
 
         this.renderer.renderLists.dispose()
+        this.renderer.info.programs.forEach(program => program.destroy())
+        this.renderer.info.programs.length = 0
     }
 
 
