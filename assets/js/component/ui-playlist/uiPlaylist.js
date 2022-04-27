@@ -20,12 +20,10 @@ export default {
         </div>
     `,
     setup(){
-        const {ref, reactive, watchEffect, onMounted, computed, watch} = Vue
+        const {ref, computed, watch} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
-        const root = ref()
-        const showing = computed(() => store.getters['playlist/getShowing'])
         const playing = computed(() => store.getters['playlist/getPlaying'])
         const hololive = computed(() => store.getters['open/getAnim'].hololive)
         const style = ref({display: 'none', opacity: '0'})
