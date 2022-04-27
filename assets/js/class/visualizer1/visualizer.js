@@ -8,7 +8,7 @@ import {TestShader} from '../../postprocess/TestShader.js'
 
 import Child from './build/visualizer.child.build.js'
 
-export default class{
+const Visualizer1 = class{
     constructor({app, audio, element, color, radius}){
         this.renderer = app.renderer
         this.audio = audio
@@ -45,7 +45,7 @@ export default class{
         this.create()
 
         this.animate()
-        
+
         this.resizeEvent = () => {
             this.resize()
         }
@@ -259,3 +259,5 @@ export default class{
         }
     }
 }
+
+export {Visualizer1}

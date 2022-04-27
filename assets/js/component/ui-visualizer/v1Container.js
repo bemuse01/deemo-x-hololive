@@ -1,5 +1,5 @@
-import Visualizer from '../../class/visualizer1/visualizer.js'
-import Particle from '../../class/particle/particle.js'
+import {Visualizer1} from '../../class/visualizer1/visualizer.js'
+import {Particle} from '../../class/particle/particle.js'
 
 export default {
     template: `
@@ -8,7 +8,7 @@ export default {
         </div>
     `,
     setup(){
-        const {nextTick, onMounted, onUnmounted, ref, computed} = Vue
+        const {nextTick, onMounted, computed, onBeforeUnmount} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -27,16 +27,16 @@ export default {
         onMounted(() => {
             nextTick(() => {
                 particle = new Particle({app: app.value, audio: audio.value, color, element})
-                visualizer = new Visualizer({app: app.value, audio: audio.value, color, element, radius})
+                visualizer = new Visualizer1({app: app.value, audio: audio.value, color, element, radius})
             })
         })
 
-        onUnmounted(() => {
+        onBeforeUnmount(() => {
             visualizer.dispose()
             particle.dispose()
             visualizer = null
             particle = null
-            // console.log(app.value.renderer.info)
+            console.log(app.value.renderer.info)
         })
 
         return{

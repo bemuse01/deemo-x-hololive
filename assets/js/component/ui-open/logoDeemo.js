@@ -10,7 +10,7 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, computed, watchEffect, onUnmounted, nextTick, onMounted} = Vue
+        const {reactive, computed, watchEffect, onBeforeUnmount, nextTick, onMounted} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -45,10 +45,10 @@ export default {
             })
         })
         
-        onUnmounted(() => {
+        onBeforeUnmount(() => {
             logo.dispose()
             logo = null
-            // console.log(app.value.renderer.info)
+            console.log(app.value.renderer.info)
         })
 
         return{

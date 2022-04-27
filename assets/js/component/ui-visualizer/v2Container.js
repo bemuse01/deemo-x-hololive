@@ -1,4 +1,4 @@
-import Visualizer from '../../class/visualizer2/visualizer.js'
+import {Visualizer2} from '../../class/visualizer2/visualizer.js'
 
 export default {
     template: `
@@ -7,7 +7,7 @@ export default {
         </div>
     `,
     setup(){
-        const {nextTick, onMounted, onUnmounted, ref, computed} = Vue
+        const {nextTick, onMounted, computed, onBeforeUnmount} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -21,15 +21,16 @@ export default {
 
         onMounted(() => {
             nextTick(() => {
-                visualizer = new Visualizer({app: app.value, audio: audio.value, color: 0xffffff, element, radius})
+                visualizer = new Visualizer2({app: app.value, audio: audio.value, color: 0xffffff, element, radius})
             })
         })
 
-        onUnmounted(() => {
+        onBeforeUnmount(() => {
             visualizer.dispose()
             visualizer = null
-            // console.log(app.value.renderer.info)
+            console.log(app.value.renderer.info)
         })
+
 
         return{
             element

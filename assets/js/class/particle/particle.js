@@ -6,7 +6,7 @@ import {AfterimagePass} from '../../postprocess/AfterimagePass.js'
 
 import Child from './build/particle.child.build.js'
 
-export default class{
+const Particle = class{
     constructor({app, audio, element, color}){
         this.renderer = app.renderer
         this.audio = audio
@@ -213,3 +213,5 @@ export default class{
         }
     }
 }
+
+export {Particle}

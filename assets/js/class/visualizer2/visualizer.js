@@ -9,7 +9,7 @@ import Child from './build/visualizer.child.build.js'
 import PARTICLE from './build/visualizer.particle.build.js'
 import LOGO from './build/visualizer.logo.build.js'
 
-export default class{
+const Visualizer2 = class{
     constructor({app, audio, element, color, logoSrc, radius}){
         this.renderer = app.renderer
         this.audio = audio
@@ -216,3 +216,5 @@ export default class{
         }
     }
 }
+
+export {Visualizer2}
