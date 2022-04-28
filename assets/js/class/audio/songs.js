@@ -1,6 +1,12 @@
+import Method from "../../method/method.js"
+
 export default class{
     constructor(songs){
         this.songs = songs
+        
+        this.playFlag = Array.from(songs, _ => false)
+        this.stopFlag = Array.from(songs, _ => false)
+        this.volumeVelocity = 0.03
         
         this.list = []
         this.maxVolume = 1
@@ -59,33 +65,42 @@ export default class{
         const {audio} = this.list[idx]
         if(!audio) return
 
-        this.createTween({audio, 
-            s: {volume: 0},
-            e: {volume: this.maxVolume},
-            cbs: {
-                onStart: (audio) => {
-                    audio.currentTime = audio.duration * time
-                    audio.play()
-                }
-            },
-            delay: 500
-        })
+        this.playFlag[idx] = true
+        this.stopFlag[idx] = false
+
+        audio.currentTime = audio.duration * time
+        audio.play()
+
+        // this.createTween({audio, 
+        //     s: {volume: 0},
+        //     e: {volume: this.maxVolume},
+        //     cbs: {
+        //         onStart: (audio) => {
+        //             audio.currentTime = audio.duration * time
+        //             audio.play()
+        //         }
+        //     },
+        //     delay: 500
+        // })
     }
     stopAudio(idx, playAudioAfter){
         const {audio} = this.list[idx]
         if(!audio) return
 
-        this.createTween({audio, 
-            s: {volume: this.maxVolume},
-            e: {volume: 0},
-            cbs: {
-                onComplete: (audio) => {
-                    audio.pause()
-                    if(playAudioAfter) this.playAudio(idx, 0)
-                }
-            },
-            delay: 0
-        })
+        this.playFlag[idx] = false
+        this.stopFlag[idx] = true
+
+        // this.createTween({audio, 
+        //     s: {volume: this.maxVolume},
+        //     e: {volume: 0},
+        //     cbs: {
+        //         onComplete: (audio) => {
+        //             audio.pause()
+        //             if(playAudioAfter) this.playAudio(idx, 0)
+        //         }
+        //     },
+        //     delay: 0
+        // })
     }
     createTween({audio, s, e, cbs, delay}){
         const start = s
@@ -144,6 +159,9 @@ export default class{
 
     // animate
     animate(){
+        this.playAudioFadeIn()
+        this.stopAudioFadeOut()
+
         if(this.analyser && this.anim){
             this.analyser.getByteFrequencyData(this.audioData)
 
@@ -153,6 +171,39 @@ export default class{
         }
 
         requestAnimationFrame(() => this.animate())
+    }
+    playAudioFadeIn(){
+        this.playFlag.forEach((flag, idx) => {
+            
+            if(flag){
+                const {audio} = this.list[idx]
+    
+                const volume = audio.volume + this.volumeVelocity
+                audio.volume = Method.clamp(volume, 0, 1)
+    
+                if(audio.volume >= 1){
+                    this.playFlag[idx] = false
+                }
+            }
+
+        })
+   
+    }
+    stopAudioFadeOut(){
+        this.stopFlag.forEach((flag, idx) => {
+            
+            if(flag){
+                const {audio} = this.list[idx]
+    
+                const volume = audio.volume - this.volumeVelocity
+                audio.volume = Method.clamp(volume, 0, 1)
+    
+                if(audio.volume <= 0){
+                    this.stopFlag[idx] = false
+                }
+            }
+
+        })
     }
     setAnimate(anim){
         this.anim = anim

@@ -15,10 +15,16 @@ export default {
         const store = useStore()
         const element = ref()
         const style = ref({display: 'none', opacity: '0'})
+        const songs = computed(() => store.getters['playlist/getSongs'])
+        const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const showing = computed(() => store.getters['loading/getShowing'])
         const playlistShowing = computed(() => store.getters['playlist/getShowing'])
         const playing = computed(() => store.getters['playlist/getPlaying'])
         const ease = BezierEasing(0.25, 0.1, 0.25, 0.1)
+
+        const afterLoading = () => {
+            songs.value.playAudio(crtKey.value, 0)
+        }
 
         const show = () => {
             const start = {opacity: 0}
@@ -57,6 +63,7 @@ export default {
 
         const onCompleteTween = () => {
             style.value.display = 'none'
+            afterLoading()
         }
         
         const start = () => {

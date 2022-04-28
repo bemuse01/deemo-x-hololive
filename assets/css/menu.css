@@ -1,0 +1,22 @@
+.ui-menu{
+    position: absolute;
+    top: 13px;
+    right: 20px;
+}
+.ui-menu img{
+    max-width: 100%;
+}
+.menu-btn-container{
+    width: auto;
+    height: auto;
+}
+.menu-btn{
+    display: inline-block;
+    width: 64px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+.menu-btn:hover{
+    opacity: 1;
+}
