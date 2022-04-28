@@ -15,7 +15,7 @@ export default {
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const playing = computed(() => store.getters['playlist/getPlaying'])
         const style = computed(() => {
-            if((+crtItem.value.type === 2 && playing.value) || needsShow.value) return {
+            if(+crtItem.value.type === 2 && (playing.value || needsShow.value)) return {
                 filter: `
                     drop-shadow(0 0 2px #${crtItem.value.color.toString(16)}) 
                     drop-shadow(0 0 2px #${crtItem.value.color.toString(16)}) 

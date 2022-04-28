@@ -1,5 +1,3 @@
-import Songs from '../../data/songs.js'
-
 const createDegree = (count) => {
     const len = ~~(count / 4)
     const degree = [0]
@@ -29,26 +27,26 @@ const updatePosition = ({deg, radius1, radius2}) => {
     return {x, y}
 }
 
-const getOpacity = ({len, current, key}) => {
-    let max = Songs[current].isDefault ? 0.6 : 0.8
+const getOpacity = ({songs, len, current, key}) => {
+    let max = songs[current].isDefault ? 0.6 : 0.8
     const o = max / len
     const sub = Math.abs(current - key)
     const opacity = max - o * sub
     return opacity
 }
 
-const setColor = (style, key) => {
-    if(Songs[key].isDefault){
-        style.container.color = 'black'
+const setColor = (songs, style, key) => {
+    if(songs[key].isDefault){
+        style.color = 'black'
     }
     else{
-        style.container.color = 'white'
+        style.color = 'white'
     }
 }
 
 export default {
     template: `
-        <div class="nav-item-box" :style="style.container">
+        <div class="nav-item-box" :style="boxStyle">
             
             <div 
                 class="nav-item"
@@ -68,7 +66,7 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, ref, computed} = Vue
+        const {ref, computed} = Vue
         const {useStore} = Vuex
 
 
@@ -79,9 +77,8 @@ export default {
 
         // vars
         const store = useStore()
-        const style = reactive({
-            container: {color: 'black', transition: 'color 0.3s'}
-        })
+        const boxStyle = ref({color: 'black', transition: 'color 0.3s'})
+        const songs = computed(() => store.getters['playlist/getSongs'].list)
         const radius1 = 170
         const radius2 = 210
         const count = 14 // count must be even num
@@ -90,13 +87,13 @@ export default {
         const current = store.getters['playlist/getCrtKey']
         let canClick = true
 
-        const items = ref(Array.from(Songs, (song, key) => {
+        const items = ref(Array.from(songs.value, (song, key) => {
             const {name, songSrc} = song
             
             const deg = getDeg({current, key, upDegree, downDegree, count})
             const {x, y} = updatePosition({deg, radius1, radius2})
 
-            const opacity = getOpacity({len, current, key})
+            const opacity = getOpacity({songs: songs.value, len, current, key})
             const display = Math.abs(current - key) < len ? 'block' : 'none'
 
             const style = {
@@ -114,7 +111,7 @@ export default {
             if(!canClick) return
             canClick = false
 
-            setColor(style, cur)
+            setColor(songs.value, boxStyle.value, cur)
 
             store.dispatch('playlist/setCrtKey', cur)
 
@@ -130,7 +127,7 @@ export default {
             const newDeg = getDeg({current: cur, key: idx, upDegree, downDegree, count})
 
             const oldOpacity = item.opacity
-            const newOpacity = getOpacity({len, current: cur, key: idx})
+            const newOpacity = getOpacity({songs: songs.value, len, current: cur, key: idx})
 
             const start = {deg: oldDeg, opacity: oldOpacity}
             const end = {deg: newDeg, opacity: newOpacity}
@@ -166,7 +163,7 @@ export default {
         }
 
         return{
-            style,
+            boxStyle,
             items,
             initTween
         }
