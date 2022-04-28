@@ -70,11 +70,6 @@ export default {
         const {useStore} = Vuex
 
 
-        // to-do
-        // list render (ref => computed)
-        // style (ref => computed)
-
-
         // vars
         const store = useStore()
         const boxStyle = ref({color: 'black', transition: 'color 0.3s'})
