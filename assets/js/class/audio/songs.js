@@ -41,7 +41,7 @@ export default class{
             
             const audio = isDefault ? undefined : new Audio()
             const length = isDefault ? '\xa0' : '00:00'
-            const type = `${~~(Math.random() * 3)}`
+            // const type = `${~~(Math.random() * 3)}`
 
             if(audio){
                 audio.loop = true
@@ -49,7 +49,7 @@ export default class{
                 audio.volume = 0
             }
 
-            return {...song, length, audio, type}
+            return {...song, length, audio}
         })
     }
 
