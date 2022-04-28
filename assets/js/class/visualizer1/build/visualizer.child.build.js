@@ -13,7 +13,7 @@ export default class{
             color,
             smooth: 0.25,
             step: 128,
-            boost: 3
+            boost: 2
         }
 
 
