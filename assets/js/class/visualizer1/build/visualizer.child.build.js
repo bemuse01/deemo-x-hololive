@@ -3,7 +3,8 @@ import Circle from '../../objects/circle.js'
 import Spline from '../../../lib/cubic-spline.js'
 
 export default class{
-    constructor({group, color, radius}){
+    constructor({group, color, radius, scale}){
+        this.scale = scale
         this.group = group
 
         this.param = {
@@ -83,7 +84,7 @@ export default class{
         let data = audioDataAvg || 0
         if(!audioData) return 
 
-        const scale = 1 + data * 0.4
+        const scale = 1 + data * this.scale
 
         this.group.scale.set(scale, scale, 1)
         

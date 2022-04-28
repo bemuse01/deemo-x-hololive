@@ -15,13 +15,15 @@ export default {
         
         const app = computed(() => store.getters['getApp'])
         const audio = computed(() => store.getters['playlist/getSongs'])
+        const crtKey = computed(() => store.getters['playlist/getCrtKey'])
+        const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
 
         const element = '.visualizer-v2-container > div'
         const radius = 28
 
         onMounted(() => {
             nextTick(() => {
-                visualizer = new Visualizer2({app: app.value, audio: audio.value, color: 0xffffff, element, radius})
+                visualizer = new Visualizer2({app: app.value, audio: audio.value, color: 0xffffff, element, radius, logoSrc: crtItem.value.logoSrc})
             })
         })
 

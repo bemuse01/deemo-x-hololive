@@ -9,12 +9,13 @@ import {TestShader} from '../../postprocess/TestShader.js'
 import Child from './build/visualizer.child.build.js'
 
 const Visualizer1 = class{
-    constructor({app, audio, element, color, radius}){
+    constructor({app, audio, element, color, radius, scale}){
         this.renderer = app.renderer
         this.audio = audio
         this.element = document.querySelector(element)
         this.color = color
         this.radius = radius
+        this.scale = scale
 
         this.param = {
             fov: 60,
@@ -125,7 +126,7 @@ const Visualizer1 = class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size, radius: this.radius, color: this.color})
+            this.comp[module] = new instance({group, size: this.size, radius: this.radius, color: this.color, scale: this.scale})
         }
 
         for(let i in this.group) this.build.add(this.group[i])
