@@ -41,6 +41,7 @@ export default class{
             
             const audio = isDefault ? undefined : new Audio()
             const length = isDefault ? '\xa0' : '00:00'
+            const type = `0`
 
             if(audio){
                 audio.loop = true
@@ -48,7 +49,7 @@ export default class{
                 audio.volume = 0
             }
 
-            return {...song, length, audio}
+            return {...song, length, audio, type}
         })
     }
 
@@ -174,9 +175,11 @@ export default class{
         if(this.analyser && this.anim){
             this.analyser.getByteFrequencyData(this.audioData)
 
-            // const len = ~~(this.audioData.length / 4)
-            const half = [...this.audioData].slice(0, this.audioData.length)
-            this.audioDataAvg = half[~~(half.length * 0.1)] / 255
+            const len = ~~(this.audioData.length / 4)
+            // const half = [...this.audioData].slice(0, this.audioData.length)
+            // this.audioDataAvg = half[~~(half.length * 0.1)] / 255
+            const half = [...this.audioData].slice(0, len)
+            this.audioDataAvg = half[~~(half.length * 0.2)] / 255
         }
 
         requestAnimationFrame(() => this.animate())

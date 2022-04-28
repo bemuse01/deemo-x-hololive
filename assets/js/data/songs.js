@@ -7,7 +7,6 @@ export default [
         name: 'Deemo x Hololive',
         vocal: 'Hololive, Nijisanji',
         composer: '\xa0',
-        type: '1',
         isDefault: true,
     },
     {
@@ -18,7 +17,6 @@ export default [
         name: 'Kamippoi na',
         vocal: 'Laplus Darknesss',
         composer: 'PINOCCHIOP',
-        type: '2',
     },
     {
         songSrc: './assets/song/ranbu_suisei.ogg',
@@ -28,7 +26,6 @@ export default [
         name: 'Ranbu No Melody',
         vocal: 'Hoshimati Suisei',
         composer: 'SID',
-        type: '1',
     },
     {
         songSrc: './assets/song/kakusei_suisei.ogg',
@@ -38,7 +35,6 @@ export default [
         name: 'Kakusei',
         vocal: 'Hoshimati Suisei',
         composer: 'Superfly',
-        type: '2',
     },
     {
         songSrc: './assets/song/phony_chima.ogg',
@@ -48,7 +44,6 @@ export default [
         name: 'Phony',
         vocal: 'Machita Chima',
         composer: 'Tsumiki',
-        type: '1',
     },
     {
         songSrc: './assets/song/phony_suisei.ogg',
@@ -58,7 +53,6 @@ export default [
         name: 'Phony',
         vocal: 'Hoshimati Suisei',
         composer: 'Tsumiki',
-        type: '2',
     },
     {
         songSrc: './assets/song/king_chima.ogg',
@@ -68,7 +62,6 @@ export default [
         name: 'KING',
         vocal: 'Machita Chima',
         composer: 'Kanaria',
-        type: '1',
     },
     {
         songSrc: './assets/song/king_suisei.ogg',
@@ -78,7 +71,6 @@ export default [
         name: 'KING',
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
-        type: '1',
     },
     {
         songSrc: './assets/song/error_towa.ogg',
@@ -88,7 +80,6 @@ export default [
         name: 'Error',
         vocal: 'Tokoyami Towa',
         composer: 'niki',
-        type: '1',
     },
     {
         songSrc: './assets/song/sparkle_mio.ogg',
@@ -98,7 +89,6 @@ export default [
         name: 'Sparkle',
         vocal: 'Ookami Mio',
         composer: 'RADWIMPS',
-        type: '2',
     },
     {
         songSrc: './assets/song/goodbye_aqua.ogg',
@@ -108,6 +98,5 @@ export default [
         name: 'Goodbye Sengen',
         vocal: 'Minato Aqua',
         composer: 'Chinozo',
-        type: '1'
     }
 ]

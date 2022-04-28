@@ -5,7 +5,7 @@ export default {
     template: `
         <div class="ui-container visualizer-container visualizer-v1-container">
             <div :ref="el => element = el"></div>
-            <div class="v1-logo">
+            <div class="v-logo v1-logo">
                 <div :style="style"></div>
             </div>
         </div>

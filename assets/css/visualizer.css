@@ -16,15 +16,23 @@
     height: 100%;
 }
 
-.v1-logo{
+.v-logo{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+.v-logo > div{
+    width: 100%;
+    height: 100%;
+}
+
+.v1-logo{
     width: 17vh !important;
     height: 17vh !important;
 }
-.v1-logo > div{
-    width: 100%;
-    height: 100%;
+
+.v0-logo{
+    width: 16vh !important;
+    height: 16vh !important;
 }
