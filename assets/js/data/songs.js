@@ -48,7 +48,7 @@ export default [
         name: 'Phony',
         vocal: 'Machita Chima',
         composer: 'Tsumiki',
-        type: '1',
+        type: '2',
     },
     {
         songSrc: './assets/song/phony_suisei.ogg',
@@ -58,7 +58,7 @@ export default [
         name: 'Phony',
         vocal: 'Hoshimati Suisei',
         composer: 'Tsumiki',
-        type: '1',
+        type: '2',
     },
     {
         songSrc: './assets/song/king_chima.ogg',
@@ -68,7 +68,7 @@ export default [
         name: 'KING',
         vocal: 'Machita Chima',
         composer: 'Kanaria',
-        type: '0',
+        type: '1',
     },
     {
         songSrc: './assets/song/king_suisei.ogg',
@@ -78,7 +78,7 @@ export default [
         name: 'KING',
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
-        type: '0',
+        type: '1',
     },
     {
         songSrc: './assets/song/error_towa.ogg',
@@ -108,6 +108,6 @@ export default [
         name: 'Goodbye Sengen',
         vocal: 'Minato Aqua',
         composer: 'Chinozo',
-        type: '2'
+        type: '1'
     }
 ]
