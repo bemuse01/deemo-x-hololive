@@ -7,7 +7,7 @@ export default {
         'v2-container': v2Container
     },
     template: `
-        <div class="ui ui-visualizer" @click="click">
+        <div class="ui ui-visualizer">
 
             <v1-container v-if="type === 1" />
             <v2-container v-else-if="type === 2" />
@@ -21,7 +21,6 @@ export default {
         const store = useStore()
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
-        const songs = computed(() => store.getters['playlist/getSongs'])
         const playing = computed(() => store.getters['playlist/getPlaying'])
         const loadingDelay = store.getters['loading/getLoadingDelay']
         const needsShow = ref(false)
@@ -50,15 +49,8 @@ export default {
             }
         })
 
-        const click = () => {
-            store.dispatch('playlist/setPlaying', false)
-            songs.value.stopAudio(crtKey.value, true)
-            songs.value.setAnimate(false)
-        }
-
         return{
             type,
-            click
         }
     }
 }

@@ -24,7 +24,7 @@ export default {
 
         const setAudio = () => {
             songs.value.createContext(key.value)
-            songs.value.stopAudio(key.value, true)
+            songs.value.stopAudio(key.value)
             songs.value.setAnimate(true)
         }
 

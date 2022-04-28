@@ -119,6 +119,8 @@ export default class{
 
         const xs = this.index
         const ys = sample
+        ys[0] = 0
+
         const spline = new Spline(xs, ys)
         
         for(let i = 0; i < len; i++){

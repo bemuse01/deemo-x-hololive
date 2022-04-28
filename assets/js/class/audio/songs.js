@@ -61,6 +61,15 @@ export default class{
             if(audio) audio.addEventListener('canplaythrough', () => song.length = audio.duration)
         })
     }
+    resumeAudio(idx){
+        const {audio} = this.list[idx]
+        if(!audio) return
+
+        this.playFlag[idx] = true
+        this.stopFlag[idx] = false
+
+        audio.play()
+    }
     playAudio(idx, time = 0.2){
         const {audio} = this.list[idx]
         if(!audio) return
@@ -83,7 +92,7 @@ export default class{
         //     delay: 500
         // })
     }
-    stopAudio(idx, playAudioAfter){
+    stopAudio(idx){
         const {audio} = this.list[idx]
         if(!audio) return
 
