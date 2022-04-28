@@ -9,7 +9,7 @@ export default class{
 
         this.param = {
             count: 3,
-            radius: radius + 1.2,
+            radius: radius + 1,
             thickness: 0.3,
             seg: 360,
             color,
@@ -27,7 +27,7 @@ export default class{
         this.step = 5
 
         this.oldTime = window.performance.now()
-        this.interval = 200
+        this.interval = 150
 
         this.darkMaterial = new THREE.MeshBasicMaterial({transparent: true, color: 0x000000})
 
