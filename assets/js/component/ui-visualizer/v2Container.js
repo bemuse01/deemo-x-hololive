@@ -19,7 +19,7 @@ export default {
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
 
         const element = '.visualizer-v2-container > div'
-        const radius = 28
+        const radius = 30
 
         onMounted(() => {
             nextTick(() => {
