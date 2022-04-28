@@ -3,5 +3,4 @@ export default {
     near: 0.1,
     far: 10000,
     pos: 100,
-    radius: 13
 }
