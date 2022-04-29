@@ -1,6 +1,6 @@
-import Logo from '../../class/logo/logo.js'
+// import Logo from '../../class/logo/logo.js'
 
-export default {
+const LogoDeemo = {
     template: `
         <div 
             class="ui-container open-deemo-container"

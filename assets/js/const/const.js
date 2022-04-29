@@ -4,4 +4,3 @@ const RADIAN = Math.PI / 180
 const RATIO = window.devicePixelRatio
 const SIMPLEX = new SimplexNoise()
 let WIDTH = window.innerWidth, HEIGHT = window.innerHeight
-let app = null

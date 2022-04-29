@@ -1,6 +1,6 @@
-import Method from "../../method/method.js"
+// import Method from "../../method/method.js"
 
-export default class{
+const songs = class{
     constructor(songs){
         this.songs = songs
         

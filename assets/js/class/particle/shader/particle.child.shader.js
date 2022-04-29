@@ -1,4 +1,4 @@
-export default {
+const Particle1ChildShader = {
     vertex: `
         attribute float aPointSize;
 

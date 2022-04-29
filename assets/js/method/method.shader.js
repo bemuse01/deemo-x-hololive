@@ -1,4 +1,4 @@
-export default {
+const ShaderMethod = {
     executeNormalizing(){
         return `
             float executeNormalizing(float x, float a, float b, float min, float max){

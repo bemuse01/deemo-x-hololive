@@ -1,8 +1,8 @@
-import NavBackground from './navBackground.js'
-import NavItems from './navItems.js'
-import NavCurrent from './navCurrent.js'
+// import NavBackground from './navBackground.js'
+// import NavItems from './navItems.js'
+// import NavCurrent from './navCurrent.js'
 
-export default {
+const NavContainer = {
     components: {
         'nav-background': NavBackground,
         'nav-items': NavItems,

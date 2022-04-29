@@ -1,8 +1,8 @@
-import * as THREE from '../../../lib/three.module.js'
-import Ring from '../../objects/ring.js'
-import Shader from '../shader/visualizer.tunnel.shader.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Ring from '../../objects/ring.js'
+// import Shader from '../shader/visualizer.tunnel.shader.js'
 
-export default class{
+const Visualizer0TunnelBuild = class{
     constructor({group, radius, color}){
         this.group = group
 
@@ -100,8 +100,8 @@ export default class{
             const {radius, thickness, seg, color, needsShader} = param
 
             const materialOpt = needsShader ? {
-                vertexShader: Shader.vertex,
-                fragmentShader: Shader.fragment,
+                vertexShader: Visualizer0TunnelShader.vertex,
+                fragmentShader: Visualizer0TunnelShader.fragment,
                 transparent: true,
                 // blending: THREE.AdditiveBlending,
                 uniforms: {

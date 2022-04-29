@@ -1,6 +1,6 @@
-import {Visualizer0} from '../../class/visualizer0/visualizer.js'
+// import {Visualizer0} from '../../class/visualizer0/visualizer.js'
 
-export default {
+const v0Container = {
     template: `
         <div class="ui-container visualizer-container visualizer-v0-container">
             <div :ref="el => element = el"></div>

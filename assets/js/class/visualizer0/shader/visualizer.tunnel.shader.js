@@ -1,4 +1,4 @@
-export default {
+const Visualizer0TunnelShader = {
     vertex: `
         attribute float aOpacity;
 

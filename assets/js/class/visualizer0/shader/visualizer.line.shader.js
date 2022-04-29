@@ -1,4 +1,4 @@
-export default {
+const Visualizer0LineShader = {
     vertex: `
         uniform float uPointSize;
         uniform float uPointScale;

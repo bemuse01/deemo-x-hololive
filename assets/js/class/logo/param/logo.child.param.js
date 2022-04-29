@@ -1,3 +1,3 @@
-export default {
+const LogoChildParam = {
     count: 5
 }

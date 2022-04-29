@@ -1,4 +1,4 @@
-export default {
+const LoadingStore = {
     namespaced: true,
     state: {
         showing: false,

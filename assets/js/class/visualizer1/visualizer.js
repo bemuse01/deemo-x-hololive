@@ -1,12 +1,12 @@
-import * as THREE from '../../lib/three.module.js'
-import PublicMethod from '../../method/method.js'
-import {EffectComposer} from '../../postprocess/EffectComposer.js'
-import {RenderPass} from '../../postprocess/RenderPass.js'
-import {ShaderPass} from '../../postprocess/ShaderPass.js'
-import {UnrealBloomPass} from '../../postprocess/UnrealBloomPass.js'
-import {TestShader} from '../../postprocess/TestShader.js'
+// import * as THREE from '../../lib/three.module.js'
+// import PublicMethod from '../../method/method.js'
+// import {EffectComposer} from '../../postprocess/EffectComposer.js'
+// import {RenderPass} from '../../postprocess/RenderPass.js'
+// import {ShaderPass} from '../../postprocess/ShaderPass.js'
+// import {UnrealBloomPass} from '../../postprocess/UnrealBloomPass.js'
+// import {TestShader} from '../../postprocess/TestShader.js'
 
-import Child from './build/visualizer.child.build.js'
+// import Child from './build/visualizer.child.build.js'
 
 const Visualizer1 = class{
     constructor({app, audio, element, color, radius, scale}){
@@ -28,7 +28,7 @@ const Visualizer1 = class{
         }
 
         this.modules = {
-            child: Child,
+            child: Visualizer1ChildBuild,
         }
         this.group = {}
         this.comp = {}
@@ -83,30 +83,30 @@ const Visualizer1 = class{
         const width = right - left
         const height = bottom - top
 
-        const renderScene = new RenderPass( this.scene, this.camera )
+        const renderScene = new THREE.RenderPass( this.scene, this.camera )
 
         // bloom composer
-        const bloomPass = new UnrealBloomPass( new THREE.Vector2( width, height ), 
+        const bloomPass = new THREE.UnrealBloomPass( new THREE.Vector2( width, height ), 
             this.param.strength,
             this.param.radius,
             this.param.threshold
         )
 
-        this.bloomComposer = new EffectComposer(this.renderer)
+        this.bloomComposer = new THREE.EffectComposer(this.renderer)
         this.bloomComposer.renderToScreen = false
         this.bloomComposer.addPass(renderScene)
         this.bloomComposer.addPass(bloomPass)
 
 
         // final composer
-        const finalPass = new ShaderPass(
+        const finalPass = new THREE.ShaderPass(
             new THREE.ShaderMaterial({
                 uniforms: {
                     baseTexture: {value: null},
                     bloomTexture: {value: this.bloomComposer.renderTarget2.texture}
                 },
-                vertexShader: TestShader.vertexShader,
-                fragmentShader: TestShader.fragmentShader,
+                vertexShader: FinalShader.vertexShader,
+                fragmentShader: FinalShader.fragmentShader,
                 transparent: true,
                 defines: {}
             }), "baseTexture"
@@ -114,7 +114,7 @@ const Visualizer1 = class{
         finalPass.needsSwap = true
 
         const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 2048})
-        this.finalComposer = new EffectComposer(this.renderer, renderTarget)
+        this.finalComposer = new THREE.EffectComposer(this.renderer, renderTarget)
         this.finalComposer.addPass(renderScene)
         this.finalComposer.addPass(finalPass)
     }
@@ -262,5 +262,3 @@ const Visualizer1 = class{
         }
     }
 }
-
-export {Visualizer1}

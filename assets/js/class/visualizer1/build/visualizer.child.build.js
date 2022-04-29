@@ -1,8 +1,8 @@
-import * as THREE from '../../../lib/three.module.js'
-import Circle from '../../objects/circle.js'
-import Spline from '../../../lib/cubic-spline.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Circle from '../../objects/circle.js'
+// import Spline from '../../../lib/cubic-spline.js'
 
-export default class{
+const Visualizer1ChildBuild = class{
     constructor({group, color, radius, scale}){
         this.scale = scale
         this.group = group

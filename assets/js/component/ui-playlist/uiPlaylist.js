@@ -1,9 +1,8 @@
-// import BgContainer from '../public/bgContainer.js'
-import BgContainer from './bgContainer.js'
-import NavContainer from './navContainer.js'
-import ComposerContainer from './composerContainer.js'
+// import BgContainer from './bgContainer.js'
+// import NavContainer from './navContainer.js'
+// import ComposerContainer from './composerContainer.js'
 
-export default {
+const UiPlaylist = {
     components: {
         'bg-container': BgContainer,
         'nav-container': NavContainer,

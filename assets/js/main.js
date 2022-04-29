@@ -1,12 +1,12 @@
-import Store from './store/index.js'
+// import Store from './store/index.js'
 
-import App from './class/app/app.js'
+// import App from './class/app/app.js'
 
-import BgContainer from './component/container/bgContainer.js'
-import CanvasContainer from './component/container/canvasContainer.js'
-import UiContainer from './component/container/uiContainer.js'
-import LoadingContainer from './component/container/loadingContainer.js'
-import Method from './method/method.js'
+// import BgContainer from './component/container/bgContainer.js'
+// import CanvasContainer from './component/container/canvasContainer.js'
+// import UiContainer from './component/container/uiContainer.js'
+// import LoadingContainer from './component/container/loadingContainer.js'
+// import Method from './method/method.js'
 
 const vueApp = Vue.createApp({
     components: {

@@ -1,4 +1,4 @@
-export default {
+const VolumeBtn = {
     template: `
         <div class="menu-btn volume-btn" @click="setVolume">
             <div>

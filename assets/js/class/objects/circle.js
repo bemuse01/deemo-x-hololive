@@ -1,6 +1,6 @@
-import * as THREE from '../../lib/three.module.js'
+// import * as THREE from '../../lib/three.module.js'
 
-export default class{
+const Circle = class{
     constructor({radius, seg, materialName, materialOpt}){
         this.radius = radius
         this.seg = seg

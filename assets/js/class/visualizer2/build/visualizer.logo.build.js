@@ -1,7 +1,7 @@
-import * as THREE from '../../../lib/three.module.js'
-import Plane from '../../objects/plane.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Plane from '../../objects/plane.js'
 
-export default class{
+const Visualizer2LogoBuild = class{
     constructor({group, logoSrc, radius}){
         if(!logoSrc) return
 

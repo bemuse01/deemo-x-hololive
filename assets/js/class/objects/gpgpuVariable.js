@@ -1,4 +1,4 @@
-export default class{
+const GpgpuVarible = class{
     constructor({gpuCompute, textureName, shader, uniforms, texture}){
         this.gpuCompute = gpuCompute
         this.texture = texture

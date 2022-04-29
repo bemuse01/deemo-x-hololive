@@ -1,4 +1,4 @@
-export default {
+const SongBtn = {
     template: `
         <div class="menu-btn song-btn" @click="toggleSong">
             <img :src="songBtnSrc">

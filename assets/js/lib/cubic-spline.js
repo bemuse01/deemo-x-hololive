@@ -1,4 +1,4 @@
-export default class{
+const Spline = class{
   constructor(xs, ys) {
     this.xs = xs;
     this.ys = ys;

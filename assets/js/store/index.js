@@ -1,9 +1,9 @@
-import OpenStore from './open.js'
-import PlaylistStore from './playlist.js'
-import LoadingStore from './loading.js'
-import MenuStore from './menu.js'
+// import OpenStore from './open.js'
+// import PlaylistStore from './playlist.js'
+// import LoadingStore from './loading.js'
+// import MenuStore from './menu.js'
 
-export default Vuex.createStore({
+const Store = Vuex.createStore({
     state: {
         app: null,
         scale: 1,

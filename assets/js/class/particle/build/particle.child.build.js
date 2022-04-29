@@ -1,8 +1,8 @@
-import * as THREE from '../../../lib/three.module.js'
-import Particle from '../../objects/particle.js'
-import Shader from '../shader/particle.child.shader.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Particle from '../../objects/particle.js'
+// import Shader from '../shader/particle.child.shader.js'
 
-export default class{
+const Particle1ChildBuild = class{
     constructor({group, size, color}){
         this.group = group
         this.size = size
@@ -30,8 +30,8 @@ export default class{
             count: this.param.count,
             materialName: 'ShaderMaterial',
             materialOpt: {
-                vertexShader: Shader.vertex,
-                fragmentShader: Shader.fragment,
+                vertexShader: Particle1ChildShader.vertex,
+                fragmentShader: Particle1ChildShader.fragment,
                 transparent: true,
                 // depthWrite: false,
                 // depthTest: false,

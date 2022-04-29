@@ -1,9 +1,9 @@
-import * as THREE from '../../../lib/three.module.js'
-import Plane from '../../objects/plane.js'
-import Spline from '../../../lib/cubic-spline.js'
-import Line from '../../objects/line.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Plane from '../../objects/plane.js'
+// import Spline from '../../../lib/cubic-spline.js'
+// import Line from '../../objects/line.js'
 
-export default class{
+const Visualizer2ChildBuild = class{
     constructor({group, radius}){
         this.group = group
 

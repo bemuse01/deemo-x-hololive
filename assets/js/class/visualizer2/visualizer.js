@@ -1,13 +1,13 @@
-import * as THREE from '../../lib/three.module.js'
-import PublicMethod from '../../method/method.js'
-import {EffectComposer} from '../../postprocess/EffectComposer.js'
-import {RenderPass} from '../../postprocess/RenderPass.js'
-import {ShaderPass} from '../../postprocess/ShaderPass.js'
-import {VolumetericLightShader} from '../../postprocess/VolumetericLightShader.js'
+// import * as THREE from '../../lib/three.module.js'
+// import PublicMethod from '../../method/method.js'
+// import {EffectComposer} from '../../postprocess/EffectComposer.js'
+// import {RenderPass} from '../../postprocess/RenderPass.js'
+// import {ShaderPass} from '../../postprocess/ShaderPass.js'
+// import {VolumetericLightShader} from '../../postprocess/VolumetericLightShader.js'
 
-import Child from './build/visualizer.child.build.js'
-import PARTICLE from './build/visualizer.particle.build.js'
-import LOGO from './build/visualizer.logo.build.js'
+// import Child from './build/visualizer.child.build.js'
+// import PARTICLE from './build/visualizer.particle.build.js'
+// import LOGO from './build/visualizer.logo.build.js'
 
 const Visualizer2 = class{
     constructor({app, audio, element, color, logoSrc, radius}){
@@ -26,9 +26,9 @@ const Visualizer2 = class{
         }
 
         this.modules = {
-            child: Child,
-            particle: PARTICLE,
-            logo: LOGO
+            child: Visualizer2ChildBuild,
+            particle: Visualizer2ParticleBuild,
+            logo: Visualizer2LogoBuild
         }
         this.group = {}
         this.comp = {}
@@ -218,5 +218,3 @@ const Visualizer2 = class{
         }
     }
 }
-
-export {Visualizer2}

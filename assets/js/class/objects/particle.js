@@ -1,6 +1,6 @@
-import * as THREE from '../../lib/three.module.js'
+// import * as THREE from '../../lib/three.module.js'
 
-export default class{
+const Particle = class{
     constructor({count, lifeVelocity, materialName, materialOpt}){
         this.count = count
         this.materialName = materialName

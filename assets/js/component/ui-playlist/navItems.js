@@ -1,50 +1,50 @@
-const createDegree = (count) => {
-    const len = ~~(count / 4)
-    const degree = [0]
-    const deg = 360 / count
+// const createDegree = (count) => {
+//     const len = ~~(count / 4)
+//     const degree = [0]
+//     const deg = 360 / count
 
-    for(let i = 1; i < len + 1; i++){
-        degree.push(deg * i)
-    }
+//     for(let i = 1; i < len + 1; i++){
+//         degree.push(deg * i)
+//     }
 
-    return {upDegree: degree.map(e => -e), downDegree: degree}
-}
+//     return {upDegree: degree.map(e => -e), downDegree: degree}
+// }
 
-const getDeg = ({current, key, upDegree, downDegree, count}) => {
-    const sign = Math.sign(current - key)
-    const degree = key < current ? upDegree : downDegree
-    const edge = degree.length * (360 / count)
-    const idx = Math.abs(current - key)
-    const deg = idx < degree.length ? degree[idx] : edge * -sign
+// const getDeg = ({current, key, upDegree, downDegree, count}) => {
+//     const sign = Math.sign(current - key)
+//     const degree = key < current ? upDegree : downDegree
+//     const edge = degree.length * (360 / count)
+//     const idx = Math.abs(current - key)
+//     const deg = idx < degree.length ? degree[idx] : edge * -sign
 
-    return deg
-}
+//     return deg
+// }
 
-const updatePosition = ({deg, radius1, radius2}) => {
-    const x = Math.cos(deg * RADIAN) * radius1
-    const y = Math.sin(deg * RADIAN) * radius2
+// const updatePosition = ({deg, radius1, radius2}) => {
+//     const x = Math.cos(deg * RADIAN) * radius1
+//     const y = Math.sin(deg * RADIAN) * radius2
     
-    return {x, y}
-}
+//     return {x, y}
+// }
 
-const getOpacity = ({songs, len, current, key}) => {
-    let max = songs[current].isDefault ? 0.6 : 0.8
-    const o = max / len
-    const sub = Math.abs(current - key)
-    const opacity = max - o * sub
-    return opacity
-}
+// const getOpacity = ({songs, len, current, key}) => {
+//     let max = songs[current].isDefault ? 0.6 : 0.8
+//     const o = max / len
+//     const sub = Math.abs(current - key)
+//     const opacity = max - o * sub
+//     return opacity
+// }
 
-const setColor = (songs, style, key) => {
-    if(songs[key].isDefault){
-        style.color = 'black'
-    }
-    else{
-        style.color = 'white'
-    }
-}
+// const setColor = (songs, style, key) => {
+//     if(songs[key].isDefault){
+//         style.color = 'black'
+//     }
+//     else{
+//         style.color = 'white'
+//     }
+// }
 
-export default {
+const NavItems = {
     template: `
         <div class="nav-item-box" :style="boxStyle">
             
@@ -66,6 +66,56 @@ export default {
         </div>
     `,
     setup(){
+        const createDegree = (count) => {
+            const len = ~~(count / 4)
+            const degree = [0]
+            const deg = 360 / count
+        
+            for(let i = 1; i < len + 1; i++){
+                degree.push(deg * i)
+            }
+        
+            return {upDegree: degree.map(e => -e), downDegree: degree}
+        }
+        
+        const getDeg = ({current, key, upDegree, downDegree, count}) => {
+            const sign = Math.sign(current - key)
+            const degree = key < current ? upDegree : downDegree
+            const edge = degree.length * (360 / count)
+            const idx = Math.abs(current - key)
+            const deg = idx < degree.length ? degree[idx] : edge * -sign
+        
+            return deg
+        }
+        
+        const updatePosition = ({deg, radius1, radius2}) => {
+            const x = Math.cos(deg * RADIAN) * radius1
+            const y = Math.sin(deg * RADIAN) * radius2
+            
+            return {x, y}
+        }
+        
+        const getOpacity = ({songs, len, current, key}) => {
+            let max = songs[current].isDefault ? 0.6 : 0.8
+            const o = max / len
+            const sub = Math.abs(current - key)
+            const opacity = max - o * sub
+            return opacity
+        }
+        
+        const setColor = (songs, style, key) => {
+            if(songs[key].isDefault){
+                style.color = 'black'
+            }
+            else{
+                style.color = 'white'
+            }
+        }
+
+
+
+        
+
         const {ref, computed} = Vue
         const {useStore} = Vuex
 

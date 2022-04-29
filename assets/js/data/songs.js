@@ -1,4 +1,4 @@
-export default [
+const Songs = [
     {
         songSrc: '',
         bgSrc: './assets/src/bg.jpg',

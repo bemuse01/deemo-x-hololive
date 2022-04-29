@@ -1,4 +1,4 @@
-export default {
+const LoadingContainer = {
     template: `
         <div 
             id="loading-container" 
@@ -9,7 +9,7 @@ export default {
         </div>
     `,
     setup(){
-        const {ref, onMounted, computed, watchEffect, watch} = Vue
+        const {ref, computed, watch} = Vue
         const {useStore} = Vuex
 
         const store = useStore()

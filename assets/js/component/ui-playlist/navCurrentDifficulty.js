@@ -1,4 +1,4 @@
-export default {
+const NavCurrentDifficulty = {
     template: `
         <div class="song-difficulty">
                         

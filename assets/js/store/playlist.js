@@ -1,7 +1,7 @@
-import Songs from '../data/songs.js'
-import songs from '../class/audio/songs.js'
+// import Songs from '../data/songs.js'
+// import songs from '../class/audio/songs.js'
 
-export default {
+const PlaylistStore = {
     namespaced: true,
     state: {
         showing: false,

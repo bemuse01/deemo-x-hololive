@@ -1,19 +1,26 @@
-import * as THREE from '../../lib/three.module.js'
+// import * as THREE from '../../lib/three.module.js'
 
-import Param from './param/logo.param.js'
-import PublicMethod from '../../method/method.js'
+// import this from './param/logo.param.js'
+// import Method from '../../method/method.js'
 
-import Child from './build/logo.child.build.js'
+// import Child from './build/logo.child.build.js'
 
-export default class{
+const Logo = class{
     constructor(app, anim, src, element){
         this.anim = anim
         this.src = src
         this.renderer = app.renderer
         this.element = document.querySelector(element)
 
+        this.param = {
+            fov: 60,
+            near: 0.1,
+            far: 10000,
+            pos: 100,
+        }
+
         this.modules = {
-            child: Child
+            child: LogoChildBuild
         }
         this.group = {}
         this.comp = {}
@@ -48,8 +55,8 @@ export default class{
 
         this.scene = new THREE.Scene()
 
-        this.camera = new THREE.PerspectiveCamera(Param.fov, width / height, Param.near, Param.far)
-        this.camera.position.z = Param.pos
+        this.camera = new THREE.PerspectiveCamera(this.param.fov, width / height, this.param.near, this.param.far)
+        this.camera.position.z = this.param.pos
         
         this.size = {
             el: {
@@ -57,8 +64,8 @@ export default class{
                 h: height
             },
             obj: {
-                w: PublicMethod.getVisibleWidth(this.camera, 0),
-                h: PublicMethod.getVisibleHeight(this.camera, 0)
+                w: Method.getVisibleWidth(this.camera, 0),
+                h: Method.getVisibleHeight(this.camera, 0)
             }
         }
     }
@@ -146,8 +153,8 @@ export default class{
 
         this.size.el.w = width
         this.size.el.h = height
-        this.size.obj.w = PublicMethod.getVisibleWidth(this.camera, 0)
-        this.size.obj.h = PublicMethod.getVisibleHeight(this.camera, 0)
+        this.size.obj.w = Method.getVisibleWidth(this.camera, 0)
+        this.size.obj.h = Method.getVisibleHeight(this.camera, 0)
     }
     resizeObject(){
         for(const comp in this.comp){

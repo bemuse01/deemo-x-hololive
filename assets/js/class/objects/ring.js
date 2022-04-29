@@ -1,6 +1,6 @@
-import * as THREE from '../../lib/three.module.js'
+// import * as THREE from '../../lib/three.module.js'
 
-export default class{
+const Ring = class{
     constructor({innerRadius, outerRadius, seg, materialOpt}){
         this.innerRadius = innerRadius
         this.outerRadius = outerRadius

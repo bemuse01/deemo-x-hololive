@@ -1,6 +1,6 @@
-import * as THREE from '../../lib/three.module.js'
+// import * as THREE from '../../lib/three.module.js'
 
-export default class{
+const Plane = class{
     constructor({width, height, widthSeg, heightSeg, materialName, materialOpt}){
         this.width = width
         this.height = height

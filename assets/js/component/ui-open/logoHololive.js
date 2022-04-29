@@ -1,4 +1,4 @@
-export default {
+const LogoHololive = {
     template: `
         <div 
             class="ui-container open-hololive-container"

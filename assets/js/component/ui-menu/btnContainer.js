@@ -1,8 +1,8 @@
-import SongBtn from './songBtn.js'
-import HomeBtn from './homeBtn.js'
-import VolumeBtn from './volumeBtn.js'
+// import SongBtn from './songBtn.js'
+// import HomeBtn from './homeBtn.js'
+// import VolumeBtn from './volumeBtn.js'
 
-export default {
+const BtnContainer = {
     components: {
         'song-btn': SongBtn,
         'home-btn': HomeBtn,

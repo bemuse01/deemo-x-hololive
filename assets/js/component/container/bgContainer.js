@@ -1,4 +1,4 @@
-export default {
+const BgContainer = {
     template: `
         <transition >
             <div id="bg-container">
@@ -14,6 +14,7 @@ export default {
         const store = useStore()
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
+        console.log(crtItem.value)
         const imgStyle = computed(() => {
             if(crtItem.value.isDefault){
                 return {background: 'none'}

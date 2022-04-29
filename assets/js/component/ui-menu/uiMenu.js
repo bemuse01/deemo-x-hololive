@@ -1,6 +1,6 @@
-import BtnContainer from './btnContainer.js'
+// import BtnContainer from './btnContainer.js'
 
-export default {
+const UiMenu = {
     components: {
         'btn-container': BtnContainer
     },

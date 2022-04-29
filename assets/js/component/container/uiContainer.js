@@ -1,13 +1,13 @@
-import UiOpen from "../ui-open/uiOpen.js"
-import UiPlaylist from "../ui-playlist/uiPlaylist.js"
-import UiViualizer from "../ui-visualizer/uiViualizer.js"
-import UiMenu from "../ui-menu/uiMenu.js"
+// import UiOpen from "../ui-open/uiOpen.js"
+// import UiPlaylist from "../ui-playlist/uiPlaylist.js"
+// import UiVisualizer from "../ui-visualizer/uiVisualizer.js"
+// import UiMenu from "../ui-menu/uiMenu.js"
 
-export default {
+const UiContainer = {
     components: {
         'ui-open': UiOpen,
         'ui-playlist': UiPlaylist,
-        'ui-visualizer': UiViualizer,
+        'ui-visualizer': UiVisualizer,
         'ui-menu': UiMenu
     },
     template: `

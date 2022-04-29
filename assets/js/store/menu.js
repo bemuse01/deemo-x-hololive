@@ -1,4 +1,4 @@
-export default {
+const MenuStore = {
     namespaced: true,
     state: {
         isPlaying: false

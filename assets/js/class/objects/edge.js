@@ -1,6 +1,6 @@
-import * as THREE from '../../lib/three.module.js'
+// import * as THREE from '../../lib/three.module.js'
 
-export default class{
+const Edge = class{
     constructor({geometry, materialName, materialOpt}){
         this.geometry = geometry
         this.materialName = materialName

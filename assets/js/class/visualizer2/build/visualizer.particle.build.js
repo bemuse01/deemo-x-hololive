@@ -1,8 +1,8 @@
-import * as THREE from '../../../lib/three.module.js'
-import Edge from '../../objects/edge.js'
-import Plane from '../../objects/plane.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Edge from '../../objects/edge.js'
+// import Plane from '../../objects/plane.js'
 
-export default class{
+const Visualizer2ParticleBuild = class{
     constructor({group, radius}){
         this.group = group
         

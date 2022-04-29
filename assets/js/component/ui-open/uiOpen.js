@@ -1,12 +1,10 @@
-import LogoDeemo from './logoDeemo.js'
-import LogoHololive from './LogoHololive.js'
-import BgContainer from '../public/bgContainer.js'
+// import LogoDeemo from './logoDeemo.js'
+// import LogoHololive from './LogoHololive.js'
 
-export default {
+const UiOpen = {
     components: {
         'logo-deemo': LogoDeemo,
         'logo-hololive': LogoHololive,
-        'bg-container': BgContainer
     },
     template: `
         <div class="ui ui-open" v-if="showing">

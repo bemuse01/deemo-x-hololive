@@ -1,15 +1,15 @@
-import Songs from '../../data/songs.js'
+// import Songs from '../../data/songs.js'
 
-const getDeg = ({degree, deg, offset, key}) => {
-    return (offset + degree) - deg * key
-}
+// const getDeg = ({degree, deg, offset, key}) => {
+//     return (offset + degree) - deg * key
+// }
 
-const setOpacity = (style, key) => {
-    if(Songs[key].isDefault) style.container.opacity = '1'
-    else style.container.opacity = '0.25'
-}
+// const setOpacity = (style, key) => {
+//     if(Songs[key].isDefault) style.container.opacity = '1'
+//     else style.container.opacity = '0.25'
+// }
 
-export default {
+const NavBackground = {
     template: `
         <div class="nav-background" :style="style.container">
         
@@ -26,6 +26,18 @@ export default {
         </div>
     `,
     setup(){
+        const getDeg = ({degree, deg, offset, key}) => {
+            return (offset + degree) - deg * key
+        }
+        
+        const setOpacity = (style, key) => {
+            if(Songs[key].isDefault) style.container.opacity = '1'
+            else style.container.opacity = '0.25'
+        }
+
+
+
+
         const {reactive, watchEffect} = Vue
         const {useStore} = Vuex
 

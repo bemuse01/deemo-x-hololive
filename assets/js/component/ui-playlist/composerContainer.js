@@ -1,4 +1,4 @@
-export default {
+const ComposerContainer = {
     template: `
         <div class="ui-container playlist-composer-container" :style="style">
             

@@ -1,8 +1,8 @@
-const checkTime = (time) => {
-    return time < 10 ? '0' + time : time
-}
+// const checkTime = (time) => {
+//     return time < 10 ? '0' + time : time
+// }
 
-export default {
+const NavCurrentInfo = {
     template: `
         <div class="song-info">
                     
@@ -45,6 +45,14 @@ export default {
         </div>
     `,
     setup(){
+        const checkTime = (time) => {
+            return time < 10 ? '0' + time : time
+        }
+
+        
+
+
+
         const {computed} = Vue
         const {useStore} = Vuex
 

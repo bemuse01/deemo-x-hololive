@@ -1,9 +1,9 @@
-import * as THREE from '../../../lib/three.module.js'
-import Ring from '../../objects/ring.js'
-import Particle from '../../objects/particle.js'
-import Shader from '../shader/visualizer.line.shader.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Ring from '../../objects/ring.js'
+// import Particle from '../../objects/particle.js'
+// import Shader from '../shader/visualizer.line.shader.js'
 
-export default class{
+const Visualizer0LineBuild = class{
     constructor({group, radius, color}){
         this.group = group
 
@@ -86,8 +86,8 @@ export default class{
                     count: 2,
                     materialName: 'ShaderMaterial',
                     materialOpt:{
-                        vertexShader: Shader.vertex,
-                        fragmentShader: Shader.fragment,
+                        vertexShader: Visualizer0LineShader.vertex,
+                        fragmentShader: Visualizer0LineShader.fragment,
                         transparent: true,
                         // blending: THREE.AdditiveBlending,
                         depthTest: false,

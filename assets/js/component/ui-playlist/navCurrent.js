@@ -1,7 +1,7 @@
-import NavCurrentInfo from './navCurrentInfo.js'
-import NavCurrentDifficulty from './navCurrentDifficulty.js'
+// import NavCurrentInfo from './navCurrentInfo.js'
+// import NavCurrentDifficulty from './navCurrentDifficulty.js'
 
-export default {
+const NavCurrent = {
     components: {
         'nav-current-info': NavCurrentInfo,
         'nav-current-difficulty': NavCurrentDifficulty

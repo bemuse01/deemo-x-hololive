@@ -1,7 +1,7 @@
-import ShaderMethod from '../../../method/method.shader.js'
-import Param from '../param/logo.child.param.js'
+// import ShaderMethod from '../../../method/method.shader.js'
+// import LogoChildParam from '../param/logo.child.param.js'
 
-export default {
+const LogoChildShader = {
     vertex: `
         varying vec2 vUv;
 
@@ -13,8 +13,8 @@ export default {
     `,
     fragment: `
         uniform sampler2D uTexture;
-        uniform vec2[${Param.count}] uRandPosition;
-        uniform float[${Param.count}] uRadius;
+        uniform vec2[${LogoChildParam.count}] uRandPosition;
+        uniform float[${LogoChildParam.count}] uRadius;
         uniform float uRatio;
         uniform float uBlur;
         
@@ -30,7 +30,7 @@ export default {
             float a = 0.0;
             int num = 0;
 
-            for(int i = 0; i < ${Param.count}; i++){
+            for(int i = 0; i < ${LogoChildParam.count}; i++){
                 if(uRadius[i] == 0.0) continue;
 
                 float radius = uRadius[i] * uRatio;
@@ -44,7 +44,7 @@ export default {
                 a += alpha;
             }
 
-            color.a *= a / ${Param.count}.;
+            color.a *= a / ${LogoChildParam.count}.;
 
             gl_FragColor = color;
         }

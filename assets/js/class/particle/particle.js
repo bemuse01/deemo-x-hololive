@@ -1,12 +1,12 @@
-import * as THREE from '../../lib/three.module.js'
-import PublicMethod from '../../method/method.js'
-import {EffectComposer} from '../../postprocess/EffectComposer.js'
-import {RenderPass} from '../../postprocess/RenderPass.js'
-import {AfterimagePass} from '../../postprocess/AfterimagePass.js'
+// import * as THREE from '../../lib/three.module.js'
+// import PublicMethod from '../../method/method.js'
+// import {EffectComposer} from '../../postprocess/EffectComposer.js'
+// import {RenderPass} from '../../postprocess/RenderPass.js'
+// import {AfterimagePass} from '../../postprocess/AfterimagePass.js'
 
-import Child from './build/particle.child.build.js'
+// import Child from './build/particle.child.build.js'
 
-const Particle = class{
+const Particle1 = class{
     constructor({app, audio, element, color}){
         this.renderer = app.renderer
         this.audio = audio
@@ -25,7 +25,7 @@ const Particle = class{
         }
 
         this.modules = {
-            child: Child,
+            child: Particle1ChildBuild,
         }
         this.group = {}
         this.comp = {}
@@ -215,5 +215,3 @@ const Particle = class{
         }
     }
 }
-
-export {Particle}

@@ -1,9 +1,8 @@
-import * as THREE from '../../../lib/three.module.js'
-import Plane from '../../objects/plane.js'
-import Shader from '../shader/logo.child.shader.js'
-import Param from '../param/logo.child.param.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Plane from '../../objects/plane.js'
+// import Shader from '../shader/logo.child.shader.js'
 
-export default class{
+const LogoChildBuild = class{
     constructor({group, size, name, anim, src}){
         this.name = name
         this.anim = anim
@@ -12,7 +11,7 @@ export default class{
 
         this.param = {
             blur: 0.25,
-            count: Param.count,
+            count: LogoChildParam.count,
             time: 3000,
             delayDefault: 500,
             delayStep: 0
@@ -39,7 +38,7 @@ export default class{
         const {randPosition, radius} = this.createUniforms()
 
         loader.load(this.src, (texture) => {
-
+            
             this.object = new Plane({
                 width: this.size.obj.w,
                 height: this.size.obj.h,
@@ -47,8 +46,8 @@ export default class{
                 heightSeg: 1,
                 materialName: 'ShaderMaterial',
                 materialOpt: {
-                    vertexShader: Shader.vertex,
-                    fragmentShader: Shader.fragment,
+                    vertexShader: LogoChildShader.vertex,
+                    fragmentShader: LogoChildShader.fragment,
                     transparent: true,
                     uniforms: {
                         uTexture: {value: texture},

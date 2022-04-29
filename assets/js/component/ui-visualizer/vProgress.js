@@ -1,4 +1,4 @@
-export default {
+const vProgress = {
     template: `
         <div class="ui-container visualizer-vProgress-container">
             <div class="progress-bar" :style="style"></div>

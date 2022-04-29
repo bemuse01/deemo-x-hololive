@@ -1,4 +1,4 @@
-export default {
+const HomeBtn = {
     template: `
         <div class="menu-btn home-btn" v-show="playing" @click="back">
             <img src="./assets/src/pause_btn_home.png">

@@ -1,4 +1,4 @@
-export default {
+const CanvasContainer = {
     template: `
         <div id="canvas-container" :style="style">
             <canvas id="canvas"></canvas>

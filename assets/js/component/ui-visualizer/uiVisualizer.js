@@ -1,9 +1,9 @@
-import v1Container from './v1Container.js'
-import v2Container from './v2Container.js'
-import v0Container from './v0Container.js'
-import vProgress from './vProgress.js'
+// import v1Container from './v1Container.js'
+// import v2Container from './v2Container.js'
+// import v0Container from './v0Container.js'
+// import vProgress from './vProgress.js'
 
-export default {
+const UiVisualizer  = {
     components: {
         'v0-container': v0Container,
         'v1-container': v1Container,

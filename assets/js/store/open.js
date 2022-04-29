@@ -1,4 +1,4 @@
-export default {
+const OpenStore = {
     namespaced: true,
     state: {
         showing: true,

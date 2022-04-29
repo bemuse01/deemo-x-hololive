@@ -1,7 +1,7 @@
-import {Visualizer1} from '../../class/visualizer1/visualizer.js'
-import {Particle} from '../../class/particle/particle.js'
+// import {Visualizer1} from '../../class/visualizer1/visualizer.js'
+// import {Particle} from '../../class/particle/particle.js'
 
-export default {
+const v1Container = {
     template: `
         <div class="ui-container visualizer-container visualizer-v1-container">
             <div :ref="el => element = el"></div>

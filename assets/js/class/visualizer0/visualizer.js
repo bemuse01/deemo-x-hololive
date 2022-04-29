@@ -1,17 +1,16 @@
-import * as THREE from '../../lib/three.module.js'
-import {EffectComposer} from '../../postprocess/EffectComposer.js'
-import {RenderPass} from '../../postprocess/RenderPass.js'
-import {ShaderPass} from '../../postprocess/ShaderPass.js'
-import {UnrealBloomPass} from '../../postprocess/UnrealBloomPass.js'
-import {TestShader} from '../../postprocess/TestShader.js'
-// import {TestShader2} from '../../postprocess/TestShader2.js'
-import PublicMethod from '../../method/method.js'
+// import * as THREE from '../../lib/three.module.js'
+// import {EffectComposer} from '../../postprocess/EffectComposer.js'
+// import {RenderPass} from '../../postprocess/RenderPass.js'
+// import {ShaderPass} from '../../postprocess/ShaderPass.js'
+// import {UnrealBloomPass} from '../../postprocess/UnrealBloomPass.js'
+// import {TestShader} from '../../postprocess/TestShader.js'
+// import PublicMethod from '../../method/method.js'
 
-import Center from './build/visualizer.center.build.js'
-import Child from './build/visualizer.child.build.js'
-import Tunnel from './build/visualizer.tunnel.build.js'
-import Line from './build/visualizer.line.build.js'
-import Logo from './build/visualizer.logo.build.js'
+// import Center from './build/visualizer.center.build.js'
+// import Child from './build/visualizer.child.build.js'
+// import Tunnel from './build/visualizer.tunnel.build.js'
+// import Line from './build/visualizer.line.build.js'
+// import Logo from './build/visualizer.logo.build.js'
   
 const Visualizer0 = class{
     constructor({app, audio, element, color, radius, logoSrc}){
@@ -33,11 +32,11 @@ const Visualizer0 = class{
         }
 
         this.modules = {
-            tunnel: Tunnel,
-            line: Line,
-            center: Center,
-            child: Child,
-            logo: Logo
+            tunnel: Visualizer0TunnelBuild,
+            line: Visualizer0LineBuild,
+            center: Visualizer0CenterBuild,
+            child: Visualizer0ChildBuild,
+            logo: Visualizer0LogoBuild
         }
         this.group = {}
         this.comp = {}
@@ -114,8 +113,8 @@ const Visualizer0 = class{
                     baseTexture: {value: null},
                     bloomTexture: {value: this.bloomComposer.renderTarget2.texture}
                 },
-                vertexShader: TestShader.vertexShader,
-                fragmentShader: TestShader.fragmentShader,
+                vertexShader: FinalShader.vertexShader,
+                fragmentShader: FinalShader.fragmentShader,
                 transparent: true,
                 defines: {}
             }), "baseTexture"
@@ -277,5 +276,3 @@ const Visualizer0 = class{
         }
     }
 }
-
-export {Visualizer0}

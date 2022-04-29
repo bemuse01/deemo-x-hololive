@@ -1,7 +1,7 @@
-import * as THREE from '../../../lib/three.module.js'
-import Ring from '../../objects/ring.js'
+// import * as THREE from '../../../lib/three.module.js'
+// import Ring from '../../objects/ring.js'
 
-export default class{
+const Visualizer0ChildBuild = class{
     constructor({group, color, radius}){
         this.group = group
 

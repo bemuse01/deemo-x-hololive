@@ -1,6 +1,6 @@
-import * as THREE from '../../lib/three.module.js'
+// import * as THREE from '../../lib/three.module.js'
 
-export default class{
+const Line = class{
     constructor({materialName, materialOpt}){
         this.materialName = materialName
         this.materialOpt = materialOpt
