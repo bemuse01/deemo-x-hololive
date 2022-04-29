@@ -58,6 +58,10 @@ export default {
             if(cur) isPlaying.value = true
         })
 
+        watch(crtItem, () => {
+            isPlaying.value = true
+        })
+
         return{
             crtItem,
             playing,
