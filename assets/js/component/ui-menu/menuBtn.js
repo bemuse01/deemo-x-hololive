@@ -49,7 +49,7 @@ export default {
 
         const back = () => {
             store.dispatch('playlist/setPlaying', false)
-            songs.value.stopAudio(crtKey.value, true)
+            songs.value.stopAudio(crtKey.value)
             songs.value.setAnimate(false)
             isPlaying.value = true
         }
