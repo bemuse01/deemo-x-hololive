@@ -6,7 +6,7 @@ export default [
         color: '',
         name: 'Deemo x Hololive',
         vocal: 'Hololive, Nijisanji',
-        composer: '\xa0',
+        composer: 'Various Artists',
         type: '1',
         isDefault: true,
     },
@@ -19,6 +19,16 @@ export default [
         vocal: 'Laplus Darknesss',
         composer: 'PINOCCHIOP',
         type: '0',
+    },
+    {
+        songSrc: './assets/song/kami_seffyna.ogg',
+        bgSrc: './assets/src/kami_seffyna.jpg',
+        logoSrc: './assets/src/seffyna_logo.png',
+        color: 0xff1e2e,
+        name: 'Kamippoi na',
+        vocal: 'Seffyna',
+        composer: 'PINOCCHIOP',
+        type: '1',
     },
     {
         songSrc: './assets/song/ranbu_suisei.ogg',
@@ -119,5 +129,15 @@ export default [
         vocal: 'Suisei x Miko',
         composer: 'DECO*27',
         type: '1'
+    },
+    {
+        songSrc: './assets/song/alien_sora.ogg',
+        bgSrc: './assets/src/alien_sora.jpg',
+        logoSrc: './assets/src/hololive_logo.png',
+        color: 0xf23e58,
+        name: 'Alien Alien',
+        vocal: 'Tokino Sora',
+        composer: 'NayutalieN',
+        type: '2'
     }
 ]
