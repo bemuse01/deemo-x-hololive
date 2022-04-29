@@ -22,14 +22,14 @@ export default class{
     // create
     create(){
         const geometry = this.createGeometry()
-        const material = this.createMaterial()
-        this.mesh = new THREE.Mesh(geometry, material)
+        this.createMaterial()
+        this.mesh = new THREE.Mesh(geometry, this.material)
     }
     createGeometry(){
         return new THREE.PlaneGeometry(this.width, this.height, this.widthSeg, this.heightSeg)
     }
     createMaterial(){
-        return new THREE[this.materialName](this.materialOpt)
+        this.material = new THREE[this.materialName](this.materialOpt)
     }
 
 
@@ -70,6 +70,9 @@ export default class{
             this.mesh.material.uniforms[name].value[idx] = value
         }
     }
+    setMaterial(material){
+        this.mesh.material = material
+    }
 
 
     // get
@@ -80,7 +83,7 @@ export default class{
         return this.mesh.geometry
     }
     getMaterial(){
-        return this.mesh.material
+        return this.material
     }
     getAttribute(name){
         return this.mesh.geometry.attributes[name]

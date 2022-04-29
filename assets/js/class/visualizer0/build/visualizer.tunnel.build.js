@@ -64,7 +64,7 @@ export default class{
     // tween
     createTween(objects){
         const start = {opacity: 0, z: 0}
-        const end = {opacity: [1, 0.1, 0.1, 0.1], z: 200}
+        const end = {opacity: [1, 0, -1], z: 200}
 
         const tw = new TWEEN.Tween(start)
         .to(end, 7000)

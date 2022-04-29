@@ -11,14 +11,16 @@ import Center from './build/visualizer.center.build.js'
 import Child from './build/visualizer.child.build.js'
 import Tunnel from './build/visualizer.tunnel.build.js'
 import Line from './build/visualizer.line.build.js'
+import Logo from './build/visualizer.logo.build.js'
   
 const Visualizer0 = class{
-    constructor({app, audio, element, color, radius}){
+    constructor({app, audio, element, color, radius, logoSrc}){
         this.renderer = app.renderer
         this.audio = audio
         this.element = document.querySelector(element)
         this.color = color
         this.radius = radius
+        this.logoSrc = logoSrc
 
         this.param = {
             fov: 60,
@@ -35,6 +37,7 @@ const Visualizer0 = class{
             line: Line,
             center: Center,
             child: Child,
+            logo: Logo
         }
         this.group = {}
         this.comp = {}
@@ -132,7 +135,7 @@ const Visualizer0 = class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size, radius: this.radius, color: this.color})
+            this.comp[module] = new instance({group, size: this.size, radius: this.radius, color: this.color, logoSrc: this.logoSrc})
         }
 
         for(let i in this.group) this.build.add(this.group[i])
@@ -196,6 +199,7 @@ const Visualizer0 = class{
     animate(){
         this.render()
         this.animateObject()
+        this.animateGroup()
 
         this.animation = requestAnimationFrame(() => this.animate())
     }
@@ -213,6 +217,15 @@ const Visualizer0 = class{
         this.bloomComposer.render()
         this.restoreMaterial()
         this.finalComposer.render()
+    }
+    animateGroup(){
+        const time = window.performance.now()
+
+        const x = SIMPLEX.noise3D(0.005, 0.02, time * 0.0002581)
+        const y = SIMPLEX.noise3D(0.015, 0.01, time * 0.0002123)
+
+        this.build.position.x = x * 9
+        this.build.position.y = y * 9
     }
     animateObject(){
         const {audioData, audioDataAvg} = this.audio

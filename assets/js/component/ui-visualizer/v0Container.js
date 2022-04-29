@@ -4,9 +4,6 @@ export default {
     template: `
         <div class="ui-container visualizer-container visualizer-v0-container">
             <div :ref="el => element = el"></div>
-            <div class="v-logo v0-logo">
-                <div :style="style"></div>
-            </div>
         </div>
     `,
     setup(){
@@ -25,12 +22,12 @@ export default {
         }))
 
         const element = '.visualizer-v0-container > div'
-        const radius = 13
+        const radius = 12
         const color = crtItem.value.color
 
         onMounted(() => {
             nextTick(() => {
-                visualizer = new Visualizer0({app: app.value, audio: audio.value, color, element, radius})
+                visualizer = new Visualizer0({app: app.value, audio: audio.value, color, element, radius, logoSrc: crtItem.value.logoSrc})
             })
         })
 
