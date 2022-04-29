@@ -109,5 +109,15 @@ export default [
         vocal: 'Minato Aqua',
         composer: 'Chinozo',
         type: '1'
+    },
+    {
+        songSrc: './assets/song/animal_suisei_miko.ogg',
+        bgSrc: './assets/src/animal_suisei_miko.jpg',
+        logoSrc: './assets/src/suisei_miko_logo.png',
+        color: 0xff2786,
+        name: 'Animal',
+        vocal: 'Suisei x Miko',
+        composer: 'DECO*27',
+        type: '1'
     }
 ]
