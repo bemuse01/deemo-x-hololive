@@ -1,24 +1,10 @@
-import Songs from '../../data/songs.js'
-
-const getTranslateY = (key) => {
-    return -100 / Songs.length * key
-}
-
-const setBg = (style, key) => {
-    const y = getTranslateY(key)
-    style.container.transform = `translate(0, ${y}%)`
-
-    if(Songs[key].isDefault) {
-        style.container.filter = 'none'
-    }
-    else {
-        style.container.filter = 'brightness(1.15)'
-    }
+const getTranslateY = (len, key) => {
+    return -100 / len * key
 }
 
 export default {
     template: `
-        <div class="ui-container playlist-bg-container" :style="style.container">
+        <div class="ui-container playlist-bg-container" :style="style">
             <div
                 v-for="item in items"
                 :key="item.key"
@@ -28,19 +14,20 @@ export default {
         </div>
     `,
     setup(){
-        const {ref,reactive, watchEffect} = Vue
+        const {computed} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
+        const songs = computed(() => store.getters['playlist/getSongs'].list)
+        const crtKey = computed(() => store.getters['playlist/getCrtKey'])
+        const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
 
-        const style = reactive({
-            container: {
-                transform: `translate(0, ${getTranslateY(store.getters['playlist/getCrtKey'])}%)`,
-                filter: 'none'
-            }
-        })
+        const style = computed(() => ({
+            transform: `translate(0, ${getTranslateY(songs.value.length, crtKey.value)}%)`,
+            filter: crtItem.value.isDefault ? 'none' : 'brightness(1.15)'
+        }))
 
-        const items = ref(Array.from(Songs, (item, key) => {
+        const items = computed(() => Array.from(songs.value, (item, key) => {
             const {bgSrc, isDefault} = item
 
             const overlay = isDefault ? 'transparent' : 'rgba(0, 0, 0, 1)'
@@ -51,11 +38,6 @@ export default {
 
             return {key, style}
         }))
-
-        watchEffect(() => {
-            const key = store.getters['playlist/getCrtKey']
-            setBg(style, key)
-        })
 
         return{
             style,
