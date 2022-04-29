@@ -1,11 +1,13 @@
 // import BgContainer from '../public/bgContainer.js'
 import BgContainer from './bgContainer.js'
 import NavContainer from './navContainer.js'
+import ComposerContainer from './composerContainer.js'
 
 export default {
     components: {
         'bg-container': BgContainer,
         'nav-container': NavContainer,
+        'composer-container': ComposerContainer
     },
     template: `
         <div 
@@ -16,6 +18,7 @@ export default {
 
             <bg-container></bg-container>
             <nav-container></nav-container>
+            <composer-container></composer-container>
 
         </div>
     `,
