@@ -9,6 +9,7 @@
 .menu-btn-container{
     width: auto;
     height: auto;
+    transform-origin: right top;
 }
 .menu-btn{
     display: inline-block;

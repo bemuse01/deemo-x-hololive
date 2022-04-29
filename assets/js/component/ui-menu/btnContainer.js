@@ -7,7 +7,11 @@ export default {
         'home-btn': HomeBtn
     },
     template: `
-        <div class="ui-container menu-btn-container" v-show="!crtItem.isDefault">
+        <div 
+            class="ui-container menu-btn-container" 
+            v-show="!crtItem.isDefault"
+            :style="style"
+        >
 
             <song-btn />
             <home-btn />
@@ -22,6 +26,10 @@ export default {
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const playing = computed(() => store.getters['playlist/getPlaying'])
+        const scale = computed(() => store.getters['getScale'])
+        const style = computed(() => ({
+            transform: `scale(${scale.value})`
+        }))
 
         watch(playing, (cur) => {
             if(cur) store.dispatch('menu/setIsPlaying', true)
@@ -33,6 +41,7 @@ export default {
 
         return{
             crtItem,
+            style
         }
     }
 }
