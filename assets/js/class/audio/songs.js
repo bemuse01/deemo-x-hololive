@@ -7,7 +7,8 @@ export default class{
         this.playFlag = Array.from(songs, _ => false)
         this.stopFlag = Array.from(songs, _ => false)
         this.volumeVelocity = 0.03
-        
+        this.stopTime = false
+
         this.list = []
         this.maxVolume = 1
         this.fft = 2 ** 14
@@ -71,6 +72,14 @@ export default class{
 
         audio.play()
     }
+    pauseAudio(idx){
+        const {audio} = this.list[idx]
+        if(!audio) return
+
+        this.stopTime = false
+        this.playFlag[idx] = false
+        this.stopFlag[idx] = true
+    }
     playAudio(idx, time = 0.2){
         const {audio} = this.list[idx]
         if(!audio) return
@@ -97,6 +106,7 @@ export default class{
         const {audio} = this.list[idx]
         if(!audio) return
 
+        this.stopTime = true
         this.playFlag[idx] = false
         this.stopFlag[idx] = true
 
@@ -212,6 +222,7 @@ export default class{
     
                 if(audio.volume <= 0){
                     this.stopFlag[idx] = false
+                    if(this.stopTime) audio.currentTime = 0
                     audio.pause()
                 }
             }

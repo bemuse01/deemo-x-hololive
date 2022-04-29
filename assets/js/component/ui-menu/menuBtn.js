@@ -34,7 +34,7 @@ export default {
         const pauseSong = () => {
             if(crtItem.value.isDefault) return
 
-            songs.value.stopAudio(crtKey.value)
+            songs.value.pauseAudio(crtKey.value)
             isPlaying.value = false
         }
 
