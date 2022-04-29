@@ -1,10 +1,12 @@
 import SongBtn from './songBtn.js'
 import HomeBtn from './homeBtn.js'
+import VolumeBtn from './volumeBtn.js'
 
 export default {
     components: {
         'song-btn': SongBtn,
-        'home-btn': HomeBtn
+        'home-btn': HomeBtn,
+        'volume-btn': VolumeBtn
     },
     template: `
         <div 
@@ -14,6 +16,7 @@ export default {
         >
 
             <song-btn />
+            <volume-btn />
             <home-btn />
 
         </div>

@@ -10,7 +10,7 @@ export default class{
         this.stopTime = false
 
         this.list = []
-        this.maxVolume = 1
+        this.volume = 1
         this.fft = 2 ** 14
         this.smoothingTimeConstant = 0.65
 
@@ -89,18 +89,6 @@ export default class{
 
         audio.currentTime = audio.duration * time
         audio.play()
-
-        // this.createTween({audio, 
-        //     s: {volume: 0},
-        //     e: {volume: this.maxVolume},
-        //     cbs: {
-        //         onStart: (audio) => {
-        //             audio.currentTime = audio.duration * time
-        //             audio.play()
-        //         }
-        //     },
-        //     delay: 500
-        // })
     }
     stopAudio(idx){
         const {audio} = this.list[idx]
@@ -109,18 +97,6 @@ export default class{
         this.stopTime = true
         this.playFlag[idx] = false
         this.stopFlag[idx] = true
-
-        // this.createTween({audio, 
-        //     s: {volume: this.maxVolume},
-        //     e: {volume: 0},
-        //     cbs: {
-        //         onComplete: (audio) => {
-        //             audio.pause()
-        //             if(playAudioAfter) this.playAudio(idx, 0)
-        //         }
-        //     },
-        //     delay: 0
-        // })
     }
     createTween({audio, s, e, cbs, delay}){
         const start = s
@@ -177,6 +153,17 @@ export default class{
     }
 
 
+    // set
+    setVolume(volume, idx){
+        const {audio} = this.list[idx]
+        audio.volume = volume
+        this.volume = volume
+    }
+    setAnimate(anim){
+        this.anim = anim
+    }
+
+
     // animate
     animate(){
         this.playAudioFadeIn()
@@ -203,7 +190,7 @@ export default class{
                 const volume = audio.volume + this.volumeVelocity
                 audio.volume = Method.clamp(volume, 0, 1)
     
-                if(audio.volume >= 1){
+                if(audio.volume >= this.volume){
                     this.playFlag[idx] = false
                 }
             }
@@ -228,8 +215,5 @@ export default class{
             }
 
         })
-    }
-    setAnimate(anim){
-        this.anim = anim
     }
 }
