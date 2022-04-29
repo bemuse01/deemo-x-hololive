@@ -24,12 +24,6 @@ export default {
         setCrtKey(state, value){
             state.crtKey = value
         },
-        // setSong(state, {idx, value}){
-        //     state.songs[idx] = value
-        // },
-        // setSongByKey(state, {idx, key, value}){
-        //     state.songs[idx][key] = value
-        // },
         setPlaying(state, value){
             state.playing = value
         }
@@ -41,12 +35,6 @@ export default {
         setCrtKey({commit}, value){
             commit('setCrtKey', value)
         },
-        // setSong({commit}, {idx, value}){
-        //     commit('setSong', {idx, value})
-        // },
-        // setSongByKey({commit}, {idx, key, value}){
-        //     commit('setSongByKey', {idx, key, value})
-        // },
         setPlaying({commit}, value){
             commit('setPlaying', value)
         }
