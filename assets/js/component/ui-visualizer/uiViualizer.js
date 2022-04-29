@@ -1,16 +1,19 @@
 import v1Container from './v1Container.js'
 import v2Container from './v2Container.js'
 import v0Container from './v0Container.js'
+import vProgress from './vProgress.js'
 
 export default {
     components: {
         'v0-container': v0Container,
         'v1-container': v1Container,
-        'v2-container': v2Container
+        'v2-container': v2Container,
+        'v-progress': vProgress
     },
     template: `
         <div class="ui ui-visualizer">
 
+            <v-progress v-if="type < 3"/>
             <v0-container v-if="type === 0" />
             <v1-container v-else-if="type === 1" />
             <v2-container v-else-if="type === 2" />

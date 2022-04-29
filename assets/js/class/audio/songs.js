@@ -212,6 +212,7 @@ export default class{
     
                 if(audio.volume <= 0){
                     this.stopFlag[idx] = false
+                    audio.pause()
                 }
             }
 
