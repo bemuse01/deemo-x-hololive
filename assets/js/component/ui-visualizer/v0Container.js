@@ -34,8 +34,6 @@ const v0Container = {
         onBeforeUnmount(() => {
             visualizer.dispose()
             visualizer = null
-            console.log(app.value.renderer.info)
-            console.log(performance.memory)
         })
 
         return{

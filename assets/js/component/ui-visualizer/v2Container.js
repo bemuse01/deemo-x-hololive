@@ -30,7 +30,6 @@ const v2Container = {
         onBeforeUnmount(() => {
             visualizer.dispose()
             visualizer = null
-            console.log(app.value.renderer.info)
         })
 
 

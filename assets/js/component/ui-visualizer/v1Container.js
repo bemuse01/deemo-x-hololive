@@ -44,7 +44,7 @@ const v1Container = {
 
         onMounted(() => {
             nextTick(() => {
-                particle = new Particle({app: app.value, audio: audio.value, color, element})
+                particle = new Particle1({app: app.value, audio: audio.value, color, element})
                 visualizer = new Visualizer1({app: app.value, audio: audio.value, color, element, radius, scale: sc})
             })
 
@@ -57,7 +57,6 @@ const v1Container = {
             visualizer = null
             particle = null
             cancelAnimationFrame(animation.value)
-            console.log(app.value.renderer.info)
         })
 
         return{

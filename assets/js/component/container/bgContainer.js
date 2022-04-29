@@ -14,7 +14,6 @@ const BgContainer = {
         const store = useStore()
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
-        console.log(crtItem.value)
         const imgStyle = computed(() => {
             if(crtItem.value.isDefault){
                 return {background: 'none'}

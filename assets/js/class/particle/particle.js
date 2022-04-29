@@ -1,5 +1,5 @@
 // import * as THREE from '../../lib/three.module.js'
-// import PublicMethod from '../../method/method.js'
+// import Method from '../../method/method.js'
 // import {EffectComposer} from '../../postprocess/EffectComposer.js'
 // import {RenderPass} from '../../postprocess/RenderPass.js'
 // import {AfterimagePass} from '../../postprocess/AfterimagePass.js'
@@ -70,8 +70,8 @@ const Particle1 = class{
                 h: height
             },
             obj: {
-                w: PublicMethod.getVisibleWidth(this.camera, 0),
-                h: PublicMethod.getVisibleHeight(this.camera, 0)
+                w: Method.getVisibleWidth(this.camera, 0),
+                h: Method.getVisibleHeight(this.camera, 0)
             }
         }
     }
@@ -80,11 +80,11 @@ const Particle1 = class{
         // const width = right - left
         // const height = bottom - top
 
-        const renderScene = new RenderPass( this.scene, this.camera )
+        const renderScene = new THREE.RenderPass( this.scene, this.camera )
 
-        this.motionComposer = new EffectComposer(this.renderer)
+        this.motionComposer = new THREE.EffectComposer(this.renderer)
 
-        this.afterimagePass = new AfterimagePass()
+        this.afterimagePass = new THREE.AfterimagePass()
         this.afterimagePass.uniforms.damp.value = 0.85
 
         this.motionComposer.addPass(renderScene)
@@ -205,8 +205,8 @@ const Particle1 = class{
 
         this.size.el.w = width
         this.size.el.h = height
-        this.size.obj.w = PublicMethod.getVisibleWidth(this.camera, 0)
-        this.size.obj.h = PublicMethod.getVisibleHeight(this.camera, 0)
+        this.size.obj.w = Method.getVisibleWidth(this.camera, 0)
+        this.size.obj.h = Method.getVisibleHeight(this.camera, 0)
     }
     resizeObject(){
         for(const comp in this.comp){

@@ -4,7 +4,7 @@
 // import {ShaderPass} from '../../postprocess/ShaderPass.js'
 // import {UnrealBloomPass} from '../../postprocess/UnrealBloomPass.js'
 // import {TestShader} from '../../postprocess/TestShader.js'
-// import PublicMethod from '../../method/method.js'
+// import Method from '../../method/method.js'
 
 // import Center from './build/visualizer.center.build.js'
 // import Child from './build/visualizer.child.build.js'
@@ -81,8 +81,8 @@ const Visualizer0 = class{
                 h: height
             },
             obj: {
-                w: PublicMethod.getVisibleWidth(this.camera, 0),
-                h: PublicMethod.getVisibleHeight(this.camera, 0)
+                w: Method.getVisibleWidth(this.camera, 0),
+                h: Method.getVisibleHeight(this.camera, 0)
             }
         }
     }
@@ -91,23 +91,23 @@ const Visualizer0 = class{
         const width = right - left
         const height = bottom - top
 
-        const renderScene = new RenderPass( this.scene, this.camera )
+        const renderScene = new THREE.RenderPass( this.scene, this.camera )
 
         // bloom composer
-        const bloomPass = new UnrealBloomPass( new THREE.Vector2( width, height ), 
+        const bloomPass = new THREE.UnrealBloomPass( new THREE.Vector2( width, height ), 
             this.param.strength,
             this.param.radius,
             this.param.threshold
         )
 
-        this.bloomComposer = new EffectComposer(this.renderer)
+        this.bloomComposer = new THREE.EffectComposer(this.renderer)
         this.bloomComposer.renderToScreen = false
         this.bloomComposer.addPass(renderScene)
         this.bloomComposer.addPass(bloomPass)
 
 
         // final composer
-        const finalPass = new ShaderPass(
+        const finalPass = new THREE.ShaderPass(
             new THREE.ShaderMaterial({
                 uniforms: {
                     baseTexture: {value: null},
@@ -122,7 +122,7 @@ const Visualizer0 = class{
         finalPass.needsSwap = true
 
         const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 2048})
-        this.finalComposer = new EffectComposer(this.renderer, renderTarget)
+        this.finalComposer = new THREE.EffectComposer(this.renderer, renderTarget)
         this.finalComposer.addPass(renderScene)
         this.finalComposer.addPass(finalPass)
     }
@@ -266,8 +266,8 @@ const Visualizer0 = class{
 
         this.size.el.w = width
         this.size.el.h = height
-        this.size.obj.w = PublicMethod.getVisibleWidth(this.camera, 0)
-        this.size.obj.h = PublicMethod.getVisibleHeight(this.camera, 0)
+        this.size.obj.w = Method.getVisibleWidth(this.camera, 0)
+        this.size.obj.h = Method.getVisibleHeight(this.camera, 0)
     }
     resizeObject(){
         for(const comp in this.comp){

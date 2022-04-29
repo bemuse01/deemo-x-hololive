@@ -48,7 +48,6 @@ const LogoDeemo = {
         onBeforeUnmount(() => {
             logo.dispose()
             logo = null
-            console.log(app.value.renderer.info)
         })
 
         return{

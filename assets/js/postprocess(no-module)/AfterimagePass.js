@@ -10,10 +10,12 @@
 			this.uniforms = THREE.UniformsUtils.clone( this.shader.uniforms );
 			this.uniforms[ 'damp' ].value = damp;
 			this.textureComp = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, {
-				magFilter: THREE.NearestFilter
+				magFilter: THREE.NearestFilter,
+				format: THREE.RGBAFormat
 			} );
 			this.textureOld = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, {
-				magFilter: THREE.NearestFilter
+				magFilter: THREE.NearestFilter,
+				format: THREE.RGBAFormat
 			} );
 			this.shaderMaterial = new THREE.ShaderMaterial( {
 				uniforms: this.uniforms,
@@ -21,7 +23,7 @@
 				fragmentShader: this.shader.fragmentShader
 			} );
 			this.compFsQuad = new THREE.FullScreenQuad( this.shaderMaterial );
-			const material = new THREE.MeshBasicMaterial();
+			const material = new THREE.MeshBasicMaterial({transparent: true});
 			this.copyFsQuad = new THREE.FullScreenQuad( material );
 
 		}
