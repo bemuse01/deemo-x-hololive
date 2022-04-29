@@ -1,13 +1,13 @@
-import MenuBtn from './menuBtn.js'
+import BtnContainer from './btnContainer.js'
 
 export default {
     components: {
-        'menu-btn': MenuBtn
+        'btn-container': BtnContainer
     },
     template: `
         <div class="ui ui-menu">
 
-            <menu-btn />
+            <btn-container />
         
         </div>
     `,

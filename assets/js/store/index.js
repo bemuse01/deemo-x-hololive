@@ -1,6 +1,7 @@
 import OpenStore from './open.js'
 import PlaylistStore from './playlist.js'
 import LoadingStore from './loading.js'
+import MenuStore from './menu.js'
 
 export default Vuex.createStore({
     state: {
@@ -30,6 +31,7 @@ export default Vuex.createStore({
     modules: {
         open: OpenStore,
         playlist: PlaylistStore,
-        loading: LoadingStore
+        loading: LoadingStore,
+        menu: MenuStore
     }
 })
