@@ -4,7 +4,7 @@
 
 const UiPlaylist = {
     components: {
-        'bg-container': BgContainer,
+        'playlist-bg-container': PlaylistBgContainer,
         'nav-container': NavContainer,
         'composer-container': ComposerContainer
     },
@@ -15,7 +15,7 @@ const UiPlaylist = {
             :ref="el => root = el"
         >
 
-            <bg-container></bg-container>
+            <playlist-bg-container></playlist-bg-container>
             <nav-container></nav-container>
             <composer-container></composer-container>
 
