@@ -24,17 +24,22 @@ export default {
 
         const setAudio = () => {
             songs.value.createContext(key.value)
-            songs.value.stopAudio(key.value)
-            songs.value.setAnimate(true)
         }
 
-        const clickToPlay = () => {
+        const playAudio = () => {
             if(!songs.value.getAudio(key.value)) return
-            setAudio()
+
+            songs.value.setAnimate(true)
+            songs.value.stopAudio(key.value)
             store.dispatch('playlist/setPlaying', true)
         }
 
+        const clickToPlay = () => {
+            playAudio()
+        }
+
         watch(key, (cur, pre) => {
+            setAudio()
             songs.value.stopAudio(pre)
             songs.value.playAudio(cur)
         })

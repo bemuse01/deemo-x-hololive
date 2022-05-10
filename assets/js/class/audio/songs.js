@@ -14,7 +14,7 @@ export default class{
         this.fft = 2 ** 14
         this.smoothingTimeConstant = 0.65
 
-        this.context = new AudioContext()
+        this.context = null
         this.source = null
         this.analyser = null
         this.sources = []
@@ -60,7 +60,9 @@ export default class{
         this.list.forEach(song => {
             const {audio} = song
 
-            if(audio) audio.addEventListener('canplaythrough', () => song.length = audio.duration)
+            if(audio) audio.addEventListener('canplaythrough', () => {
+                song.length = audio.duration
+            })
         })
     }
     resumeAudio(idx){
@@ -71,6 +73,7 @@ export default class{
         this.stopFlag[idx] = false
 
         audio.play()
+        this.context.resume()
     }
     pauseAudio(idx){
         const {audio} = this.list[idx]
@@ -89,6 +92,7 @@ export default class{
 
         audio.currentTime = audio.duration * time
         audio.play()
+        this.context.resume()
     }
     stopAudio(idx){
         const {audio} = this.list[idx]
@@ -120,6 +124,7 @@ export default class{
     createContext(idx){
         // if(this.source) this.source.disconnect()
         // if(this.analyser) this.analyser.disconnect()
+        if(!this.context) this.context = new AudioContext()
         
         if(this.sources[idx]) this.source = this.sources[idx]
         else{
