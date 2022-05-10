@@ -1,5 +1,5 @@
 import LogoDeemo from './logoDeemo.js'
-import LogoHololive from './LogoHololive.js'
+import LogoHololive from './logoHolo.js'
 import BgContainer from '../public/bgContainer.js'
 
 export default {
