@@ -122,6 +122,9 @@ export default class{
 
     // web audio api
     createContext(idx){
+        const {audio} = this.list[idx]
+        if(!audio) return
+        
         // if(this.source) this.source.disconnect()
         // if(this.analyser) this.analyser.disconnect()
         if(!this.context) this.context = new AudioContext()
