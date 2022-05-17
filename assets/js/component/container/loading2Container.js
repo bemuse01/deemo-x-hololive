@@ -13,7 +13,7 @@ export default {
         </div>
     `,
     setup(){
-        const {ref, onMounted, computed, watchEffect} = Vue
+        const {ref, onMounted, computed, watch} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -33,6 +33,7 @@ export default {
             return {key, style}
         }))
         const isTweenDone = ref(false)
+        const canPlayOpening = computed(() => isTweenDone.value && srcLoaded.value)
         const showing = ref(true)
 
         const initTween = () => {
@@ -75,11 +76,12 @@ export default {
             showing.value = false
         }
 
-        watchEffect(() => {
-            if(isTweenDone.value && srcLoaded.value){
+        watch(canPlayOpening, cur => {
+            if(cur){
                 // should be modified
                 // not working without setTimeout
                 setTimeout(() => playOpening(), 0)
+                // playOpening()
             }
         })
 
