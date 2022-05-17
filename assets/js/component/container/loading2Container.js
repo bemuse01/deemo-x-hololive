@@ -13,7 +13,7 @@ export default {
         </div>
     `,
     setup(){
-        const {ref, onMounted, computed, watch} = Vue
+        const {ref, onBeforeMount, computed, watch} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -85,7 +85,7 @@ export default {
             }
         })
 
-        onMounted(() => {
+        onBeforeMount(() => {
             initTween()
         })
 
