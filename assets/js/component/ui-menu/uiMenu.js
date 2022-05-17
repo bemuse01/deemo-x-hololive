@@ -12,12 +12,12 @@ export default {
         </div>
     `,
     setup(){
-        const {computed} = Vue
-        const {useStore} = Vuex
+        // const {computed} = Vue
+        // const {useStore} = Vuex
 
-        const store = useStore()
+        // const store = useStore()
 
-        return{
-        }
+        // return{
+        // }
     }
 }

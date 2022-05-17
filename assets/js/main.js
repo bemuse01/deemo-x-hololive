@@ -6,6 +6,7 @@ import BgContainer from './component/container/bgContainer.js'
 import CanvasContainer from './component/container/canvasContainer.js'
 import UiContainer from './component/container/uiContainer.js'
 import LoadingContainer from './component/container/loadingContainer.js'
+import Loading2Container from './component/container/loading2Container.js'
 import Method from './method/method.js'
 
 const vueApp = Vue.createApp({
@@ -13,7 +14,8 @@ const vueApp = Vue.createApp({
         'bg-container': BgContainer,
         'canvas-container': CanvasContainer,
         'ui-container': UiContainer,
-        'loading-container': LoadingContainer
+        'loading-container': LoadingContainer,
+        'loading2-container': Loading2Container
     },
     setup(){
         const {onMounted} = Vue

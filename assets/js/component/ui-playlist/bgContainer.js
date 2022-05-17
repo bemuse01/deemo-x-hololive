@@ -27,8 +27,21 @@ export default {
             filter: crtItem.value.isDefault ? 'none' : 'brightness(1.15)'
         }))
 
+        let loadedCount = 0
+
+        const loadImg = () => {
+            loadedCount++
+            if(loadedCount === songs.value.length){
+                store.dispatch('playlist/setSrcLoaded', true)
+            }
+        }
+
         const items = computed(() => Array.from(songs.value, (item, key) => {
             const {bgSrc, isDefault} = item
+
+            const img = new Image()
+            img.src = bgSrc
+            img.onload = loadImg
 
             const overlay = isDefault ? 'transparent' : 'rgba(0, 0, 0, 1)'
 

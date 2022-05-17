@@ -10,11 +10,12 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, computed, watchEffect, onBeforeUnmount, nextTick, onMounted} = Vue
+        const {reactive, computed, watchEffect, onBeforeUnmount, nextTick, onMounted, watch} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
         const app = computed(() => store.getters['getApp'])
+        const srcLoaded = computed(() => store.getters['playlist/getSrcLoaded'])
         const anim = reactive({
             child: false
         })
@@ -39,10 +40,14 @@ export default {
             store.dispatch('open/setAnim', {name: 'deemo', value: true})
         })
 
-        onMounted(() => {
-            nextTick(() => {
-                logo = new Logo(app.value, anim, src, element)
-            })
+        watch(srcLoaded, (cur) => {
+            if(cur){
+                // onMounted(() => {
+                    nextTick(() => {
+                        logo = new Logo(app.value, anim, src, element)
+                    })
+                // })
+            }
         })
         
         onBeforeUnmount(() => {
