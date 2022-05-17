@@ -41,7 +41,7 @@ export default {
         })
     
 
-        onMounted(() => {
+        // onMounted(() => {
             nextTick(() => {
                 watch(canPlay, (cur) => {
                     if(cur){
@@ -49,7 +49,7 @@ export default {
                     }
                 })
             })
-        })
+        // })
         
         onBeforeUnmount(() => {
             logo.dispose()

@@ -12,9 +12,6 @@ export default class{
         this.renderer = app.renderer
         this.element = document.querySelector(element)
 
-        console.log(this.element)
-        console.log(this.src)
-
         this.modules = {
             child: Child
         }
