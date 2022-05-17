@@ -6,15 +6,13 @@ export default {
             deemo: false,
             hololive: false,
             overlay: false
-        }
+        },
+        canPlay: false
     },
     getters: {
-        getShowing(state){
-            return state.showing
-        },
-        getAnim(state){
-            return state.anim
-        }
+        getShowing: (state) => state.showing,
+        getAnim: (state) => state.anim,
+        getCanPlay: (state) => state.canPlay
     },
     mutations: {
         setShowing(state, value){
@@ -22,6 +20,9 @@ export default {
         },
         setAnim(state, {name, value}){
             state.anim[name] = value
+        },
+        setCanPlay(state, value){
+            state.canPlay = value
         }
     },
     actions: {
@@ -30,6 +31,9 @@ export default {
         },
         setAnim({commit}, param){
             commit('setAnim', param)
+        },
+        setCanPlay({commit}, value){
+            commit('setCanPlay', value)
         }
     }
 }
