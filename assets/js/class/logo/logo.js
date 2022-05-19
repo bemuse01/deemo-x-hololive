@@ -19,6 +19,8 @@ export default class{
 
         this.context = this.canvas.getContext('2d')
 
+        this.renderer.setSize(width, height)
+
         this.modules = {
             child: Child
         }
@@ -129,7 +131,6 @@ export default class{
         // this.renderer.setScissor(left, bottom, width, height)
         // this.renderer.setViewport(left, bottom, width, height)
 
-        this.renderer.setSize(width, height)
         this.renderer.clear()
 
         this.camera.lookAt(this.scene.position)
