@@ -78,10 +78,7 @@ export default {
 
         watch(canPlayOpening, cur => {
             if(cur){
-                // should be modified
-                // not working without setTimeout
-                setTimeout(() => playOpening(), 0)
-                // playOpening()
+                playOpening()
             }
         })
 
