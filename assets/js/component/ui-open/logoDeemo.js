@@ -46,9 +46,9 @@ export default {
     
 
         onMounted(() => {
-            watch(app, app => {
-                if(app){
-                    logo = new Logo({app, anim, src, element: element.value, canvas: canvas.value})
+            watch(canPlay, cur => {
+                if(cur){
+                    logo = new Logo({app: app.value, anim, src, element: element.value, canvas: canvas.value})
                 }
             })
         })

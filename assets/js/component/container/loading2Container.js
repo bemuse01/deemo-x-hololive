@@ -27,7 +27,7 @@ export default {
             const style = {
                 background: `hsl(0, 0%, ${light}%)`,
                 left: '0',
-                transform: 'translate(-100%, -50%) rotate(0deg)'
+                transform: 'translate(-105%, -50%) rotate(0deg)'
             }
 
             return {key, style}
@@ -47,7 +47,7 @@ export default {
             const idx = (len - 1) - key
 
             const start = {left: 0, x: -100, rotate: 0}
-            const end = {left: 100, x: 0, rotate: 180}
+            const end = {left: 105, x: 0, rotate: 180}
 
             const tw = new TWEEN.Tween(start)
             .to(end, 1000)
