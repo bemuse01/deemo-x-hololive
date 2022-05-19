@@ -3,11 +3,14 @@ import {Visualizer2} from '../../class/visualizer2/visualizer.js'
 export default {
     template: `
         <div class="ui-container visualizer-container visualizer-v2-container">
-            <div :ref="el => element = el"></div>
+            <canvas 
+                :ref="el => canvas = el" 
+                :style="style"
+            />
         </div>
     `,
     setup(){
-        const {nextTick, onMounted, computed, onBeforeUnmount} = Vue
+        const {ref, onMounted, computed, onBeforeUnmount} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -17,14 +20,21 @@ export default {
         const audio = computed(() => store.getters['playlist/getSongs'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
+        const crtColor = computed(() => crtItem.value.color)
+        const crtLogoSrc = computed(() => crtItem.value.logoSrc)
 
-        const element = '.visualizer-v2-container > div'
+        const style = ref({filter: `
+            drop-shadow(0 0 2px #${crtColor.value.toString(16)}) 
+            drop-shadow(0 0 2px #${crtColor.value.toString(16)}) 
+            brightness(1.5)
+        `})
+
+        const canvas = ref()
         const radius = 30
+        const color = 0xffffff
 
         onMounted(() => {
-            nextTick(() => {
-                visualizer = new Visualizer2({app: app.value, audio: audio.value, color: 0xffffff, element, radius, logoSrc: crtItem.value.logoSrc})
-            })
+            visualizer = new Visualizer2({app: app.value, audio: audio.value, color, canvas: canvas.value, radius, logoSrc: crtLogoSrc.value})
         })
 
         onBeforeUnmount(() => {
@@ -35,7 +45,8 @@ export default {
 
 
         return{
-            element
+            canvas,
+            style
         }
     }
 }

@@ -10,10 +10,18 @@ import PARTICLE from './build/visualizer.particle.build.js'
 import LOGO from './build/visualizer.logo.build.js'
 
 const Visualizer2 = class{
-    constructor({app, audio, element, color, logoSrc, radius}){
+    constructor({app, audio, canvas, color, logoSrc, radius}){
         this.renderer = app.renderer
         this.audio = audio
-        this.element = document.querySelector(element)
+        this.element = canvas
+        
+        const {width, height} = this.element.getBoundingClientRect()
+        this.canvas = canvas
+        this.canvas.width = width * RATIO
+        this.canvas.height = height * RATIO
+
+        this.context = this.canvas.getContext('2d')
+
         this.logoSrc = logoSrc
         this.color = color
         this.radius = radius
@@ -173,13 +181,16 @@ const Visualizer2 = class{
         const left = rect.left
         const bottom = this.renderer.domElement.clientHeight - rect.bottom
 
-        this.renderer.setScissor(left, bottom, width, height)
-        this.renderer.setViewport(left, bottom, width, height)
+        // this.renderer.setScissor(left, bottom, width, height)
+        // this.renderer.setViewport(left, bottom, width, height)
     
-        this.renderer.autoClear = false
-        this.renderer.clearDepth()
+        this.renderer.setSize(width, height)
+        this.renderer.clear()
 
         this.composer.render()
+                
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.context.drawImage(this.renderer.domElement, 0, 0)
     }
     animateObject(){
         const {audioData, audioDataAvg} = this.audio
