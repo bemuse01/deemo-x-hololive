@@ -4,7 +4,7 @@ import songs from '../class/audio/songs.js'
 export default {
     namespaced: true,
     state: {
-        showing: false,
+        showing: true,
         crtKey: 0,
         songs: new songs(Songs),
         durations: [],

@@ -9,23 +9,38 @@ export default {
         'bg-container': BgContainer
     },
     template: `
-        <div class="ui ui-open" v-if="showing">
+        <transition name="fade">
+            <div class="ui ui-open" v-if="showing">
 
-            <div class="open-logo-box">
+                <div class="open-logo-box">
 
-                <logo-deemo />
-                <logo-hololive />
+                    <logo-deemo />
+                    <logo-hololive />
 
+                </div>
+            
             </div>
-        
-        </div>
+        </transition>
     `,
     setup(){
-        const {computed} = Vue
+        const {computed, watchEffect} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
         const showing = computed(() => store.getters['open/getShowing'])
+        const anims = computed(() => store.getters['open/getAnim'])
+
+        const hide = () => {
+            store.dispatch('open/setShowing', false)
+        }
+
+        watchEffect(() => {
+            for(const anim in anims.value){
+                if(!anims.value[anim]) return
+            }
+
+            hide()
+        })
 
         return{
             showing

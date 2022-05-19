@@ -4,13 +4,14 @@ export default {
     template: `
         <div 
             class="ui-container open-deemo-container"
-            :style="style.container"
+            :style="style"
+            :ref="el => element = el"
         >
-            <div></div>
+            <canvas :ref="el => canvas = el" />
         </div>
     `,
     setup(){
-        const {reactive, computed, watchEffect, onBeforeUnmount, nextTick, onMounted, watch} = Vue
+        const {reactive, computed, watchEffect, onBeforeUnmount, onMounted, watch, ref} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -19,16 +20,19 @@ export default {
         const anim = reactive({
             child: false
         })
-        const style = reactive({
-            container: {right: '50%', transform: 'translate(50%, -50%)'}
-        })
+        const style = ref({right: '50%', transform: 'translate(50%, -50%)'})
         const src = './assets/src/logo.png'
-        const element = '.open-deemo-container'
+        const element = ref()
+        const canvas = ref()
         let logo = null
 
         const slide = () => {
-            style.container.right = '0'
-            style.container.transform = 'translate(0, -50%)'
+            style.value.right = '0'
+            style.value.transform = 'translate(0, -50%)'
+        }
+
+        const hide = () => {
+            store.dispatch('open/setAnim', {name: 'deemo', value: true})
         }
 
         watchEffect(() => {
@@ -37,19 +41,17 @@ export default {
             }
 
             slide()
-            store.dispatch('open/setAnim', {name: 'deemo', value: true})
+            hide()
         })
     
 
-        // onMounted(() => {
-            nextTick(() => {
-                watch(canPlay, (cur) => {
-                    if(cur){
-                        logo = new Logo(app.value, anim, src, element)
-                    }
-                })
+        onMounted(() => {
+            watch(app, app => {
+                if(app){
+                    logo = new Logo({app, anim, src, element: element.value, canvas: canvas.value})
+                }
             })
-        // })
+        })
         
         onBeforeUnmount(() => {
             logo.dispose()
@@ -59,6 +61,8 @@ export default {
 
         return{
             style,
+            element,
+            canvas
         }
     }
 }

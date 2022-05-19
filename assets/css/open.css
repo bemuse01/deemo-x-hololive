@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* background: white; */
+    background: white;
     
     --logo-width: 58rem;
 
@@ -32,7 +32,7 @@
     height: calc(var(--deemo-width) * var(--deemo-ratio));
     transition: var(--time-04s);
 }
-.open-deemo-container div{
+.open-deemo-container canvas{
     width: 100%;
     height: 100%;
 }

@@ -13,10 +13,10 @@ export default {
     template: `
         <div id="ui-container">
 
-            <ui-open></ui-open>
             <ui-visualizer></ui-visualizer>
             <ui-playlist></ui-playlist>
             <ui-menu></ui-menu>
+            <ui-open></ui-open>
 
         </div>
     `

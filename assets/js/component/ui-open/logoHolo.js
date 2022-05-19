@@ -9,11 +9,12 @@ export default {
         </div>
     `,
     setup(){
-        const {reactive, watchEffect, ref, onMounted} = Vue
+        const {reactive, watchEffect, ref, onMounted, computed} = Vue
         const {useStore} = Vuex
         const element = ref()
 
         const store = useStore()
+        const deemoAnim = computed(() => store.getters['open/getAnim'].deemo)
         const style = reactive({
             container: {opacity: 0, transform: 'translate(0, 0)'}
         })
@@ -23,14 +24,16 @@ export default {
             style.container.transform = 'translate(0, -50%)'
         }
 
+        const hide = () => {
+            store.dispatch('open/setAnim', {name: 'hololive', value: true})
+        }
+
         const onTransitionend = () => {
-            setTimeout(() => {
-                store.dispatch('open/setAnim', {name: 'hololive', value: true})
-            }, 500)
+            setTimeout(hide, 500)
         }
 
         watchEffect(() => {
-            if(!store.getters['open/getAnim'].deemo) return
+            if(!deemoAnim.value) return
 
             slide()
         })

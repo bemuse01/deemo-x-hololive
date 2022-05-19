@@ -5,7 +5,6 @@ export default {
         anim: {
             deemo: false,
             hololive: false,
-            overlay: false
         },
         canPlay: false
     },

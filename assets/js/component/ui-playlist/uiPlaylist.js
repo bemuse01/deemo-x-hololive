@@ -29,7 +29,7 @@ export default {
         const store = useStore()
         const playing = computed(() => store.getters['playlist/getPlaying'])
         const hololive = computed(() => store.getters['open/getAnim'].hololive)
-        const style = ref({display: 'none', opacity: '0'})
+        const style = ref({display: 'block', opacity: '1'})
         const ease = BezierEasing(0.25, 0.1, 0.25, 0.1)
         const loadingDelay = store.getters['loading/getLoadingDelay']
 
@@ -73,13 +73,13 @@ export default {
             style.value.display = 'none'
         }
 
-        const emitHideOpen = () => {
-            store.dispatch('open/setShowing', false)
-        }
+        // const emitHideOpen = () => {
+        //     store.dispatch('open/setShowing', false)
+        // }
 
-        watch(hololive, (cur, pre) => {
-            if(cur) show(0, {onComplete: emitHideOpen})
-        })
+        // watch(hololive, (cur, pre) => {
+        //     if(cur) show(0, {onComplete: emitHideOpen})
+        // })
 
         watch(playing, (cur, pre) => {
             if(cur) hide(loadingDelay)
