@@ -18,7 +18,8 @@ export default {
             if(crtItem.value.isDefault){
                 return {background: 'none'}
             }else{
-                return {background: `url('${crtItem.value.bgSrc}') no-repeat center center / cover`}
+                if(+crtItem.value.type === 0) return {background: 'black'}
+                else return {background: `url('${crtItem.value.bgSrc}') no-repeat center center / cover`}
             }
         })
         const overlayStyle = computed(() => {
