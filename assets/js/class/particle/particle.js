@@ -7,10 +7,18 @@ import {AfterimagePass} from '../../postprocess/AfterimagePass.js'
 import Child from './build/particle.child.build.js'
 
 const Particle = class{
-    constructor({app, audio, element, color}){
+    constructor({app, audio, canvas, color}){
         this.renderer = app.renderer
         this.audio = audio
-        this.element = document.querySelector(element)
+        this.element = canvas
+
+        const {width, height} = this.element.getBoundingClientRect()
+        this.canvas = canvas
+        this.canvas.width = width * RATIO
+        this.canvas.height = height * RATIO
+
+        this.context = this.canvas.getContext('2d')
+
         this.color = color
 
         this.param = {
@@ -84,7 +92,7 @@ const Particle = class{
 
         this.motionComposer = new EffectComposer(this.renderer)
 
-        this.afterimagePass = new AfterimagePass()
+        this.afterimagePass = new AfterimagePass(0.85, this.canvas.width, this.canvas.height)
         this.afterimagePass.uniforms.damp.value = 0.85
 
         this.motionComposer.addPass(renderScene)
@@ -168,13 +176,16 @@ const Particle = class{
         const left = rect.left
         const bottom = this.renderer.domElement.clientHeight - rect.bottom
 
-        this.renderer.setScissor(left, bottom, width, height)
-        this.renderer.setViewport(left, bottom, width, height)
+        // this.renderer.setScissor(left, bottom, width, height)
+        // this.renderer.setViewport(left, bottom, width, height)
 
-        this.renderer.autoClear = false
-        this.renderer.clearDepth()
+        this.renderer.setSize(width, height)
+        this.renderer.clear()
         
         this.motionComposer.render()
+
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.context.drawImage(this.renderer.domElement, 0, 0)
     }
     animateObject(){
         const {audioDataAvg} = this.audio
@@ -202,6 +213,7 @@ const Particle = class{
         this.camera.updateProjectionMatrix()
 
         this.motionComposer.setSize(width, height)
+        this.afterimagePass.setSize(width, height)
 
         this.size.el.w = width
         this.size.el.h = height

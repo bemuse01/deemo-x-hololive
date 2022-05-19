@@ -9,10 +9,18 @@ import {TestShader} from '../../postprocess/TestShader.js'
 import Child from './build/visualizer.child.build.js'
 
 const Visualizer1 = class{
-    constructor({app, audio, element, color, radius, scale}){
+    constructor({app, audio, canvas, color, radius, scale}){
         this.renderer = app.renderer
         this.audio = audio
-        this.element = document.querySelector(element)
+        this.element = canvas
+
+        const {width, height} = this.element.getBoundingClientRect()
+        this.canvas = canvas
+        this.canvas.width = width * RATIO
+        this.canvas.height = height * RATIO
+
+        this.context = this.canvas.getContext('2d')
+
         this.color = color
         this.radius = radius
         this.scale = scale
@@ -201,16 +209,20 @@ const Visualizer1 = class{
         const left = rect.left
         const bottom = this.renderer.domElement.clientHeight - rect.bottom
 
-        this.renderer.setScissor(left, bottom, width, height)
-        this.renderer.setViewport(left, bottom, width, height)
+        // this.renderer.setScissor(left, bottom, width, height)
+        // this.renderer.setViewport(left, bottom, width, height)
     
-        this.renderer.autoClear = false
-        this.renderer.clearDepth()
+        // this.renderer.autoClear = false
+        // this.renderer.setSize(width, height)
+        // this.renderer.clear()
 
         this.setMaterial()
         this.bloomComposer.render()
         this.restoreMaterial()
         this.finalComposer.render()
+
+        // this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.context.drawImage(this.renderer.domElement, 0, 0)
     }
     animateObject(){
         const {audioData, audioDataAvg} = this.audio

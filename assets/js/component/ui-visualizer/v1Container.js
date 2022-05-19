@@ -4,14 +4,14 @@ import {Particle} from '../../class/particle/particle.js'
 export default {
     template: `
         <div class="ui-container visualizer-container visualizer-v1-container">
-            <div :ref="el => element = el"></div>
+            <canvas :ref="el => canvas = el" />
             <div class="v-logo v1-logo">
                 <div :style="style"></div>
             </div>
         </div>
     `,
     setup(){
-        const {nextTick, onMounted, computed, onBeforeUnmount, ref} = Vue
+        const {onMounted, computed, onBeforeUnmount, ref} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -28,7 +28,7 @@ export default {
             background: `url('${crtItem.value.logoSrc}') no-repeat center center / cover`
         }))
 
-        const element = '.visualizer-v1-container > div'
+        const canvas = ref()
         const radius = 17
         const sc = 0.5
         const color = crtItem.value.color
@@ -43,10 +43,8 @@ export default {
         }
 
         onMounted(() => {
-            nextTick(() => {
-                particle = new Particle({app: app.value, audio: audio.value, color, element})
-                visualizer = new Visualizer1({app: app.value, audio: audio.value, color, element, radius, scale: sc})
-            })
+            particle = new Particle({app: app.value, audio: audio.value, color, canvas: canvas.value})
+            visualizer = new Visualizer1({app: app.value, audio: audio.value, color, canvas: canvas.value, radius, scale: sc})
 
             animate()
         })
@@ -61,7 +59,7 @@ export default {
         })
 
         return{
-            element,
+            canvas,
             style
         }
     }
