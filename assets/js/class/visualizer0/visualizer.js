@@ -29,6 +29,8 @@ const Visualizer0 = class{
 
         this.context = this.canvas.getContext('2d')
 
+        this.renderer.setSize(width, height)
+
         this.param = {
             fov: 60,
             near: 0.1,
@@ -133,6 +135,9 @@ const Visualizer0 = class{
         this.finalComposer = new EffectComposer(this.renderer, renderTarget)
         this.finalComposer.addPass(renderScene)
         this.finalComposer.addPass(finalPass)
+        
+        this.bloomComposer.setSize(width, height)
+        this.finalComposer.setSize(width, height)
     }
 
 
@@ -219,11 +224,7 @@ const Visualizer0 = class{
 
         // this.renderer.setScissor(left, bottom, width, height)
         // this.renderer.setViewport(left, bottom, width, height)
-        this.renderer.setSize(width, height)
         this.renderer.clear()
-
-        this.bloomComposer.setSize(width, height)
-        this.finalComposer.setSize(width, height)
 
         this.setMaterial()
         this.bloomComposer.render()

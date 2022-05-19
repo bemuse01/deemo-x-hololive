@@ -26,6 +26,8 @@ const Visualizer2 = class{
         this.color = color
         this.radius = radius
 
+        this.renderer.setSize(width, height)
+
         this.param = {
             fov: 60,
             near: 0.1,
@@ -101,6 +103,8 @@ const Visualizer2 = class{
 
         this.composer.addPass(renderScene)
         this.composer.addPass(volumePass)
+
+        this.composer.setSize(width, height)
     }
 
 
@@ -184,10 +188,8 @@ const Visualizer2 = class{
         // this.renderer.setScissor(left, bottom, width, height)
         // this.renderer.setViewport(left, bottom, width, height)
     
-        this.renderer.setSize(width, height)
         this.renderer.clear()
 
-        this.composer.setSize(width, height)
         this.composer.render()
                 
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)

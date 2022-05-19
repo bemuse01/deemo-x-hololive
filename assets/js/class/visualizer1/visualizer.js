@@ -25,6 +25,8 @@ const Visualizer1 = class{
         this.radius = radius
         this.scale = scale
 
+        this.renderer.setSize(width, height)
+
         this.param = {
             fov: 60,
             near: 0.1,
@@ -125,6 +127,9 @@ const Visualizer1 = class{
         this.finalComposer = new EffectComposer(this.renderer, renderTarget)
         this.finalComposer.addPass(renderScene)
         this.finalComposer.addPass(finalPass)
+
+        this.bloomComposer.setSize(width, height)
+        this.finalComposer.setSize(width, height)
     }
 
 
@@ -215,10 +220,6 @@ const Visualizer1 = class{
         // this.renderer.autoClear = false
         // this.renderer.setSize(width, height)
         // this.renderer.clear()
-
-        this.renderer.setSize(width, height)
-        this.bloomComposer.setSize(width, height)
-        this.finalComposer.setSize(width, height)
 
         this.setMaterial()
         this.bloomComposer.render()

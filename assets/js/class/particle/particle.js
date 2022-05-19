@@ -21,6 +21,8 @@ const Particle = class{
 
         this.color = color
 
+        this.renderer.setSize(width, height)
+
         this.param = {
             fov: 60,
             near: 0.1,
@@ -97,6 +99,8 @@ const Particle = class{
 
         this.motionComposer.addPass(renderScene)
         this.motionComposer.addPass(this.afterimagePass)
+
+        this.motionComposer.setSize(width, height)
     }
 
 
@@ -178,9 +182,6 @@ const Particle = class{
 
         // this.renderer.setScissor(left, bottom, width, height)
         // this.renderer.setViewport(left, bottom, width, height)
-
-        this.renderer.setSize(width, height)
-        this.motionComposer.setSize(width, height)
 
         this.renderer.clear()
         
