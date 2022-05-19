@@ -16,10 +16,10 @@ export default {
         <div class="ui ui-visualizer">
 
             <!--<v-background />-->
-            <v-progress v-if="type < 3"/>
             <v0-container v-if="type === 0" />
             <v1-container v-else-if="type === 1" />
             <v2-container v-else-if="type === 2" />
+            <v-progress v-if="type < 3"/>
 
         </div>
     `,

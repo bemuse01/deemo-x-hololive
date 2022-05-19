@@ -187,6 +187,7 @@ const Visualizer2 = class{
         this.renderer.setSize(width, height)
         this.renderer.clear()
 
+        this.composer.setSize(width, height)
         this.composer.render()
                 
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)

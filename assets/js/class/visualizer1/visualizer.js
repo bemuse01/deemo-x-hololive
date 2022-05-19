@@ -216,6 +216,10 @@ const Visualizer1 = class{
         // this.renderer.setSize(width, height)
         // this.renderer.clear()
 
+        this.renderer.setSize(width, height)
+        this.bloomComposer.setSize(width, height)
+        this.finalComposer.setSize(width, height)
+
         this.setMaterial()
         this.bloomComposer.render()
         this.restoreMaterial()

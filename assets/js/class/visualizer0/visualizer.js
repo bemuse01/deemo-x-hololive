@@ -14,13 +14,20 @@ import Line from './build/visualizer.line.build.js'
 import Logo from './build/visualizer.logo.build.js'
   
 const Visualizer0 = class{
-    constructor({app, audio, element, color, radius, logoSrc}){
+    constructor({app, audio, canvas, color, radius, logoSrc}){
         this.renderer = app.renderer
         this.audio = audio
-        this.element = document.querySelector(element)
+        this.element = canvas
         this.color = color
         this.radius = radius
         this.logoSrc = logoSrc
+
+        const {width, height} = this.element.getBoundingClientRect()
+        this.canvas = canvas
+        this.canvas.width = width * RATIO
+        this.canvas.height = height * RATIO
+
+        this.context = this.canvas.getContext('2d')
 
         this.param = {
             fov: 60,
@@ -210,13 +217,21 @@ const Visualizer0 = class{
         const left = rect.left
         const bottom = this.renderer.domElement.clientHeight - rect.bottom
 
-        this.renderer.setScissor(left, bottom, width, height)
-        this.renderer.setViewport(left, bottom, width, height)
+        // this.renderer.setScissor(left, bottom, width, height)
+        // this.renderer.setViewport(left, bottom, width, height)
+        this.renderer.setSize(width, height)
+        this.renderer.clear()
+
+        this.bloomComposer.setSize(width, height)
+        this.finalComposer.setSize(width, height)
 
         this.setMaterial()
         this.bloomComposer.render()
         this.restoreMaterial()
         this.finalComposer.render()
+        
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.context.drawImage(this.renderer.domElement, 0, 0)
     }
     animateGroup(){
         const time = window.performance.now()

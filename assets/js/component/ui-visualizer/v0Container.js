@@ -3,11 +3,11 @@ import {Visualizer0} from '../../class/visualizer0/visualizer.js'
 export default {
     template: `
         <div class="ui-container visualizer-container visualizer-v0-container">
-            <div :ref="el => element = el"></div>
+            <canvas :ref="el => canvas = el" />
         </div>
     `,
     setup(){
-        const {nextTick, onMounted, computed, onBeforeUnmount} = Vue
+        const {ref, onMounted, computed, onBeforeUnmount} = Vue
         const {useStore} = Vuex
 
         const store = useStore()
@@ -21,14 +21,12 @@ export default {
             background: `url('${crtItem.value.logoSrc}') no-repeat center center / cover`
         }))
 
-        const element = '.visualizer-v0-container > div'
+        const canvas = ref()
         const radius = 12
         const color = crtItem.value.color
 
         onMounted(() => {
-            nextTick(() => {
-                visualizer = new Visualizer0({app: app.value, audio: audio.value, color, element, radius, logoSrc: crtItem.value.logoSrc})
-            })
+            visualizer = new Visualizer0({app: app.value, audio: audio.value, color, canvas: canvas.value, radius, logoSrc: crtItem.value.logoSrc})
         })
 
         onBeforeUnmount(() => {
@@ -39,7 +37,7 @@ export default {
         })
 
         return{
-            element,
+            canvas,
             style
         }
     }

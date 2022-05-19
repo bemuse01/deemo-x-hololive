@@ -84,15 +84,15 @@ const Particle = class{
         }
     }
     initComposer(){
-        // const {right, left, bottom, top} = this.element.getBoundingClientRect()
-        // const width = right - left
-        // const height = bottom - top
+        const {right, left, bottom, top} = this.element.getBoundingClientRect()
+        const width = right - left
+        const height = bottom - top
 
         const renderScene = new RenderPass( this.scene, this.camera )
 
         this.motionComposer = new EffectComposer(this.renderer)
 
-        this.afterimagePass = new AfterimagePass(0.85, this.canvas.width, this.canvas.height)
+        this.afterimagePass = new AfterimagePass(0.85)
         this.afterimagePass.uniforms.damp.value = 0.85
 
         this.motionComposer.addPass(renderScene)
@@ -180,6 +180,8 @@ const Particle = class{
         // this.renderer.setViewport(left, bottom, width, height)
 
         this.renderer.setSize(width, height)
+        this.motionComposer.setSize(width, height)
+
         this.renderer.clear()
         
         this.motionComposer.render()

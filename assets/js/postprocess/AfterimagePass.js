@@ -5,7 +5,6 @@ import {
 	RGBAFormat,
 	ShaderMaterial,
 	UniformsUtils,
-	Vector2,
 	WebGLRenderTarget
 } from '../lib/three.module.js';
 import { Pass, FullScreenQuad } from './Pass.js';
@@ -13,7 +12,7 @@ import { AfterimageShader } from './AfterimageShader.js';
 
 class AfterimagePass extends Pass {
 
-	constructor( damp = 0.96, width, height ) {
+	constructor( damp = 0.96 ) {
 
 		super();
 
@@ -25,7 +24,7 @@ class AfterimagePass extends Pass {
 
 		this.uniforms[ 'damp' ].value = damp;
 
-		this.textureComp = new WebGLRenderTarget( width, height, {
+		this.textureComp = new WebGLRenderTarget( window.innerWidth, window.innerHeight, {
 
 			minFilter: LinearFilter,
 			magFilter: NearestFilter,
@@ -33,7 +32,7 @@ class AfterimagePass extends Pass {
 
 		} );
 
-		this.textureOld = new WebGLRenderTarget( width, height, {
+		this.textureOld = new WebGLRenderTarget( window.innerWidth, window.innerHeight, {
 
 			minFilter: LinearFilter,
 			magFilter: NearestFilter,
