@@ -15,10 +15,12 @@ export default {
     template: `
         <div class="ui ui-visualizer">
 
-            <!--<v-background />-->
+            <v-background v-if="needsShow" />
+
             <v0-container v-if="type === 0" />
             <v1-container v-else-if="type === 1" />
             <v2-container v-else-if="type === 2" />
+            
             <v-progress v-if="type < 3"/>
 
         </div>
@@ -60,6 +62,7 @@ export default {
 
         return{
             type,
+            needsShow
         }
     }
 }

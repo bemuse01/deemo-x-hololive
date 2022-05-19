@@ -1,7 +1,7 @@
 export default {
     template: `
         <transition >
-            <div id="ui-container visualizer-vBackground-container">
+            <div class="ui-container visualizer-vBackground-container">
                 <div class="bg-img" :style="imgStyle"></div>
                 <div class="bg-overlay" :style="overlayStyle"></div>
             </div>
