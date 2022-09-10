@@ -85,7 +85,7 @@ const Visualizer2 = class{
 
         const renderScene = new RenderPass( this.scene, this.camera )
 
-        const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 2048})
+        const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 128})
         this.composer = new EffectComposer(this.renderer, renderTarget)
 
         const volumePass = new ShaderPass(VolumetericLightShader)

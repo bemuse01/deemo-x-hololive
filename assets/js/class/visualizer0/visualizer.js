@@ -122,7 +122,7 @@ const Visualizer0 = class{
         )
         finalPass.needsSwap = true
 
-        const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 2048})
+        const renderTarget = new THREE.WebGLRenderTarget(width, height, {format: THREE.RGBAFormat, samples: 128})
         this.finalComposer = new EffectComposer(this.renderer, renderTarget)
         this.finalComposer.addPass(renderScene)
         this.finalComposer.addPass(finalPass)
