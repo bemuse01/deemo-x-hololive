@@ -1,6 +1,6 @@
 export default {
     template: `
-        <div id="loading2-container" v-if="showing">
+        <div id="loading2-container">
             <div class="loading-box">
                 <div
                     class="loading-item"
@@ -13,11 +13,15 @@ export default {
         </div>
     `,
     setup(){
-        const {ref, onBeforeMount, computed, watch} = Vue
+        const {ref, onMounted, onUnmounted} = Vue
         const {useStore} = Vuex
 
+
+        // store
         const store = useStore()
-        const srcLoaded = computed(() => store.getters['playlist/getSrcLoaded'])
+
+
+        // variable
         const len = 5
         const lists = ref(Array.from({length: len}, (_, key) => {
 
@@ -33,15 +37,14 @@ export default {
             return {key, style}
         }))
         const isTweenDone = ref(false)
-        const canPlayOpening = computed(() => isTweenDone.value && srcLoaded.value)
-        const showing = ref(true)
 
+
+        // method
         const initTween = () => {
             lists.value.forEach(item => {
                 createTween(item)
             })
         }
-
         const createTween = (item) => {
             const {key, style} = item
             const idx = (len - 1) - key
@@ -57,38 +60,36 @@ export default {
             .onComplete(() => onCompleteTween(idx))
             .start()
         }
-
         const onUpdateTween = (style, {left, x, rotate}) => {
             style.left = `${left}%`
             style.transform = `translate(${x}%, -50%) rotate(${rotate}deg)`
         }
-
         const onCompleteTween = (idx) => {
-            if(idx === len - 1 && srcLoaded.value === false){
+            if(idx === len - 1 && isTweenDone.value){
                 initTween()
-            }else if(idx === len - 1 && srcLoaded.value){
-                isTweenDone.value = true
             }
         }
-
+        const stopTween = () => {
+            isTweenDone.value = true
+        }
         const playOpening = () => {
             store.dispatch('open/setCanPlay', true)
-            showing.value = false
         }
 
-        watch(canPlayOpening, cur => {
-            if(cur){
-                playOpening()
-            }
+
+        // hook
+        onUnmounted(() => {
+            stopTween()
+            playOpening()
         })
 
-        onBeforeMount(() => {
+        onMounted(() => {
             initTween()
         })
 
+
         return {
             lists,
-            showing
         }
     }
 }

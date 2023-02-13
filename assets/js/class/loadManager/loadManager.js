@@ -2,27 +2,26 @@ export default class{
     constructor(data){
         this.data = data
 
-        this.init()
+        this.isLoading = true
+        // this.init()
     }
 
 
     // init
-    async init(){
-        this.load()
+    init(){
     }
 
 
     // load
     async load(){
-        const data = await Promise.all(this.data.map(({logoPath, bgPath, audioPath}) => this.loadAll(logoPath, bgPath, audioPath)))
-        console.log(data)
+        await Promise.all(this.data.slice(1).map(({logoPath, bgPath, audioPath}) => this.loadAll(logoPath, bgPath, audioPath)))
+        this.isLoading = false
     }
     loadImg(src){
         return new Promise((resolve, reject) => {
             const img = new Image()
             img.src = src
             img.onload = () => {
-                console.log('img loaded')
                 resolve(img)
             }
         })
@@ -32,7 +31,6 @@ export default class{
             const audio = new Audio()
 
             audio.addEventListener('loadedmetadata', () => {
-                console.log('work')
                 resolve(audio)
             })
 

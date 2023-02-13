@@ -23,12 +23,12 @@ export default {
 
             <ui-container />
             <loading-container />
-            <loading2-container />
+            <loading2-container v-if="isLoading" />
 
         </div>
     `,
     setup(){
-        const {ref, onMounted} = Vue
+        const {ref, onMounted, computed} = Vue
         const {useStore} = Vuex
 
 
@@ -39,7 +39,8 @@ export default {
         // variable
         const app = ref()
         const browserUiHeight = 151
-        const loadManager = new LoadManager(Data)
+        const loadManager = ref(new LoadManager(Data))
+        const isLoading = computed(() => loadManager.value.isLoading)
 
 
         // style
@@ -51,6 +52,9 @@ export default {
 
 
         // method
+        const loadResources = () => {
+            loadManager.value.load()
+        }
         const setUiScale = () => {
             const screenHeight = window.screen.height
             const innerHeight = Method.clamp(window.innerHeight + browserUiHeight, 0, screenHeight)
@@ -63,7 +67,8 @@ export default {
         const createThreeApp = () => {
             store.dispatch('setApp', new App({element: app.value}))
         }
-        const init = () => {
+        const init = async () => {
+            loadResources()
             createThreeApp()
         }
 
@@ -92,7 +97,8 @@ export default {
 
         return{
             appStyle,
-            app
+            app,
+            isLoading
         }
     }
 }
