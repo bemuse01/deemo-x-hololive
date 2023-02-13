@@ -2,11 +2,11 @@ import * as THREE from '../../../lib/three.module.js'
 import Plane from '../../objects/plane.js'
 
 export default class{
-    constructor({group, logoSrc, radius}){
-        if(!logoSrc) return
+    constructor({group, logoPath, radius}){
+        if(!logoPath) return
 
         this.group = group
-        this.src = logoSrc
+        this.src = logoPath
 
         this.param = {
             width: radius - 5,

@@ -25,7 +25,7 @@ export default {
         const scale = ref(1)
         const style = computed(() => ({
             transform: `scale(${scale.value})`, 
-            background: `url('${crtItem.value.logoSrc}') no-repeat center center / cover`
+            background: `url('${crtItem.value.logoPath}') no-repeat center center / cover`
         }))
 
         const canvas = ref()

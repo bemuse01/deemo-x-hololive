@@ -18,7 +18,7 @@ export default {
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const style = computed(() => ({
-            background: `url('${crtItem.value.logoSrc}') no-repeat center center / cover`
+            background: `url('${crtItem.value.logoPath}') no-repeat center center / cover`
         }))
 
         const canvas = ref()
@@ -26,7 +26,7 @@ export default {
         const color = crtItem.value.color
 
         onMounted(() => {
-            visualizer = new Visualizer0({app: app.value, audio: audio.value, color, canvas: canvas.value, radius, logoSrc: crtItem.value.logoSrc})
+            visualizer = new Visualizer0({app: app.value, audio: audio.value, color, canvas: canvas.value, radius, logoPath: crtItem.value.logoPath})
         })
 
         onBeforeUnmount(() => {

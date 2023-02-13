@@ -14,8 +14,8 @@ export default {
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const songBtnSrc = computed(() => {
-            if(isPlaying.value) return './assets/src/pause_btn_retry.png'
-            else return './assets/src/pause_btn_resume.png'
+            if(isPlaying.value) return './assets/src/img/pause_btn_retry.png'
+            else return './assets/src/img/pause_btn_resume.png'
         })
         const playing = computed(() => store.getters['playlist/getPlaying'])
 

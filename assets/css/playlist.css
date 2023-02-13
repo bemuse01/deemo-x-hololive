@@ -196,7 +196,8 @@
     flex-direction: column-reverse;
 }
 .song-vocal span{
-    background-image: url('../src/song_select_easy_mask.png');
+    /* background-image: url('../src/img/song_select_easy_mask.png'); */
+    background-image: url('../src/img/song_select_easy_mask.png');
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

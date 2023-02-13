@@ -9,7 +9,7 @@ export default {
             <div class="song-title-box">
                 
                 <div class="song-bg">
-                    <img src="./assets/src/songselect_namebar.png">
+                    <img src="./assets/src/img/song_select_namebar.png">
                 </div>
                 
                 <div class="song-text song-text-title">
@@ -29,7 +29,7 @@ export default {
             <div class="song-length-box">
             
                 <div class="song-bg">
-                    <img src="./assets/src/songselect_scorebar_easy.png">
+                    <img src="./assets/src/img/song_select_scorebar_easy.png">
                 </div>
                 
                 <div class="song-text">

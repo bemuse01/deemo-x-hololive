@@ -21,7 +21,7 @@ export default {
             child: false
         })
         const style = ref({right: '50%', transform: 'translate(50%, -50%)'})
-        const src = './assets/src/logo.png'
+        const src = './assets/src/img/logo.png '
         const element = ref()
         const canvas = ref()
         let logo = null

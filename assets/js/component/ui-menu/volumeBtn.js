@@ -2,7 +2,7 @@ export default {
     template: `
         <div class="menu-btn volume-btn" @click="setVolume">
             <div>
-                <img src="./assets/src/pause_btn_volume.png">
+                <img src="./assets/src/img/pause_btn_volume.png">
             </div>
             <div>
                 <span>{{crtVolume}}</span>

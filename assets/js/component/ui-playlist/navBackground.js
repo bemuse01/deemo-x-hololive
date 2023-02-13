@@ -1,4 +1,4 @@
-import Songs from '../../data/songs.js'
+import Songs from '../../data/data.js'
 
 const getDeg = ({degree, deg, offset, key}) => {
     return (offset + degree) - deg * key
@@ -14,12 +14,12 @@ export default {
         <div class="nav-background" :style="style.container">
         
             <div class="nav-background-child flare">
-                <img src="./assets/src/songselect_flare.png">
+                <img src="./assets/src/img/song_select_flare.png">
             </div>
 
             <div class="nav-background-child flare-beam">
                 <div :style="style.flareBeam">
-                    <img src="./assets/src/songselect_flare_beam.png">
+                    <img src="./assets/src/img/song_select_flare_beam.png">
                 </div>
             </div>
             

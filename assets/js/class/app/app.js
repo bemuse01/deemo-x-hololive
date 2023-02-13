@@ -1,10 +1,10 @@
 import * as THREE from '../../lib/three.module.js'
 
 export default class{
-    constructor(){
-        this.wrap = document.getElementById('wrap')
+    constructor({element}){
+        this.element = element
 
-        const {width, height} = this.wrap.getBoundingClientRect()
+        const {width, height} = this.element.getBoundingClientRect()
         this.width = width
         this.height = height
         
@@ -23,8 +23,6 @@ export default class{
 
     // create
     create(){
-        // const canvas = document.querySelector('#canvas')
-
         this.scene = new THREE.Scene()
     
         this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true})
@@ -52,7 +50,7 @@ export default class{
 
     // resize
     resize(){
-        const {width, height} = this.wrap.getBoundingClientRect()
+        const {width, height} = this.element.getBoundingClientRect()
 
         this.width = width
         this.height = height

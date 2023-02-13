@@ -19,7 +19,7 @@ export default {
                 return {background: 'none'}
             }else{
                 if(+crtItem.value.type === 0) return {background: 'black'}
-                else return {background: `url('${crtItem.value.bgSrc}') no-repeat center center / cover`}
+                else return {background: `url('${crtItem.value.bgPath}') no-repeat center center / cover`}
             }
         })
         const overlayStyle = computed(() => {

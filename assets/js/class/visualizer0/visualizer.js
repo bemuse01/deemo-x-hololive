@@ -14,13 +14,13 @@ import Line from './build/visualizer.line.build.js'
 import Logo from './build/visualizer.logo.build.js'
   
 const Visualizer0 = class{
-    constructor({app, audio, canvas, color, radius, logoSrc}){
+    constructor({app, audio, canvas, color, radius, logoPath}){
         this.renderer = app.renderer
         this.audio = audio
         this.element = canvas
         this.color = color
         this.radius = radius
-        this.logoSrc = logoSrc
+        this.logoPath = logoPath
 
         const {width, height} = this.element.getBoundingClientRect()
         this.canvas = canvas
@@ -147,7 +147,7 @@ const Visualizer0 = class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size, radius: this.radius, color: this.color, logoSrc: this.logoSrc})
+            this.comp[module] = new instance({group, size: this.size, radius: this.radius, color: this.color, logoPath: this.logoPath})
         }
 
         for(let i in this.group) this.build.add(this.group[i])

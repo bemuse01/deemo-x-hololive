@@ -1,7 +1,7 @@
 export default {
     template: `
         <div class="menu-btn home-btn" v-show="playing" @click="back">
-            <img src="./assets/src/pause_btn_home.png">
+            <img src="./assets/src/img/pause_btn_home.png">
         </div>
     `,
     setup(){

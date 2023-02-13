@@ -38,7 +38,7 @@ export default class{
     // create
     create(){
         this.list = Array.from(this.songs, (song, idx) => {
-            const {isDefault, songSrc} = song
+            const {isDefault, audioPath} = song
             
             const audio = isDefault ? undefined : new Audio()
             const length = isDefault ? '\xa0' : '00:00'
@@ -46,7 +46,7 @@ export default class{
 
             if(audio){
                 audio.loop = true
-                audio.src = songSrc
+                audio.src = audioPath
                 audio.volume = 0
             }
 

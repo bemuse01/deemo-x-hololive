@@ -10,7 +10,7 @@ import PARTICLE from './build/visualizer.particle.build.js'
 import LOGO from './build/visualizer.logo.build.js'
 
 const Visualizer2 = class{
-    constructor({app, audio, canvas, color, logoSrc, radius}){
+    constructor({app, audio, canvas, color, logoPath, radius}){
         this.renderer = app.renderer
         this.audio = audio
         this.element = canvas
@@ -22,7 +22,7 @@ const Visualizer2 = class{
 
         this.context = this.canvas.getContext('2d')
 
-        this.logoSrc = logoSrc
+        this.logoPath = logoPath
         this.color = color
         this.radius = radius
 
@@ -114,7 +114,7 @@ const Visualizer2 = class{
             const instance = this.modules[module]
             const group = this.group[module]
 
-            this.comp[module] = new instance({group, size: this.size, logoSrc: this.logoSrc, radius: this.radius})
+            this.comp[module] = new instance({group, size: this.size, logoPath: this.logoPath, radius: this.radius})
         }
 
         for(let i in this.group) this.build.add(this.group[i])

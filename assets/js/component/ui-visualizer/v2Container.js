@@ -21,7 +21,7 @@ export default {
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const crtColor = computed(() => crtItem.value.color)
-        const crtLogoSrc = computed(() => crtItem.value.logoSrc)
+        const crtlogoPath = computed(() => crtItem.value.logoPath)
 
         const style = ref({filter: `
             drop-shadow(0 0 2px #${crtColor.value.toString(16)}) 
@@ -34,7 +34,7 @@ export default {
         const color = 0xffffff
 
         onMounted(() => {
-            visualizer = new Visualizer2({app: app.value, audio: audio.value, color, canvas: canvas.value, radius, logoSrc: crtLogoSrc.value})
+            visualizer = new Visualizer2({app: app.value, audio: audio.value, color, canvas: canvas.value, radius, logoPath: crtlogoPath.value})
         })
 
         onBeforeUnmount(() => {

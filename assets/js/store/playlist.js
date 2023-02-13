@@ -1,4 +1,4 @@
-import Songs from '../data/songs.js'
+import Songs from '../data/data.js'
 import songs from '../class/audio/songs.js'
 
 export default {

@@ -5,7 +5,7 @@ export default {
             :style="style.container"
             :ref="el => element = el"
         >
-            <img src="./assets/src/hololive.png">
+            <img src="./assets/src/img/hololive.png">
         </div>
     `,
     setup(){

@@ -37,16 +37,16 @@ export default {
         }
 
         const items = computed(() => Array.from(songs.value, (item, key) => {
-            const {bgSrc, isDefault} = item
+            const {bgPath, isDefault} = item
 
             const img = new Image()
-            img.src = bgSrc
+            img.src = bgPath
             img.onload = loadImg
 
             const overlay = isDefault ? 'transparent' : 'rgba(0, 0, 0, 1)'
 
             const style = {
-                background: `linear-gradient(to right, ${overlay}, 30%, transparent), url('${bgSrc}') no-repeat center center / cover`,
+                background: `linear-gradient(to right, ${overlay}, 30%, transparent), url('${bgPath}') no-repeat center center / cover`,
             }
 
             return {key, style}
