@@ -21,8 +21,8 @@ export default {
             :ref="el => app = el"
         >
 
-            <ui-container />
-            <loading-container />
+            <!--<ui-container />
+            <loading-container />-->
             <loading2-container v-if="isLoading" />
 
         </div>
@@ -52,8 +52,9 @@ export default {
 
 
         // method
-        const loadResources = () => {
-            loadManager.value.load()
+        const loadResources = async () => {
+            const resources = await loadManager.value.load()
+            console.log(resources)
         }
         const setUiScale = () => {
             const screenHeight = window.screen.height
