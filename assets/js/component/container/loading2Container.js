@@ -65,7 +65,7 @@ export default {
             style.transform = `translate(${x}%, -50%) rotate(${rotate}deg)`
         }
         const onCompleteTween = (idx) => {
-            if(idx === len - 1 && isTweenDone.value){
+            if(idx === len - 1 && !isTweenDone.value){
                 initTween()
             }
         }
