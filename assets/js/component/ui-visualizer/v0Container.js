@@ -16,7 +16,7 @@ export default {
         const app = computed(() => store.getters['getApp'])
         const audio = computed(() => store.getters['playlist/getSongs'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
-        const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
+        const crtItem = computed(() => audio.value.getSong(crtKey.value))
         const style = computed(() => ({
             background: `url('${crtItem.value.logoPath}') no-repeat center center / cover`
         }))

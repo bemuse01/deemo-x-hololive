@@ -12,7 +12,7 @@ export default {
         const isPlaying = computed(() => store.getters['menu/getIsPlaying'])
         const songs = computed(() => store.getters['playlist/getSongs'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
-        const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
+        const crtItem = computed(() => audio.value.getSong(crtKey.value))
         const songBtnSrc = computed(() => {
             if(isPlaying.value) return './assets/src/img/pause_btn_retry.png'
             else return './assets/src/img/pause_btn_resume.png'

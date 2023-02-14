@@ -11,7 +11,7 @@ export default {
         const store = useStore()
         const audio = computed(() => store.getters['playlist/getSongs'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
-        const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
+        const crtItem = computed(() => audio.value.getSong(crtKey.value))
         const style = ref({
             background: `#${crtItem.value.color.toString(16)}`,
             transform: 'scaleX(0)'

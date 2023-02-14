@@ -13,7 +13,7 @@ export default {
 
         const store = useStore()
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
-        const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
+        const crtItem = computed(() => audio.value.getSong(crtKey.value))
         const imgStyle = computed(() => {
             if(crtItem.value.isDefault){
                 return {background: 'none'}
