@@ -30,6 +30,9 @@
     height: 100vh;
     /* background: url('../src/bg.png') no-repeat center center / cover; */
 }
+.bg-overlay{
+    transition: 0.3s;
+}
 
 /* nav */
 .playlist-nav-container{

@@ -14,8 +14,9 @@ export default class{
 
     // load
     async load(){
-        await Promise.all(this.data.slice(1).map(({logoPath, bgPath, audioPath}) => this.loadAll(logoPath, bgPath, audioPath)))
+        const data = await Promise.all(this.data.map(({logoPath, bgPath, audioPath}) => this.loadAll(logoPath, bgPath, audioPath)))
         this.isLoading = false
+        return data
     }
     loadImg(src){
         return new Promise((resolve, reject) => {

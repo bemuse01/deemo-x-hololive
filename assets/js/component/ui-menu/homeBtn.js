@@ -9,7 +9,7 @@ export default {
         const {useStore} = Vuex
 
         const store = useStore()
-        const songs = computed(() => store.getters['playlist/getSongs'])
+        const songs = computed(() => store.getters['playlist/getPlayer'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const playing = computed(() => store.getters['playlist/getPlaying'])
 

@@ -16,7 +16,7 @@ export default {
             <ui-visualizer></ui-visualizer>
             <ui-playlist></ui-playlist>
             <ui-menu></ui-menu>
-            <ui-open></ui-open>
+            <!--<ui-open></ui-open>-->
 
         </div>
     `

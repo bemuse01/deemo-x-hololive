@@ -1,12 +1,12 @@
 import Songs from '../data/data.js'
-import songs from '../class/audio/songs.js'
+import Player from '../class/audio/player.js'
 
 export default {
     namespaced: true,
     state: {
         showing: true,
         crtKey: 0,
-        songs: new songs(Songs),
+        player: new Player(Songs),
         durations: [],
         playing: false,
         srcLoaded: false,
@@ -14,8 +14,8 @@ export default {
     getters: {
         getShowing: (state) => state.showing,
         getCrtKey: (state) => state.crtKey,
-        getSong: (state) => (idx) => state.songs.getSong(idx),
-        getSongs: (state) => state.songs,
+        getSong: (state) => (idx) => state.player.getSong(idx),
+        getPlayer: (state) => state.player,
         getPlaying: (state) => state.playing,
         getSrcLoaded: (state) => state.srcLoaded
     },

@@ -20,7 +20,7 @@ export default {
 
         const store = useStore()
         const key = computed(() => store.getters['playlist/getCrtKey'])
-        const songs = computed(() => store.getters['playlist/getSongs'])
+        const songs = computed(() => store.getters['playlist/getPlayer'])
 
         const setAudio = () => {
             songs.value.createContext(key.value)

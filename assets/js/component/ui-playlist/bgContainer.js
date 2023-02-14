@@ -1,47 +1,54 @@
 const getTranslateY = (len, key) => {
-    return -100 / len * key
+    return (-100 / len) * key
 }
 
 export default {
     template: `
-        <div class="ui-container playlist-bg-container" :style="style">
+        <div class="ui-container playlist-bg-container" :style="containerStyle">
             <div
-                v-for="item in items"
-                :key="item.key"
-                :style="item.style"
+                v-for="bg in bgs"
+                :key="bg.key"
+                :style="bg.style"
             >
             </div>
         </div>
     `,
     setup(){
-        const {computed} = Vue
+        const {computed, watch} = Vue
         const {useStore} = Vuex
 
+
+        // store
         const store = useStore()
-        const songs = computed(() => store.getters['playlist/getSongs'].list)
+        const player = computed(() => store.getters['playlist/getPlayer'])
+        const songs = computed(() => player.value.getSongs())
+        const crtSong = computed(() => player.value.getSong(crtKey.value))
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
-        const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
 
-        const style = computed(() => ({
-            transform: `translate(0, ${getTranslateY(songs.value.length, crtKey.value)}%)`,
-            filter: crtItem.value.isDefault ? 'none' : 'brightness(1.15)'
-        }))
 
-        const items = computed(() => Array.from(songs.value, (item, key) => {
-            const {bgPath, isDefault} = item
-
-            const overlay = isDefault ? 'transparent' : 'rgba(0, 0, 0, 1)'
-
-            const style = {
-                background: `linear-gradient(to right, ${overlay}, 30%, transparent), url('${bgPath}') no-repeat center center / cover`,
+        // variable
+        const bgs = computed(() => Array.from(songs.value, ({isDefault, bgPath}, key) => {
+            const overlay = isDefault ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 1)'
+            return{
+                key,
+                style: {
+                    background: `linear-gradient(to right, ${overlay}, 30%, transparent), url('${bgPath}') no-repeat center center / cover`
+                }
             }
-
-            return {key, style}
         }))
+
+        
+        // style
+        const containerStyle = computed(() => ({
+            position: 'relative',
+            transform: `translate(0, ${getTranslateY(songs.value.length, crtKey.value)}%)`,
+            filter: crtSong.value.isDefault ? 'none' : 'brightness(1.15)'
+        }))
+
 
         return{
-            style,
-            items
+            containerStyle,
+            bgs
         }
     }
 }

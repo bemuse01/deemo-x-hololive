@@ -15,7 +15,7 @@ export default {
         const store = useStore()
         const element = ref()
         const style = ref({display: 'none', opacity: '0'})
-        const songs = computed(() => store.getters['playlist/getSongs'])
+        const songs = computed(() => store.getters['playlist/getPlayer'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const showing = computed(() => store.getters['loading/getShowing'])
         const playlistShowing = computed(() => store.getters['playlist/getShowing'])

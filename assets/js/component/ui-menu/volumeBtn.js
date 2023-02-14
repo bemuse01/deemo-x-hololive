@@ -14,7 +14,7 @@ export default {
         const {useStore} = Vuex
 
         const store = useStore()
-        const songs = computed(() => store.getters['playlist/getSongs'])
+        const songs = computed(() => store.getters['playlist/getPlayer'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const volumes = [0, 0.25, 0.5, 0.75, 1]
         const idx = ref(volumes.length - 1)

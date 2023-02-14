@@ -19,7 +19,7 @@ export default {
         let particle = null
 
         const app = computed(() => store.getters['getApp'])
-        const audio = computed(() => store.getters['playlist/getSongs'])
+        const audio = computed(() => store.getters['playlist/getPlayer'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const scale = ref(1)

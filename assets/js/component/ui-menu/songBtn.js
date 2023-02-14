@@ -10,7 +10,7 @@ export default {
 
         const store = useStore()
         const isPlaying = computed(() => store.getters['menu/getIsPlaying'])
-        const songs = computed(() => store.getters['playlist/getSongs'])
+        const songs = computed(() => store.getters['playlist/getPlayer'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const songBtnSrc = computed(() => {

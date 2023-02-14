@@ -21,6 +21,7 @@ export default class{
         this.analysers = []
         this.canPlay = false
         this.anim = false
+        // this.context = new AudioContext()
 
         this.init()
     }
@@ -158,6 +159,9 @@ export default class{
     }
     getSong(idx){
         return this.list[idx]
+    }
+    getSongs(){
+        return this.list
     }
 
 

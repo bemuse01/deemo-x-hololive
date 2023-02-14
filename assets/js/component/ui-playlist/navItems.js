@@ -73,7 +73,7 @@ export default {
         // vars
         const store = useStore()
         const boxStyle = ref({color: 'black', transition: 'color 0.3s'})
-        const songs = computed(() => store.getters['playlist/getSongs'].list)
+        const songs = computed(() => store.getters['playlist/getPlayer'].list)
         const radius1 = 170
         const radius2 = 210
         const count = 14 // count must be even num

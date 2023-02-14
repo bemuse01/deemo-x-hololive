@@ -6,7 +6,8 @@ import UiContainer from './container/uiContainer.js'
 import LoadingContainer from './container/loadingContainer.js'
 import Loading2Container from './container/loading2Container.js'
 
-import Data from '../data/data.js'
+// import Data from '../data/data.js'
+import Data from '../data/playlist.js'
 
 export default {
     components: {
@@ -21,8 +22,8 @@ export default {
             :ref="el => app = el"
         >
 
-            <!--<ui-container />
-            <loading-container />-->
+            <ui-container />
+            <!--<loading-container />-->
             <loading2-container v-if="isLoading" />
 
         </div>

@@ -9,7 +9,7 @@ export default {
         const {useStore} = Vuex
 
         const store = useStore()
-        const audio = computed(() => store.getters['playlist/getSongs'])
+        const audio = computed(() => store.getters['playlist/getPlayer'])
         const crtKey = computed(() => store.getters['playlist/getCrtKey'])
         const crtItem = computed(() => store.getters['playlist/getSong'](crtKey.value))
         const style = ref({
