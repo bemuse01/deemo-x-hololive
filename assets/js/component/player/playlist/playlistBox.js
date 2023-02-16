@@ -1,10 +1,12 @@
 import PlaylistBg from './playlistBg.js'
 import PlaylistSelector from './playlistSelector.js'
+import PlaylistComposer from './playlistComposer.js'
 
 export default {
     components: {
         'playlist-bg': PlaylistBg,
-        'playlist-selector': PlaylistSelector
+        'playlist-selector': PlaylistSelector,
+        'playlist-composer': PlaylistComposer
     },
     template: `
         <div
@@ -14,6 +16,7 @@ export default {
 
             <playlist-bg />
             <playlist-selector />
+            <playlist-composer />
         
         </div>
     `,

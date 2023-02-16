@@ -8,7 +8,7 @@ export default {
     components: {
         'selector-bg': SelectorBg,
         'selector-items': SelectorItems,
-        'selector-nowPlaying': SelectorNowPlaying,
+        'selector-nowPlaying': SelectorNowPlaying
     },
     template: `
         <div 
@@ -47,13 +47,13 @@ export default {
             width: `${selectorWidth}`,
             height: '100%'
         }))
-        const scaleStyle = ref({
+        const scaleStyle = computed(() => ({
             transform: `scale(${scale.value})`,
             position: 'absolute',
             width: '100%',
             height: '100%',
             transformOrigin: 'left'
-        })
+        }))
         const childStyle = ref({
             position: 'absolute',
             top: '50%',
