@@ -1,11 +1,12 @@
 import Method from "../../method/method.js"
 
 export default class{
-    constructor(songs){
-        this.songs = songs
+    constructor({audios, playlist}){
+        this.audios = audios
+        this.playlist = playlist
         
-        this.playFlag = Array.from(songs, _ => false)
-        this.stopFlag = Array.from(songs, _ => false)
+        this.playFlag = Array.from(this.audios, _ => false)
+        this.stopFlag = Array.from(this.audios, _ => false)
         this.volumeVelocity = 0.03
         this.stopTime = false
 
@@ -15,13 +16,15 @@ export default class{
         this.smoothingTimeConstant = 0.65
 
         this.context = null
-        this.source = null
-        this.analyser = null
         this.sources = []
         this.analysers = []
         this.canPlay = false
-        this.anim = false
-        // this.context = new AudioContext()
+        this.analyser = null
+        this.audioData = []
+        this.audioDataAvg = 0
+
+        this.currentAnalyser = null
+        this.currentSource = null
 
         this.init()
     }
@@ -30,7 +33,6 @@ export default class{
     // init
     init(){
         this.create()
-        this.onLoadAudio()
 
         this.animate()
     }
@@ -38,34 +40,40 @@ export default class{
 
     // create
     create(){
-        this.list = Array.from(this.songs, (song, idx) => {
-            const {isDefault, audioPath} = song
+        this.createPlaylist()
+        this.createContext()
+    }
+    createPlaylist(){
+        this.list = Array.from(this.audios, (audio, idx) => {
+            const {duration} = audio
             
-            const audio = isDefault ? undefined : new Audio()
-            const length = isDefault ? '\xa0' : '00:00'
-            // const type = `${~~(Math.random() * 3)}`
+            audio.volume = 0
+            audio.loop = true
 
-            if(audio){
-                audio.loop = true
-                audio.src = audioPath
-                audio.volume = 0
-            }
+            return {duration, audio}
+        })
+    }
+    createContext(){
+        this.context = new AudioContext()
 
-            return {...song, length, audio}
+        this.audios.forEach(audio => {
+
+            const source = this.context.createMediaElementSource(audio)
+            const analyser = this.context.createAnalyser()
+
+            analyser.connect(this.context.destination)
+            source.connect(analyser)
+    
+            analyser.fftSize = this.fft
+            analyser.smoothingTimeConstant = this.smoothingTimeConstant
+            
+            this.analysers.push(analyser)
+            this.sources.push(source)
         })
     }
 
 
-    // audio
-    onLoadAudio(){
-        this.list.forEach(song => {
-            const {audio} = song
-
-            if(audio) audio.addEventListener('canplaythrough', () => {
-                song.length = audio.duration
-            })
-        })
-    }
+    // audio event
     resumeAudio(idx){
         const {audio} = this.list[idx]
         if(!audio) return
@@ -74,7 +82,7 @@ export default class{
         this.stopFlag[idx] = false
 
         audio.play()
-        this.context.resume()
+        // this.context.resume()
     }
     pauseAudio(idx){
         const {audio} = this.list[idx]
@@ -84,7 +92,7 @@ export default class{
         this.playFlag[idx] = false
         this.stopFlag[idx] = true
     }
-    playAudio(idx, time = 0.2){
+    prePlayAudio(idx, time = 0.2){
         const {audio} = this.list[idx]
         if(!audio) return
 
@@ -93,63 +101,15 @@ export default class{
 
         audio.currentTime = audio.duration * time
         audio.play()
-        this.context.resume()
+        // this.context.resume()
     }
-    stopAudio(idx){
+    preStopAudio(idx){
         const {audio} = this.list[idx]
         if(!audio) return
 
         this.stopTime = true
         this.playFlag[idx] = false
         this.stopFlag[idx] = true
-    }
-    createTween({audio, s, e, cbs, delay}){
-        const start = s
-        const end = e 
-
-        const tw = new TWEEN.Tween(start)
-        .to(end, 600)
-        .delay(delay)
-        .onUpdate(() => this.onUpdateTween(audio, start))
-        .start()
-
-        for(const cb in cbs) tw[cb](() => cbs[cb](audio))
-    }
-
-    onUpdateTween(audio, {volume}){
-        audio.volume = volume
-    }
-
-
-    // web audio api
-    createContext(idx){
-        const {audio} = this.list[idx]
-        if(!audio) return
-        
-        // if(this.source) this.source.disconnect()
-        // if(this.analyser) this.analyser.disconnect()
-        if(!this.context) this.context = new AudioContext()
-        
-        if(this.sources[idx]) this.source = this.sources[idx]
-        else{
-            this.sources[idx] = this.context.createMediaElementSource(this.getAudio(idx))
-            this.source = this.sources[idx]
-        }
-
-        if(this.analysers[idx]) this.analyser = this.analysers[idx]
-        else{
-            this.analysers[idx] = this.context.createAnalyser()
-            this.analyser = this.analysers[idx]
-            this.analyser.connect(this.context.destination)
-            this.source.connect(this.analyser)
-        }
-
-        this.analyser.fftSize = this.fft
-        this.analyser.smoothingTimeConstant = this.smoothingTimeConstant
-        
-        const bufferLength = this.analyser.frequencyBinCount
-        
-        this.audioData = new Uint8Array(bufferLength)
     }
 
 
@@ -160,8 +120,17 @@ export default class{
     getSong(idx){
         return this.list[idx]
     }
-    getSongs(){
+    getList(){
         return this.list
+    }
+    // get
+    getProgress(idx){
+        const {audio} = this.list[idx]
+        return audio.currentTime / audio.duration
+    }
+    getCurrentTime(idx){
+        const {audio} = this.list[idx]
+        return audio.currentTime
     }
 
 
@@ -171,8 +140,40 @@ export default class{
         audio.volume = volume
         this.volume = volume
     }
-    setAnimate(anim){
-        this.anim = anim
+    setCurrentTime(idx, timeRatio = 0){
+        const {audio} = this.list[idx]
+
+        // 0 <= timeRatio <= 1
+        audio.currentTime = timeRatio * audio.duration
+    }
+
+
+    // tween
+    resetAudio(idx, isToPlaying, delay = 1000){
+        const {audio} = this.list[idx]
+        const analyser = this.analysers[idx]
+
+
+        const start = {volume: 1}
+        const end = {volume: 0}
+
+        const tw = new TWEEN.Tween(start)
+        .to(end, delay)
+        .onUpdate(() => audio.volume = start.volume)
+        .onComplete(() => {
+            audio.currentTime = 0
+            audio.volume = 1
+
+            if(isToPlaying){
+                const bufferLength = analyser.frequencyBinCount
+                this.audioData = new Uint8Array(bufferLength)
+                this.analyser = analyser
+            }else{
+                this.analyser = null
+            }
+     
+        })
+        .start()
     }
 
 
@@ -181,17 +182,16 @@ export default class{
         this.playAudioFadeIn()
         this.stopAudioFadeOut()
 
-        if(this.analyser && this.anim){
-            this.analyser.getByteFrequencyData(this.audioData)
-
-            const len = ~~(this.audioData.length / 4)
-            // const half = [...this.audioData].slice(0, this.audioData.length)
-            // this.audioDataAvg = half[~~(half.length * 0.1)] / 255
-            const half = [...this.audioData].slice(0, len)
-            this.audioDataAvg = half[~~(half.length * 0.2)] / 255
-        }
+        if(this.analyser) this.updateAudioData()
 
         requestAnimationFrame(() => this.animate())
+    }
+    updateAudioData(){
+        this.analyser.getByteFrequencyData(this.audioData)
+
+        const len = ~~(this.audioData.length / 4)
+        const half = [...this.audioData].slice(0, len)
+        this.audioDataAvg = half[~~(half.length * 0.2)] / 255
     }
     playAudioFadeIn(){
         this.playFlag.forEach((flag, idx) => {

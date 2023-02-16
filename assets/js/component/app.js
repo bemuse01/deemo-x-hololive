@@ -2,18 +2,17 @@ import Method from '../method/method.js'
 import App from '../class/app/app.js'
 import LoadManager from '../class/loadManager/loadManager.js'
 
-import UiContainer from './container/uiContainer.js'
-import LoadingContainer from './container/loadingContainer.js'
-import Loading2Container from './container/loading2Container.js'
+import LoadingContainer from './loading/loadingContainer.js'
+import ClickerContainer from './clicker/clickerContainer.js'
+import PlayerContainer from './player/playerContainer.js'
 
-// import Data from '../data/data.js'
-import Data from '../data/playlist.js'
+import {playlist, ids, uiImgs} from '../data/data.js'
 
 export default {
     components: {
-        'ui-container': UiContainer,
         'loading-container': LoadingContainer,
-        'loading2-container': Loading2Container
+        'clicker-container': ClickerContainer,
+        'player-container': PlayerContainer
     },
     template: `
         <div
@@ -22,9 +21,26 @@ export default {
             :ref="el => app = el"
         >
 
-            <ui-container />
-            <!--<loading-container />-->
-            <loading2-container v-if="isLoading" />
+            <transition-group
+                name="fade"
+                tag="div"
+                :style="groupStyle"
+            >
+
+                <loading-container 
+                    v-if="isLoadingContainerRendered" 
+                    @loadingTweenDone="onLoadingTweenDone" 
+                    :isResourceLoaded="isResourceLoaded"
+                />
+                
+                <clicker-container 
+                    v-else-if="!isLoadingContainerRendered && !isClicked" 
+                    @click="onClick" 
+                />
+
+                <player-container v-else />
+
+            </transition-group>
 
         </div>
     `,
@@ -40,8 +56,9 @@ export default {
         // variable
         const app = ref()
         const browserUiHeight = 151
-        const loadManager = ref(new LoadManager(Data))
-        const isLoading = computed(() => loadManager.value.isLoading)
+        const isLoadingContainerRendered = ref(true)
+        const isResourceLoaded = ref(false)
+        const isClicked = ref(false)
 
 
         // style
@@ -50,28 +67,53 @@ export default {
             width: '100%',
             height: '100%'
         })
+        const groupStyle = ref({
+            width: '100%',
+            height: '100%'
+        })
 
 
         // method
         const loadResources = async () => {
-            const resources = await loadManager.value.load()
-            console.log(resources)
+            const bgs = playlist.map(e => e.bgPath)
+            const logos = playlist.map(e => e.logoPath)
+            const audios = playlist.map(e => e.audioPath)
+
+            console.log('loading...')
+
+            const uiSrcs = await Promise.all(uiImgs.map(img => LoadManager.loadImg(img.path)))
+            const bgSrcs = await Promise.all(bgs.map(path => LoadManager.loadImg(path)))
+            const logoSrcs = await Promise.all(logos.map(path => LoadManager.loadImg(path)))
+            const audioSrcs = await Promise.all(audios.map(path => LoadManager.loadAudio(path)))
+
+            console.log('done...')
+
+            store.dispatch('resource/setUis', uiImgs.map(({name}, idx) => ({name, src: uiSrcs[idx]})))
+            store.dispatch('resource/setBgs', bgSrcs)
+            store.dispatch('resource/setLogos', logoSrcs)
+            store.dispatch('resource/setAudios', audioSrcs)
+
+            isResourceLoaded.value = true
+        }
+        const onLoadingTweenDone = () => {
+            isLoadingContainerRendered.value = false
+        }
+        const onClick = () => {
+            isClicked.value = true
+        }
+        const createThreeApp = () => {
+            store.dispatch('app/setApp', new App({element: app.value}))
         }
         const setUiScale = () => {
             const screenHeight = window.screen.height
             const innerHeight = Method.clamp(window.innerHeight + browserUiHeight, 0, screenHeight)
             const scale = innerHeight / screenHeight
             
-            store.dispatch('setScale', scale)
-
-            console.log(store.getters['getScale'])
+            store.dispatch('app/setScale', scale)
         }
-        const createThreeApp = () => {
-            store.dispatch('setApp', new App({element: app.value}))
-        }
-        const init = async () => {
-            loadResources()
+        const init = () => {
             createThreeApp()
+            loadResources()
         }
 
 
@@ -99,8 +141,13 @@ export default {
 
         return{
             appStyle,
+            groupStyle,
             app,
-            isLoading
+            isClicked,
+            isResourceLoaded,
+            isLoadingContainerRendered,
+            onLoadingTweenDone,
+            onClick
         }
     }
 }

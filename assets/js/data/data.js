@@ -1,16 +1,32 @@
 import {audioPath, imgPath} from '../config.js'
+import Method from '../method/method.js'
 
-export default [
+
+// imgs
+const uiImgs = [
+    {name: 'deemo', path: imgPath + 'deemo.png'},
+    {name: 'hololive', path: imgPath + 'hololive.png'},
+    {name: 'select_difficulty_bg', path: imgPath + 'song_select_difficulty_bg_easy.png'},
+    {name: 'select_difficulty', path: imgPath + 'song_select_difficulty_easy.png'},
+    {name: 'select_mask', path: imgPath + 'song_select_easy_mask.png'},
+    {name: 'select_flare_beam', path: imgPath + 'song_select_flare_beam.png'},
+    {name: 'select_flare', path: imgPath + 'song_select_flare.png'},
+    {name: 'select_namebar', path: imgPath + 'song_select_namebar.png'},
+    {name: 'select_scorebar', path: imgPath + 'song_select_scorebar_easy.png'},
+]
+
+
+// playlist
+const playlist = [
     {
-        audioPath: '',
+        audioPath: audioPath + 'kami_yamada.ogg',
         bgPath: imgPath + 'bg.jpg',
-        logoPath: '',
-        color: '',
+        logoPath: imgPath + 'holox_logo.png',
+        color: 0x936cc6,
         name: 'Deemo x Hololive',
         vocal: 'Hololive, Nijisanji',
         composer: 'Various Artists',
-        type: '1',
-        isDefault: true
+        type: 1,
     },
     {
         audioPath: audioPath + 'kami_yamada.ogg',
@@ -20,7 +36,7 @@ export default [
         name: 'Kamippoi na',
         vocal: 'Laplus Darknesss',
         composer: 'PINOCCHIOP',
-        type: '0',
+        type: 0,
     },
     {
         audioPath: audioPath + 'kami_seffyna.ogg',
@@ -30,7 +46,7 @@ export default [
         name: 'Kamippoi na',
         vocal: 'Seffyna',
         composer: 'PINOCCHIOP',
-        type: '1',
+        type: 1,
     },
     {
         audioPath: audioPath + 'ranbu_suisei.ogg',
@@ -40,7 +56,7 @@ export default [
         name: 'Ranbu No Melody',
         vocal: 'Hoshimati Suisei',
         composer: 'SID',
-        type: '1',
+        type: 1,
     },
     {
         audioPath: audioPath + 'kakusei_suisei.ogg',
@@ -50,7 +66,7 @@ export default [
         name: 'Kakusei',
         vocal: 'Hoshimati Suisei',
         composer: 'Superfly',
-        type: '2',
+        type: 2,
     },
     {
         audioPath: audioPath + 'phony_chima.ogg',
@@ -60,7 +76,7 @@ export default [
         name: 'Phony',
         vocal: 'Machita Chima',
         composer: 'Tsumiki',
-        type: '2',
+        type: 2,
     },
     {
         audioPath: audioPath + 'phony_suisei.ogg',
@@ -70,7 +86,7 @@ export default [
         name: 'Phony',
         vocal: 'Hoshimati Suisei',
         composer: 'Tsumiki',
-        type: '1',
+        type: 1,
     },
     {
         audioPath: audioPath + 'king_chima.ogg',
@@ -80,7 +96,7 @@ export default [
         name: 'KING',
         vocal: 'Machita Chima',
         composer: 'Kanaria',
-        type: '1',
+        type: 1,
     },
     {
         audioPath: audioPath + 'king_suisei.ogg',
@@ -90,7 +106,7 @@ export default [
         name: 'KING',
         vocal: 'Hoshimati Suisei',
         composer: 'Kanaria',
-        type: '0',
+        type: 0,
     },
     {
         audioPath: audioPath + 'error_towa.ogg',
@@ -100,7 +116,7 @@ export default [
         name: 'Error',
         vocal: 'Tokoyami Towa',
         composer: 'niki',
-        type: '1',
+        type: 1,
     },
     {
         audioPath: audioPath + 'sparkle_mio.ogg',
@@ -110,7 +126,7 @@ export default [
         name: 'Sparkle',
         vocal: 'Ookami Mio',
         composer: 'RADWIMPS',
-        type: '2',
+        type: 2,
     },
     {
         audioPath: audioPath + 'goodbye_aqua.ogg',
@@ -120,7 +136,7 @@ export default [
         name: 'Goodbye Sengen',
         vocal: 'Minato Aqua',
         composer: 'Chinozo',
-        type: '1'
+        type: 1
     },
     {
         audioPath: audioPath + 'animal_suisei_miko.ogg',
@@ -130,7 +146,7 @@ export default [
         name: 'Animal',
         vocal: 'Suisei x Miko',
         composer: 'DECO*27',
-        type: '1'
+        type: 1
     },
     {
         audioPath: audioPath + 'alien_sora.ogg',
@@ -140,6 +156,12 @@ export default [
         name: 'Alien Alien',
         vocal: 'Tokino Sora',
         composer: 'NayutalieN',
-        type: '2'
+        type: 2
     }
-]
+].map((e, i) => ({...e, isHome: i === 0 ? true : false}))
+
+
+const ids = playlist.map(e => Method.uuidv4())
+
+
+export {playlist, ids, uiImgs}

@@ -1,33 +1,17 @@
 export default class{
-    constructor(data){
-        this.data = data
-
-        this.isLoading = true
-        // this.init()
-    }
-
-
-    // init
-    init(){
-    }
-
-
-    // load
-    async load(){
-        const data = await Promise.all(this.data.map(({logoPath, bgPath, audioPath}) => this.loadAll(logoPath, bgPath, audioPath)))
-        this.isLoading = false
-        return data
-    }
-    loadImg(src){
+    static loadImg(path){
         return new Promise((resolve, reject) => {
             const img = new Image()
-            img.src = src
+            img.src = path
             img.onload = () => {
                 resolve(img)
             }
         })
     }
-    loadSong(src){
+    static loadImgs(arr){
+        return Promise.all(arr) 
+    }
+    static loadAudio(path){
         return new Promise((resolve, reject) => {
             const audio = new Audio()
 
@@ -39,16 +23,10 @@ export default class{
                 reject(e)
             })
 
-            audio.src = src
+            audio.src = path
         })
     }
-    loadAll(logoPath, bgPath, audioPath){
-        return new Promise(async (resolve, reject) => {
-            const logo = await this.loadImg(logoPath)
-            const bg = await this.loadImg(bgPath)
-            const song = await this.loadSong(audioPath)
-
-            resolve({logo, bg, song})
-        })
+    static loadAudios(arr){
+        return Promise.all(arr)
     }
 }

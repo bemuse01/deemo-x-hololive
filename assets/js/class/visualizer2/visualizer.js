@@ -224,6 +224,9 @@ const Visualizer2 = class{
         this.size.el.h = height
         this.size.obj.w = PublicMethod.getVisibleWidth(this.camera, 0)
         this.size.obj.h = PublicMethod.getVisibleHeight(this.camera, 0)
+
+        this.canvas.width = width * RATIO
+        this.canvas.height = height * RATIO
     }
     resizeObject(){
         for(const comp in this.comp){

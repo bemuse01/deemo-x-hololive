@@ -1,0 +1,103 @@
+/* nowPlaying info */
+.nowPlaying-info{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(0, -50%);
+    width: 592px;
+    height: calc(62px + 24px);
+}
+.nowPlaying-info > div{
+    position: absolute;
+}
+.info-title-box{
+    width: 100%;
+    height: 62px;
+    top: 0;
+}
+.info-duration-box{
+    width: 100%;
+    height: 27px;
+    bottom: 0;
+}
+.info-bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.info-bg img{
+    transform-origin: left;
+    transform: scaleX(1.125);
+}
+.info-duration-box .info-bg{
+    width: 535px;
+}
+.info-text{
+    position: absolute;
+    right: 0;
+    width: 82%;
+    height: 100%;
+}
+.info-text-title{
+    top: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    height: 90%;
+    flex-direction: column;
+}
+.info-text-title > div{
+    /* position: absolute; */
+    flex: 1;
+}
+.info-name{
+    font-family: FANTIQUE;
+    font-size: 24px;
+    text-shadow: 0 0 3px black;
+    filter: drop-shadow(0 0 1px black);
+    max-height: 100%;
+    color: white;
+}
+.info-name span{
+    display: inline-block;
+    transform-origin: left 65%;
+    transform: scale(2.25);
+}
+.info-vocal{
+    color: white;
+    font-size: 20px;
+    line-height: 20px;
+    font-family: CanelaBold;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+.info-vocal span{
+    background-image: url('../src/img/song_select_easy_mask.png');
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-left: 10px;
+    padding-bottom: 4px;
+}
+.info-duration{
+    font-family: Eringobragh;
+    font-size: 46px;
+    max-height: 27px;
+    display: flex;
+    flex-flow: column-reverse;
+    justify-content: center;
+}
+/* nav composer */
+/* .playlist-composer-container{
+    position: absolute;
+    font-family: FANTIQUE;
+    font-size: 40px;
+    letter-spacing: -0.4px;
+    padding-top: 4px;
+    padding-left: 28px;
+    transition: color 0.3s;
+    transform-origin: left top;
+}
+.composer-current{
+    padding-top: 5px;
+} */
