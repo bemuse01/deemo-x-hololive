@@ -23,9 +23,6 @@
 
 
 /* init */
-html, body{
-    overflow: hidden;
-}
 html{
     font-size: 10px;
 }
@@ -35,6 +32,7 @@ html{
 }
 body{
     background: white;
+    overflow: hidden;
     position: absolute;
 }
 div#wrap{
