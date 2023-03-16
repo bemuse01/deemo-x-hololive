@@ -41,6 +41,7 @@ div#wrap{
     left: 0;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 img{
     max-width: 100%;
